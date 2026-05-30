@@ -9,7 +9,113 @@
 body{
     font-family:Arial,sans-serif;
     background:#f5f5f5;
-    margin:0;
+    margin:0;<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Landing Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="text-2xl font-bold text-blue-600">DevPortfolio</div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#home" class="hover:text-blue-600 transition">Menu</a>
+                    <a href="#services" class="hover:text-blue-600 transition">Xizmatlar</a>
+                    <a href="#about" class="hover:text-blue-600 transition">Biz haqimizda</a>
+                    <a href="#contact" class="hover:text-blue-600 transition">Kontakt</a>
+                </div>
+                <button class="md:hidden text-2xl" id="menu-btn"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="pt-32 pb-20 px-4 text-center bg-gradient-to-b from-blue-50 to-white">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6">Professional Raqamli Yechimlar</h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">Biz sizning g'oyalaringizni yuqori sifatli veb-ilovalar ko'rinishida hayotga tatbiq etamiz.</p>
+        <a href="#contact" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">Buyurtma berish</a>
+    </section>
+
+    <section id="services" class="py-20 max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Xizmatlarimiz</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-8 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                <div class="text-blue-600 text-3xl mb-4"><i class="fas fa-code"></i></div>
+                <h3 class="text-xl font-bold mb-2">Veb Dasturlash</h3>
+                <p class="text-gray-600 text-sm">Django va Python yordamida murakkab backend tizimlar yaratish.</p>
+            </div>
+            <div class="p-8 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                <div class="text-blue-600 text-3xl mb-4"><i class="fas fa-mobile-alt"></i></div>
+                <h3 class="text-xl font-bold mb-2">Responsive Dizayn</h3>
+                <p class="text-gray-600 text-sm">Har qanday ekran o'lchamiga moslashuvchi interfeyslar.</p>
+            </div>
+            <div class="p-8 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                <div class="text-blue-600 text-3xl mb-4"><i class="fas fa-robot"></i></div>
+                <h3 class="text-xl font-bold mb-2">Telegram Botlar</h3>
+                <p class="text-gray-600 text-sm">Biznes jarayonlarini avtomatlashtirish uchun aqlli botlar.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-100 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-12">Bajarilgan Ishlar</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg overflow-hidden shadow">
+                    <div class="h-48 bg-gray-200"></div>
+                    <div class="p-4"><h4 class="font-bold">E-Commerce Platforma</h4></div>
+                </div>
+                <div class="bg-white rounded-lg overflow-hidden shadow">
+                    <div class="h-48 bg-gray-200"></div>
+                    <div class="p-4"><h4 class="font-bold">CRM Tizimi</h4></div>
+                </div>
+                <div class="bg-white rounded-lg overflow-hidden shadow">
+                    <div class="h-48 bg-gray-200"></div>
+                    <div class="p-4"><h4 class="font-bold">Booking App</h4></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 max-w-xl mx-auto px-4">
+        <div class="bg-white p-8 rounded-3xl shadow-xl">
+            <h2 class="text-2xl font-bold mb-6 text-center">Buyurtma Qoldirish</h2>
+            <form id="orderForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Ismingiz</label>
+                    <input type="text" id="name" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Telefon raqamingiz</label>
+                    <input type="tel" id="phone" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Xizmat turi</label>
+                    <select id="service" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        <option>Landing Page</option>
+                        <option>Telegram Bot</option>
+                        <option>Murakkab Sayt</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition">Yuborish</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-10 text-center border-t border-gray-200">
+        <p class="text-gray-500">&copy; 2026 DevPortfolio. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+    <script>
+        // Formani Telegram botga yuborish logikasi keyingi bosqichda
+    </script>
+</body>
+</html>
     padding:30px;
 }
 
