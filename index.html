@@ -100,8 +100,56 @@
         <p class="text-gray-500">&copy; 2026 DevPortfolio. Barcha huquqlar himoyalangan.</p>
     </footer>
 
-    <script>
-        // Formani Telegram botga yuborish logikasi keyingi bosqichda
-    </script>
+   <script>
+    // 1. Web App URL manzilingiz
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyxJ5MzEttcKaGlVve61mtexlO5zi4R3i_Ez6zGtouLfWBgErU19ROWX0CX3cdafcBN/exec";
+    const form = document.getElementById('orderForm');
+
+    // 2. Mobil menyu uchun (Hamburger)
+    const menuBtn = document.getElementById('menu-btn');
+    menuBtn.addEventListener('click', () => {
+        // Bu yerga mobil menyu ochilish kodini qo'shishingiz mumkin
+        alert("Menyu hali faol emas, lekin forma ishlaydi!");
+    });
+
+    // 3. Formani yuborish
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        
+        // Yuborish tugmasini vaqtincha bloklash (ikki marta bosmaslik uchun)
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Yuborilmoqda...";
+
+        const formData = {
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            service: document.getElementById('service').value
+        };
+
+        // Google Scriptga ma'lumot yuborish
+        fetch(scriptURL, {
+            method: 'POST',
+            mode: 'no-cors', // CORS xatoligini oldini olish uchun
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(() => {
+            alert("Tabriklaymiz! Buyurtmangiz qabul qilindi.");
+            form.reset();
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Yuborish";
+        })
+        .catch(error => {
+            console.error('Xatolik!', error.message);
+            alert("Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring.");
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Yuborish";
+        });
+    });
+</script>
 </body>
 </html>
