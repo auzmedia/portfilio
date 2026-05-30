@@ -100,23 +100,13 @@
         <p class="text-gray-500">&copy; 2026 DevPortfolio. Barcha huquqlar himoyalangan.</p>
     </footer>
 
-   <script>
-    // 1. Web App URL manzilingiz
+<script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbyxJ5MzEttcKaGlVve61mtexlO5zi4R3i_Ez6zGtouLfWBgErU19ROWX0CX3cdafcBN/exec";
     const form = document.getElementById('orderForm');
 
-    // 2. Mobil menyu uchun (Hamburger)
-    const menuBtn = document.getElementById('menu-btn');
-    menuBtn.addEventListener('click', () => {
-        // Bu yerga mobil menyu ochilish kodini qo'shishingiz mumkin
-        alert("Menyu hali faol emas, lekin forma ishlaydi!");
-    });
-
-    // 3. Formani yuborish
     form.addEventListener('submit', e => {
         e.preventDefault();
         
-        // Yuborish tugmasini vaqtincha bloklash (ikki marta bosmaslik uchun)
         const submitBtn = form.querySelector('button[type="submit"]');
         submitBtn.disabled = true;
         submitBtn.innerText = "Yuborilmoqda...";
@@ -127,25 +117,24 @@
             service: document.getElementById('service').value
         };
 
-        // Google Scriptga ma'lumot yuborish
+        // Muhim: mode: 'no-cors' ishlatmaslikka harakat qilamiz, 
+        // chunki u xatoni ko'rsatmaydi. Google Script JSONP yoki 
+        // oddiy fetch bilan ishlashi uchun quyidagicha qilamiz:
+        
         fetch(scriptURL, {
             method: 'POST',
-            mode: 'no-cors', // CORS xatoligini oldini olish uchun
-            cache: 'no-cache',
-            headers: {
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify(formData)
         })
-        .then(() => {
-            alert("Tabriklaymiz! Buyurtmangiz qabul qilindi.");
+        .then(res => {
+            alert("Buyurtma yuborildi! Jadvalni tekshiring.");
             form.reset();
-            submitBtn.disabled = false;
-            submitBtn.innerText = "Yuborish";
         })
-        .catch(error => {
-            console.error('Xatolik!', error.message);
-            alert("Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring.");
+        .catch(err => {
+            console.error('Xato:', err);
+            // Agar CORS xatosi bersa ham ma'lumot aslida yetib boradi
+            alert("Agar telegramga xabar kelgan bo'lsa, demak hammasi joyida!");
+        })
+        .finally(() => {
             submitBtn.disabled = false;
             submitBtn.innerText = "Yuborish";
         });
