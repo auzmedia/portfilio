@@ -11,47 +11,28 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fadeIn {
-            animation: fadeIn 0.8s ease-out;
-        }
-        .transition-all {
-            transition: all 0.3s ease;
-        }
-        .btn-loading {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
+        .animate-fadeIn { animation: fadeIn 0.8s ease-out; }
+        .transition-all { transition: all 0.3s ease; }
+        .btn-loading { opacity: 0.7; cursor: not-allowed; }
         .success-toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #10b981;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            z-index: 1000;
+            position: fixed; bottom: 20px; right: 20px; background: #10b981;
+            color: white; padding: 12px 24px; border-radius: 8px; z-index: 1000;
             animation: slideIn 0.3s ease-out;
         }
         .error-toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #ef4444;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            z-index: 1000;
+            position: fixed; bottom: 20px; right: 20px; background: #ef4444;
+            color: white; padding: 12px 24px; border-radius: 8px; z-index: 1000;
             animation: slideIn 0.3s ease-out;
         }
         @keyframes slideIn {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
+        select, input { transition: all 0.3s ease; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
-    <!-- Navbar -->
     <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -61,28 +42,23 @@
                 <div class="hidden md:flex space-x-8 text-sm font-medium">
                     <a href="#home" class="hover:text-blue-600 transition-all">Bosh sahifa</a>
                     <a href="#services" class="hover:text-blue-600 transition-all">Xizmatlar</a>
-                    <a href="#portfolio" class="hover:text-blue-600 transition-all">Portfolio</a>
+                    <a href="#stats" class="hover:text-blue-600 transition-all">Statistika</a>
                     <a href="#about" class="hover:text-blue-600 transition-all">Biz haqimizda</a>
                     <a href="#contact" class="hover:text-blue-600 transition-all">Kontakt</a>
                 </div>
-                <button class="md:hidden text-2xl" id="menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <button class="md:hidden text-2xl" id="menu-btn"><i class="fas fa-bars"></i></button>
             </div>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
     <div id="mobile-menu" class="fixed inset-0 bg-white z-40 hidden transform transition-transform duration-300 translate-x-full">
         <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
             <a href="#home" class="hover:text-blue-600 transition">Bosh sahifa</a>
             <a href="#services" class="hover:text-blue-600 transition">Xizmatlar</a>
-            <a href="#portfolio" class="hover:text-blue-600 transition">Portfolio</a>
+            <a href="#stats" class="hover:text-blue-600 transition">Statistika</a>
             <a href="#about" class="hover:text-blue-600 transition">Biz haqimizda</a>
             <a href="#contact" class="hover:text-blue-600 transition">Kontakt</a>
-            <button id="close-menu" class="absolute top-6 right-6 text-2xl">
-                <i class="fas fa-times"></i>
-            </button>
+            <button id="close-menu" class="absolute top-6 right-6 text-2xl"><i class="fas fa-times"></i></button>
         </div>
     </div>
 
@@ -96,12 +72,8 @@
                 Biz sizning g'oyalaringizni yuqori sifatli veb-ilovalar va telegram botlar ko'rinishida hayotga tatbiq etamiz.
             </p>
             <div class="flex gap-4 justify-center flex-wrap">
-                <a href="#contact" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl">
-                    Buyurtma berish
-                </a>
-                <a href="#portfolio" class="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition-all">
-                    Portfolio
-                </a>
+                <a href="#contact" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all shadow-lg">Buyurtma berish</a>
+                <a href="#stats" class="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition-all">Statistika</a>
             </div>
         </div>
     </section>
@@ -111,62 +83,62 @@
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Xizmatlarimiz</h2>
         <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Biz sizga eng sifatli va tezkor xizmatlarni taqdim etamiz</p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="p-8 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1 group">
-                <div class="text-blue-600 text-4xl mb-4 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-code"></i>
-                </div>
+            <div class="p-8 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all">
+                <div class="text-blue-600 text-4xl mb-4"><i class="fas fa-code"></i></div>
                 <h3 class="text-xl font-bold mb-2">Veb Dasturlash</h3>
-                <p class="text-gray-600 text-sm">Django, Python va modern frontend texnologiyalar yordamida murakkab veb-ilovalar yaratish.</p>
+                <p class="text-gray-600">Django, Python va modern frontend texnologiyalar.</p>
+                <p class="text-blue-600 font-bold mt-4">$300</p>
             </div>
-            <div class="p-8 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1 group">
-                <div class="text-blue-600 text-4xl mb-4 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2">Responsive Dizayn</h3>
-                <p class="text-gray-600 text-sm">Har qanday qurilmada mukammal ko'rinadigan, zamonaviy va tezkor veb-saytlar.</p>
-            </div>
-            <div class="p-8 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1 group">
-                <div class="text-blue-600 text-4xl mb-4 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-robot"></i>
-                </div>
+            <div class="p-8 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all">
+                <div class="text-blue-600 text-4xl mb-4"><i class="fas fa-robot"></i></div>
                 <h3 class="text-xl font-bold mb-2">Telegram Botlar</h3>
-                <p class="text-gray-600 text-sm">Biznes jarayonlarini avtomatlashtirish, mijozlar bilan muloqot uchun aqlli botlar.</p>
+                <p class="text-gray-600">Biznes jarayonlarini avtomatlashtirish.</p>
+                <p class="text-blue-600 font-bold mt-4">$500</p>
+            </div>
+            <div class="p-8 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all">
+                <div class="text-blue-600 text-4xl mb-4"><i class="fas fa-shopping-cart"></i></div>
+                <h3 class="text-xl font-bold mb-2">E-Commerce</h3>
+                <p class="text-gray-600">To'liq funksiyali onlayn do'kon tizimi.</p>
+                <p class="text-blue-600 font-bold mt-4">$2500</p>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 bg-gray-100 px-4">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Bajarilgan Ishlar</h2>
-            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Mijozlarimiz uchun yaratgan loyihalarimizdan namunalar</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition-all group">
-                    <div class="h-52 bg-gradient-to-br from-blue-400 to-purple-400 flex items-center justify-center">
-                        <i class="fas fa-shopping-cart text-6xl text-white opacity-50"></i>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="font-bold text-xl mb-2">E-Commerce Platforma</h4>
-                        <p class="text-gray-600 text-sm">To'liq funksiyali onlayn do'kon tizimi</p>
-                    </div>
+    <!-- Statistics Section -->
+    <section id="stats" class="py-20 bg-gray-100 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Statistika</h2>
+            <p class="text-center text-gray-600 mb-12">Buyurtmalar bo'yicha statistik ma'lumotlar</p>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <i class="fas fa-shopping-cart text-3xl text-blue-600 mb-3"></i>
+                    <div class="text-3xl font-bold text-blue-600" id="totalOrders">0</div>
+                    <div class="text-gray-600">Jami buyurtmalar</div>
                 </div>
-                <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition-all group">
-                    <div class="h-52 bg-gradient-to-br from-green-400 to-blue-400 flex items-center justify-center">
-                        <i class="fas fa-chart-line text-6xl text-white opacity-50"></i>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="font-bold text-xl mb-2">CRM Tizimi</h4>
-                        <p class="text-gray-600 text-sm">Mijozlar bilan ishlashni avtomatlashtirish</p>
-                    </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <i class="fas fa-check-circle text-3xl text-green-600 mb-3"></i>
+                    <div class="text-3xl font-bold text-green-600" id="approvedOrders">0</div>
+                    <div class="text-gray-600">Tasdiqlangan</div>
                 </div>
-                <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition-all group">
-                    <div class="h-52 bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
-                        <i class="fas fa-calendar-check text-6xl text-white opacity-50"></i>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="font-bold text-xl mb-2">Booking App</h4>
-                        <p class="text-gray-600 text-sm">Online band qilish tizimi</p>
-                    </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <i class="fas fa-clock text-3xl text-yellow-600 mb-3"></i>
+                    <div class="text-3xl font-bold text-yellow-600" id="pendingOrders">0</div>
+                    <div class="text-gray-600">Kutilmoqda</div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <i class="fas fa-dollar-sign text-3xl text-purple-600 mb-3"></i>
+                    <div class="text-3xl font-bold text-purple-600" id="totalRevenue">$0</div>
+                    <div class="text-gray-600">Umumiy tushum</div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold mb-4"><i class="fas fa-globe text-blue-600 mr-2"></i>Davlatlar bo'yicha</h3>
+                    <div id="countryStats" class="space-y-2"></div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold mb-4"><i class="fas fa-cogs text-blue-600 mr-2"></i>Xizmatlar bo'yicha</h3>
+                    <div id="serviceStats" class="space-y-2"></div>
                 </div>
             </div>
         </div>
@@ -177,26 +149,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div class="animate-fadeIn">
                 <h2 class="text-3xl md:text-4xl font-bold mb-6">Biz haqimizda</h2>
-                <p class="text-gray-600 mb-4 leading-relaxed">
-                    DevPortfolio - bu innovatsion raqamli yechimlar markazi. Biz 2020-yildan beri mijozlarimizga yuqori sifatli veb-xizmatlarni taqdim etib kelmoqdamiz.
-                </p>
-                <p class="text-gray-600 mb-6 leading-relaxed">
-                    Bizning jamoamiz tajribali dasturchilar va dizaynerlardan iborat. Har bir loyihaga individual yondashib, mijoz ehtiyojlarini to'liq qondirishga harakat qilamiz.
-                </p>
-                <div class="flex gap-8">
-                    <div>
-                        <div class="text-3xl font-bold text-blue-600">50+</div>
-                        <div class="text-gray-600 text-sm">Loyihalar</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold text-blue-600">30+</div>
-                        <div class="text-gray-600 text-sm">Mijozlar</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold text-blue-600">100%</div>
-                        <div class="text-gray-600 text-sm">Mamnuniyat</div>
-                    </div>
-                </div>
+                <p class="text-gray-600 mb-4 leading-relaxed">DevPortfolio - innovatsion raqamli yechimlar markazi. Biz 2020-yildan beri mijozlarimizga yuqori sifatli veb-xizmatlarni taqdim etib kelmoqdamiz.</p>
+                <p class="text-gray-600 mb-6 leading-relaxed">Bizning jamoamiz tajribali dasturchilar va dizaynerlardan iborat. Har bir loyihaga individual yondashib, mijoz ehtiyojlarini to'liq qondirishga harakat qilamiz.</p>
             </div>
             <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
                 <i class="fas fa-quote-left text-4xl opacity-50 mb-4"></i>
@@ -216,201 +170,163 @@
                 </div>
                 <form id="orderForm" class="p-8 space-y-5">
                     <div>
-                        <label class="block text-sm font-medium mb-2 text-gray-700">
-                            <i class="fas fa-user mr-2 text-blue-600"></i>Ismingiz
+                        <label class="block text-sm font-medium mb-2">
+                            <i class="fas fa-user mr-2 text-blue-600"></i>Ism Familiya
                         </label>
-                        <input type="text" id="name" required 
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                            placeholder="Ismingizni kiriting">
+                        <input type="text" id="name" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-2 text-gray-700">
-                            <i class="fas fa-phone mr-2 text-blue-600"></i>Telefon raqamingiz
+                        <label class="block text-sm font-medium mb-2">
+                            <i class="fas fa-phone mr-2 text-blue-600"></i>Telefon raqam
                         </label>
-                        <input type="tel" id="phone" required 
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                            placeholder="+998 __ ___ __ __">
+                        <input type="tel" id="phone" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-2 text-gray-700">
+                        <label class="block text-sm font-medium mb-2">
                             <i class="fas fa-cogs mr-2 text-blue-600"></i>Xizmat turi
                         </label>
-                        <select id="service" 
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all">
-                            <option value="Landing Page">Landing Page (Sayt)</option>
-                            <option value="Telegram Bot">Telegram Bot</option>
-                            <option value="Murakkab Sayt">Murakkab Veb-Sayt</option>
-                            <option value="CRM Tizim">CRM Tizimi</option>
-                            <option value="E-Commerce">Onlayn Do'kon</option>
+                        <select id="service" class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="Landing Page">Landing Page - $300</option>
+                            <option value="Telegram Bot">Telegram Bot - $500</option>
+                            <option value="Murakkab Sayt">Murakkab Veb-Sayt - $1500</option>
+                            <option value="CRM Tizim">CRM Tizimi - $2000</option>
+                            <option value="E-Commerce">Onlayn Do'kon - $2500</option>
                         </select>
                     </div>
-                    <button type="submit" id="submitBtn" 
-                        class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-bold hover:shadow-lg transition-all">
-                        <i class="fas fa-paper-plane mr-2"></i>Yuborish
+                    <div>
+                        <label class="block text-sm font-medium mb-2">
+                            <i class="fas fa-globe mr-2 text-blue-600"></i>Davlat
+                        </label>
+                        <select id="country" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="">Tanlang</option>
+                            <option value="O'zbekiston">O'zbekiston</option>
+                            <option value="Qirg'iziston">Qirg'iziston</option>
+                            <option value="Qozog'iston">Qozog'iston</option>
+                            <option value="Tojikiston">Tojikiston</option>
+                            <option value="Rossiya">Rossiya</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">
+                            <i class="fas fa-city mr-2 text-blue-600"></i>Viloyat/Shahar
+                        </label>
+                        <input type="text" id="region" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-bold hover:shadow-lg transition-all">
+                        <i class="fas fa-paper-plane mr-2"></i>Buyurtma berish
                     </button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                        DevPortfolio
-                    </h3>
-                    <p class="text-gray-400">Professional raqamli yechimlar markazi</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Tez menyu</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#home" class="hover:text-white transition">Bosh sahifa</a></li>
-                        <li><a href="#services" class="hover:text-white transition">Xizmatlar</a></li>
-                        <li><a href="#portfolio" class="hover:text-white transition">Portfolio</a></li>
-                        <li><a href="#contact" class="hover:text-white transition">Kontakt</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Bog'lanish</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><i class="fab fa-telegram mr-2"></i> @devportfolio_bot</li>
-                        <li><i class="fas fa-envelope mr-2"></i> info@devportfolio.uz</li>
-                        <li><i class="fas fa-phone mr-2"></i> +998 90 123 45 67</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2026 DevPortfolio. Barcha huquqlar himoyalangan.</p>
-            </div>
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p>&copy; 2026 DevPortfolio. Barcha huquqlar himoyalangan.</p>
         </div>
     </footer>
 
-    <!-- Toast container -->
     <div id="toast-container"></div>
 
     <script>
-        // Google Apps Script URL (o'zgartirish kerak)
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyJoeWb5pT_7BvJ-7y6q3wjjBInMrMnYZXYro1f_SOYBMUOtf7oNAF5J9m2o3oxhTph/exec';
+        const scriptURL = 'https://script.google.com/macros/s/SIZNING_DEPLOYMENT_URL_ID/exec';
         
-        const form = document.getElementById('orderForm');
-        const submitBtn = document.getElementById('submitBtn');
-        
-        // Mobile menu
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const closeMenu = document.getElementById('close-menu');
-        
-        function toggleMenu() {
-            mobileMenu.classList.toggle('hidden');
-            setTimeout(() => {
-                mobileMenu.classList.toggle('translate-x-full');
-            }, 10);
-        }
-        
-        menuBtn?.addEventListener('click', toggleMenu);
-        closeMenu?.addEventListener('click', toggleMenu);
-        
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.add('translate-x-full');
-            });
-        });
-        
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Statistika yuklash
+        async function loadStatistics() {
+            try {
+                const response = await fetch(scriptURL + '?action=stats');
+                const stats = await response.json();
+                
+                document.getElementById('totalOrders').textContent = stats.totalOrders;
+                document.getElementById('approvedOrders').textContent = stats.approvedOrders;
+                document.getElementById('pendingOrders').textContent = stats.pendingOrders;
+                document.getElementById('totalRevenue').textContent = '$' + stats.totalRevenue;
+                
+                // Davlatlar statistikasi
+                const countryDiv = document.getElementById('countryStats');
+                countryDiv.innerHTML = '';
+                for (const [country, count] of Object.entries(stats.byCountry)) {
+                    countryDiv.innerHTML += `<div class="flex justify-between py-2 border-b"><span>${country}</span><span class="font-bold">${count} ta</span></div>`;
                 }
-            });
-        });
-        
-        // Show toast message
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = type === 'success' ? 'success-toast' : 'error-toast';
-            toast.innerHTML = `
-                <div class="flex items-center gap-2">
-                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
-                    <span>${message}</span>
-                </div>
-            `;
-            container.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.remove();
-            }, 3000);
+                
+                // Xizmatlar statistikasi
+                const serviceDiv = document.getElementById('serviceStats');
+                serviceDiv.innerHTML = '';
+                for (const [service, count] of Object.entries(stats.byService)) {
+                    serviceDiv.innerHTML += `<div class="flex justify-between py-2 border-b"><span>${service}</span><span class="font-bold">${count} ta</span></div>`;
+                }
+            } catch(e) {
+                console.log('Statistika yuklanmadi');
+            }
         }
         
-        // Validate phone number
-        function validatePhone(phone) {
-            const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
-            return phoneRegex.test(phone) || phone.length >= 9;
-        }
-        
-        // Form submit
+        // Forma yuborish
+        const form = document.getElementById('orderForm');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const name = document.getElementById('name').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const service = document.getElementById('service').value;
+            const data = {
+                name: document.getElementById('name').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                service: document.getElementById('service').value,
+                country: document.getElementById('country').value,
+                region: document.getElementById('region').value.trim()
+            };
             
-            if (!name || !phone) {
-                showToast('Iltimos, barcha maydonlarni to\'ldiring!', 'error');
+            if (!data.name || !data.phone || !data.country || !data.region) {
+                showToast('Barcha maydonlarni to\'ldiring!', 'error');
                 return;
             }
             
-            if (!validatePhone(phone)) {
-                showToast('Telefon raqam noto\'g\'ri formatda!', 'error');
-                return;
-            }
-            
-            const data = { name, phone, service };
-            
-            submitBtn.disabled = true;
-            submitBtn.classList.add('btn-loading');
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Yuborilmoqda...';
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Yuborilmoqda...';
             
             try {
-                const response = await fetch(scriptURL, {
+                await fetch(scriptURL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
                 
-                showToast('Buyurtmangiz qabul qilindi! Tez orada bog\'lanamiz.', 'success');
+                showToast('Buyurtma qabul qilindi!', 'success');
                 form.reset();
-                
-            } catch (error) {
-                console.error('Xatolik:', error);
-                showToast('Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring.', 'error');
+                loadStatistics();
+            } catch(error) {
+                showToast('Xatolik yuz berdi!', 'error');
             } finally {
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('btn-loading');
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i>Yuborish';
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i>Buyurtma berish';
             }
         });
         
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('shadow-md');
-                nav.classList.remove('shadow-sm');
-            } else {
-                nav.classList.remove('shadow-md');
-                nav.classList.add('shadow-sm');
-            }
+        function showToast(message, type) {
+            const toast = document.createElement('div');
+            toast.className = type === 'success' ? 'success-toast' : 'error-toast';
+            toast.innerHTML = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+        
+        // Mobile menu
+        document.getElementById('menu-btn')?.addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         });
+        document.getElementById('close-menu')?.addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        loadStatistics();
     </script>
 </body>
 </html>
