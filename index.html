@@ -14,21 +14,6 @@
         .animate-fadeIn { animation: fadeIn 0.8s ease-out; }
         .transition-all { transition: all 0.3s ease; }
         .btn-loading { opacity: 0.7; cursor: not-allowed; }
-        .service-group {
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 20px;
-            background: #f9fafb;
-        }
-        .service-group-title {
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 12px;
-            color: #1e40af;
-            border-bottom: 2px solid #3b82f6;
-            padding-bottom: 8px;
-        }
         .success-toast {
             position: fixed; bottom: 20px; right: 20px; background: #10b981;
             color: white; padding: 12px 24px; border-radius: 8px; z-index: 1000;
@@ -45,6 +30,8 @@
         }
         select, input { transition: all 0.3s ease; }
         select:disabled { background-color: #f3f4f6; cursor: not-allowed; }
+        optgroup { font-weight: bold; color: #1e40af; }
+        optgroup option { font-weight: normal; color: #374151; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
@@ -99,22 +86,19 @@
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Xizmatlarimiz</h2>
         <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Biz sizga eng sifatli va tezkor xizmatlarni taqdim etamiz</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Salon xizmatlari -->
             <div class="p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
                 <h3 class="text-xl font-bold mb-4 text-blue-600"><i class="fas fa-cut mr-2"></i>Salon xizmatlari</h3>
                 <ul class="space-y-2 text-gray-600">
                     <li>💇 Soch parvarishi va dizayni - 50$</li>
                     <li>💅 Tirnoq xizmati - 40$</li>
-                    <li>✨ Kosmetologiya va Teri parvarishi - 80$</li>
+                    <li>✨ Kosmetologiya - 80$</li>
                     <li>💄 Vizaj va Makiyaj - 60$</li>
-                    <li>👁 Qosh va Kiprik xizmati - 45$</li>
-                    <li>🧴 Depilyatsiya va Epilyatsiya - 55$</li>
-                    <li>💆 Tana parvarishi va Massaj - 100$</li>
-                    <li>✂ Erkaklar uchun maxsus xizmatlar - 70$</li>
+                    <li>👁 Qosh va Kiprik - 45$</li>
+                    <li>🧴 Depilyatsiya - 55$</li>
+                    <li>💆 Massaj - 100$</li>
+                    <li>✂ Barbershop - 70$</li>
                 </ul>
             </div>
-            
-            <!-- Tibbiyot xizmatlari -->
             <div class="p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
                 <h3 class="text-xl font-bold mb-4 text-green-600"><i class="fas fa-hospital-user mr-2"></i>Tibbiyot xizmatlari</h3>
                 <ul class="space-y-2 text-gray-600">
@@ -208,48 +192,41 @@
                         </label>
                         <input type="tel" id="phone" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="+998 __ ___ __ __">
                     </div>
-                    
-                    <!-- Salon xizmatlari guruhi -->
-                    <div class="service-group">
-                        <div class="service-group-title">
-                            <i class="fas fa-cut mr-2"></i>SALON XIZMATLARI
-                        </div>
-                        <select id="service_salon" class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <option value="">Tanlang</option>
-                            <option value="Soch parvarishi va dizayni (Hair Styling & Care)">💇 Soch parvarishi va dizayni - 50$</option>
-                            <option value="Tirnoq xizmati (Nail Service / Manikyur va Pedikyur)">💅 Tirnoq xizmati - 40$</option>
-                            <option value="Kosmetologiya va Teri parvarishi (Skin Care & Cosmetology)">✨ Kosmetologiya va Teri parvarishi - 80$</option>
-                            <option value="Vizaj va Makiyaj (Makeup Artistry)">💄 Vizaj va Makiyaj - 60$</option>
-                            <option value="Qosh va Kiprik xizmati (Brow & Lash Bar)">👁 Qosh va Kiprik xizmati - 45$</option>
-                            <option value="Depilyatsiya va Epilyatsiya (Sochlarni olib tashlash)">🧴 Depilyatsiya va Epilyatsiya - 55$</option>
-                            <option value="Tana parvarishi va Massaj (Body Care & Massage)">💆 Tana parvarishi va Massaj - 100$</option>
-                            <option value="Erkaklar uchun maxsus xizmatlar (Barbershop yoʻnalishi)">✂ Erkaklar uchun maxsus xizmatlar - 70$</option>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">
+                            <i class="fas fa-cogs mr-2 text-blue-600"></i>Xizmat turi
+                        </label>
+                        <select id="service" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="">Xizmatni tanlang</option>
+                            
+                            <optgroup label="🏆 SALON XIZMATLARI">
+                                <option value="Soch parvarishi va dizayni (Hair Styling & Care)">💇 Soch parvarishi va dizayni - 50$</option>
+                                <option value="Tirnoq xizmati (Nail Service / Manikyur va Pedikyur)">💅 Tirnoq xizmati - 40$</option>
+                                <option value="Kosmetologiya va Teri parvarishi (Skin Care & Cosmetology)">✨ Kosmetologiya va Teri parvarishi - 80$</option>
+                                <option value="Vizaj va Makiyaj (Makeup Artistry)">💄 Vizaj va Makiyaj - 60$</option>
+                                <option value="Qosh va Kiprik xizmati (Brow & Lash Bar)">👁 Qosh va Kiprik xizmati - 45$</option>
+                                <option value="Depilyatsiya va Epilyatsiya (Sochlarni olib tashlash)">🧴 Depilyatsiya va Epilyatsiya - 55$</option>
+                                <option value="Tana parvarishi va Massaj (Body Care & Massage)">💆 Tana parvarishi va Massaj - 100$</option>
+                                <option value="Erkaklar uchun maxsus xizmatlar (Barbershop yoʻnalishi)">✂ Erkaklar uchun maxsus xizmatlar - 70$</option>
+                            </optgroup>
+                            
+                            <optgroup label="🏥 TIBBIYOT SOHASI TARMOQLARI">
+                                <option value="Terapiya (Ichki kasalliklar)">🩺 Terapiya - 80$</option>
+                                <option value="Xirurgiya (Jarrohlik)">🔪 Xirurgiya - 200$</option>
+                                <option value="Kardiologiya">❤ Kardiologiya - 150$</option>
+                                <option value="Nevrologiya">🧠 Nevrologiya - 120$</option>
+                                <option value="Pediatriya">👶 Pediatriya - 60$</option>
+                                <option value="Ginekologiya va Akusherlik">⚕ Ginekologiya - 130$</option>
+                                <option value="Stomatologiya (Tish shifokorligi)">🦷 Stomatologiya - 100$</option>
+                                <option value="Dermatologiya va Venerologiya">🔬 Dermatologiya - 90$</option>
+                                <option value="Gastroenterologiya">🍽 Gastroenterologiya - 110$</option>
+                                <option value="Endokrinologiya">🩸 Endokrinologiya - 100$</option>
+                                <option value="Oftalmologiya (Okulist)">👁 Oftalmologiya - 85$</option>
+                                <option value="Diagnostika (Laboratoriya va Apparatli)">🔬 Diagnostika - 70$</option>
+                                <option value="Reabilitologiya va Fizioterapiya">💪 Reabilitologiya - 95$</option>
+                            </optgroup>
                         </select>
                     </div>
-                    
-                    <!-- Tibbiyot xizmatlari guruhi -->
-                    <div class="service-group">
-                        <div class="service-group-title">
-                            <i class="fas fa-hospital-user mr-2"></i>TIBBIYOT SOHASI TARMOQLARI
-                        </div>
-                        <select id="service_medical" class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <option value="">Tanlang</option>
-                            <option value="Terapiya (Ichki kasalliklar)">🩺 Terapiya - 80$</option>
-                            <option value="Xirurgiya (Jarrohlik)">🔪 Xirurgiya - 200$</option>
-                            <option value="Kardiologiya">❤ Kardiologiya - 150$</option>
-                            <option value="Nevrologiya">🧠 Nevrologiya - 120$</option>
-                            <option value="Pediatriya">👶 Pediatriya - 60$</option>
-                            <option value="Ginekologiya va Akusherlik">⚕ Ginekologiya - 130$</option>
-                            <option value="Stomatologiya (Tish shifokorligi)">🦷 Stomatologiya - 100$</option>
-                            <option value="Dermatologiya va Venerologiya">🔬 Dermatologiya - 90$</option>
-                            <option value="Gastroenterologiya">🍽 Gastroenterologiya - 110$</option>
-                            <option value="Endokrinologiya">🩸 Endokrinologiya - 100$</option>
-                            <option value="Oftalmologiya (Okulist)">👁 Oftalmologiya - 85$</option>
-                            <option value="Diagnostika (Laboratoriya va Apparatli)">🔬 Diagnostika - 70$</option>
-                            <option value="Reabilitologiya va Fizioterapiya">💪 Reabilitologiya - 95$</option>
-                        </select>
-                    </div>
-                    
                     <div>
                         <label class="block text-sm font-medium mb-2">
                             <i class="fas fa-globe mr-2 text-blue-600"></i>Davlat
@@ -314,13 +291,12 @@
         const USD_RATE = 12900;
         
         // Google Apps Script URL (o'z URL ingiz bilan almashtiring!)
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyaEprBR7-1yN7GCPjdbQt8cIAgbv4W-kQkM6ekc1Wv8d_ZBT6POTDKu0Z1GjwHLIeV/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw4T7RoFuueyV1w7NymtLV9oQUhiShIYxhI1wm5Yq-a2BfNCQAbEluMrmUOzTFbjOAa/exec';
 
         const countrySelect = document.getElementById('country');
         const regionSelect = document.getElementById('region');
         const form = document.getElementById('orderForm');
-        const serviceSalon = document.getElementById('service_salon');
-        const serviceMedical = document.getElementById('service_medical');
+        const serviceSelect = document.getElementById('service');
 
         // Davlat tanlanganda viloyatlarni yangilash
         countrySelect.addEventListener('change', function() {
@@ -338,19 +314,6 @@
                 });
             } else {
                 regionSelect.disabled = true;
-            }
-        });
-
-        // Xizmat tanlashda bir-birini tozalash
-        serviceSalon.addEventListener('change', function() {
-            if (this.value) {
-                serviceMedical.value = "";
-            }
-        });
-        
-        serviceMedical.addEventListener('change', function() {
-            if (this.value) {
-                serviceSalon.value = "";
             }
         });
 
@@ -376,7 +339,8 @@
                 if (stats.byService) {
                     serviceDiv.innerHTML = '';
                     for (const [service, count] of Object.entries(stats.byService)) {
-                        serviceDiv.innerHTML += `<div class="flex justify-between py-2 border-b"><span>${service.substring(0, 40)}${service.length > 40 ? '...' : ''}</span><span class="font-bold">${count} ta</span></div>`;
+                        let shortName = service.length > 35 ? service.substring(0, 32) + '...' : service;
+                        serviceDiv.innerHTML += `<div class="flex justify-between py-2 border-b"><span>${shortName}</span><span class="font-bold">${count} ta</span></div>`;
                     }
                 }
             } catch(e) {
@@ -390,17 +354,11 @@
             
             const name = document.getElementById('name').value.trim();
             const phone = document.getElementById('phone').value.trim();
+            const service = document.getElementById('service').value;
             const country = document.getElementById('country').value;
             const region = document.getElementById('region').value;
             
-            let service = "";
-            if (serviceSalon.value) {
-                service = serviceSalon.value;
-            } else if (serviceMedical.value) {
-                service = serviceMedical.value;
-            }
-            
-            if (!name || !phone || !country || !region || !service) {
+            if (!name || !phone || !service || !country || !region) {
                 showToast('Barcha maydonlarni to\'ldiring va xizmat tanlang!', 'error');
                 return;
             }
@@ -421,8 +379,6 @@
                 
                 showToast('Buyurtma qabul qilindi! Tez orada bog\'lanamiz.', 'success');
                 form.reset();
-                serviceSalon.value = "";
-                serviceMedical.value = "";
                 regionSelect.disabled = true;
                 regionSelect.innerHTML = '<option value="">Avval davlatni tanlang</option>';
                 loadStatistics();
