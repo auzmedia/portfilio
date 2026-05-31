@@ -127,25 +127,28 @@
             <p class="text-center text-gray-600 mb-12">Buyurtmalar bo'yicha statistik ma'lumotlar</p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <i class="fas fa-shopping-cart text-3xl text-blue-600 mb-3"></i>
                     <div class="text-3xl font-bold text-blue-600" id="totalOrders">0</div>
                     <div class="text-gray-600">Jami buyurtmalar</div>
                 </div>
                 <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <i class="fas fa-dollar-sign text-3xl text-green-600 mb-3"></i>
                     <div class="text-3xl font-bold text-green-600" id="totalRevenue">0</div>
                     <div class="text-gray-600">Umumiy summa (dollar)</div>
                 </div>
                 <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <i class="fas fa-chart-line text-3xl text-purple-600 mb-3"></i>
                     <div class="text-3xl font-bold text-purple-600" id="totalRevenueUZS">0</div>
                     <div class="text-gray-600">Umumiy summa (so'm)</div>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white rounded-2xl p-6 shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Davlatlar bo'yicha</h3>
+                    <h3 class="text-xl font-bold mb-4"><i class="fas fa-globe text-blue-600 mr-2"></i>Davlatlar bo'yicha</h3>
                     <div id="countryStats" class="space-y-2"></div>
                 </div>
                 <div class="bg-white rounded-2xl p-6 shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Xizmatlar bo'yicha</h3>
+                    <h3 class="text-xl font-bold mb-4"><i class="fas fa-cogs text-blue-600 mr-2"></i>Xizmatlar bo'yicha</h3>
                     <div id="serviceStats" class="space-y-2"></div>
                 </div>
             </div>
@@ -161,6 +164,7 @@
                 <p class="text-gray-600 mb-6 leading-relaxed">Bizning jamoamiz tajribali dasturchilar va dizaynerlardan iborat. Har bir loyihaga individual yondashib, mijoz ehtiyojlarini to'liq qondirishga harakat qilamiz.</p>
             </div>
             <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
+                <i class="fas fa-quote-left text-4xl opacity-50 mb-4"></i>
                 <p class="text-xl italic mb-4">"Sifatli xizmat va professional yondashuv - bizning asosiy tamoyilimiz"</p>
                 <p class="font-semibold">- DevPortfolio jamoasi</p>
             </div>
@@ -292,7 +296,6 @@
         const countrySelect = document.getElementById('country');
         const regionSelect = document.getElementById('region');
         const form = document.getElementById('orderForm');
-        const serviceSelect = document.getElementById('service');
 
         // Davlat tanlanganda viloyatlarni yangilash
         countrySelect.addEventListener('change', function() {
