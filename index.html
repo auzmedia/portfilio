@@ -88,19 +88,19 @@
                 <div class="text-blue-600 text-4xl mb-4"><i class="fas fa-code"></i></div>
                 <h3 class="text-xl font-bold mb-2">Veb Dasturlash</h3>
                 <p class="text-gray-600">Django, Python va modern frontend texnologiyalar.</p>
-                <p class="text-blue-600 font-bold mt-4">$300</p>
+                <p class="text-blue-600 font-bold mt-4">300 dollar</p>
             </div>
             <div class="p-8 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all">
                 <div class="text-blue-600 text-4xl mb-4"><i class="fas fa-robot"></i></div>
                 <h3 class="text-xl font-bold mb-2">Telegram Botlar</h3>
                 <p class="text-gray-600">Biznes jarayonlarini avtomatlashtirish.</p>
-                <p class="text-blue-600 font-bold mt-4">$500</p>
+                <p class="text-blue-600 font-bold mt-4">500 dollar</p>
             </div>
             <div class="p-8 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all">
                 <div class="text-blue-600 text-4xl mb-4"><i class="fas fa-shopping-cart"></i></div>
                 <h3 class="text-xl font-bold mb-2">E-Commerce</h3>
                 <p class="text-gray-600">To'liq funksiyali onlayn do'kon tizimi.</p>
-                <p class="text-blue-600 font-bold mt-4">$2500</p>
+                <p class="text-blue-600 font-bold mt-4">2500 dollar</p>
             </div>
         </div>
     </section>
@@ -110,26 +110,21 @@
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Statistika</h2>
             <p class="text-center text-gray-600 mb-12">Buyurtmalar bo'yicha statistik ma'lumotlar</p>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
                     <i class="fas fa-shopping-cart text-3xl text-blue-600 mb-3"></i>
                     <div class="text-3xl font-bold text-blue-600" id="totalOrders">0</div>
                     <div class="text-gray-600">Jami buyurtmalar</div>
                 </div>
                 <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
-                    <i class="fas fa-check-circle text-3xl text-green-600 mb-3"></i>
-                    <div class="text-3xl font-bold text-green-600" id="approvedOrders">0</div>
-                    <div class="text-gray-600">Tasdiqlangan</div>
+                    <i class="fas fa-dollar-sign text-3xl text-green-600 mb-3"></i>
+                    <div class="text-3xl font-bold text-green-600" id="totalRevenue">0</div>
+                    <div class="text-gray-600">Umumiy summa (dollar)</div>
                 </div>
                 <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
-                    <i class="fas fa-clock text-3xl text-yellow-600 mb-3"></i>
-                    <div class="text-3xl font-bold text-yellow-600" id="pendingOrders">0</div>
-                    <div class="text-gray-600">Kutilmoqda</div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
-                    <i class="fas fa-dollar-sign text-3xl text-purple-600 mb-3"></i>
-                    <div class="text-3xl font-bold text-purple-600" id="totalRevenue">$0</div>
-                    <div class="text-gray-600">Umumiy tushum</div>
+                    <i class="fas fa-chart-line text-3xl text-purple-600 mb-3"></i>
+                    <div class="text-3xl font-bold text-purple-600" id="totalRevenueUZS">0</div>
+                    <div class="text-gray-600">Umumiy summa (so'm)</div>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -174,24 +169,24 @@
                         <label class="block text-sm font-medium mb-2">
                             <i class="fas fa-user mr-2 text-blue-600"></i>Ism Familiya
                         </label>
-                        <input type="text" id="name" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <input type="text" id="name" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Ismingizni kiriting">
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-2">
                             <i class="fas fa-phone mr-2 text-blue-600"></i>Telefon raqam
                         </label>
-                        <input type="tel" id="phone" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <input type="tel" id="phone" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="+998 __ ___ __ __">
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-2">
                             <i class="fas fa-cogs mr-2 text-blue-600"></i>Xizmat turi
                         </label>
                         <select id="service" class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <option value="Landing Page">Landing Page - $300</option>
-                            <option value="Telegram Bot">Telegram Bot - $500</option>
-                            <option value="Murakkab Sayt">Murakkab Veb-Sayt - $1500</option>
-                            <option value="CRM Tizim">CRM Tizimi - $2000</option>
-                            <option value="E-Commerce">Onlayn Do'kon - $2500</option>
+                            <option value="Landing Page">Landing Page - 300 dollar</option>
+                            <option value="Telegram Bot">Telegram Bot - 500 dollar</option>
+                            <option value="Murakkab Sayt">Murakkab Veb-Sayt - 1500 dollar</option>
+                            <option value="CRM Tizim">CRM Tizimi - 2000 dollar</option>
+                            <option value="E-Commerce">Onlayn Do'kon - 2500 dollar</option>
                         </select>
                     </div>
                     <div>
@@ -232,95 +227,48 @@
     <div id="toast-container"></div>
 
     <script>
-        // =============== DAVLAT VA VILOYATLAR MA'LUMOTLARI ===============
+        // =============== DAVLAT VA VILOYATLAR ===============
         const regionsByCountry = {
             "O'zbekiston": [
-                "Toshkent shahri",
-                "Toshkent viloyati",
-                "Samarqand",
-                "Buxoro",
-                "Namangan",
-                "Farg'ona",
-                "Andijon",
-                "Qashqadaryo",
-                "Surxondaryo",
-                "Navoiy",
-                "Jizzax",
-                "Sirdaryo",
-                "Xorazm",
-                "Qoraqalpog'iston"
+                "Toshkent shahri", "Toshkent viloyati", "Samarqand", "Buxoro", "Namangan",
+                "Farg'ona", "Andijon", "Qashqadaryo", "Surxondaryo", "Navoiy", "Jizzax",
+                "Sirdaryo", "Xorazm", "Qoraqalpog'iston"
             ],
             "Qirg'iziston": [
-                "Bishkek",
-                "Osh",
-                "Jalal-Abad",
-                "Karakol",
-                "Talas",
-                "Naryn",
-                "Batken",
-                "Chuy",
-                "Ysyk-Kol"
+                "Bishkek", "Osh", "Jalal-Abad", "Karakol", "Talas", "Naryn", "Batken", "Chuy", "Ysyk-Kol"
             ],
             "Qozog'iston": [
-                "Almati",
-                "Nur-Sulton",
-                "Shimkent",
-                "Qarag'andi",
-                "Aqto'be",
-                "Taraz",
-                "O'ral",
-                "Atirau",
-                "Qo'stanay",
-                "Petropavl",
-                "Semey",
-                "Temirtau"
+                "Almati", "Nur-Sulton", "Shimkent", "Qarag'andi", "Aqto'be", "Taraz", "O'ral",
+                "Atirau", "Qo'stanay", "Petropavl", "Semey", "Temirtau"
             ],
             "Tojikiston": [
-                "Dushanbe",
-                "Xo'jand",
-                "Boxtar",
-                "Kulob",
-                "Panjakent",
-                "Istaravshan",
-                "Tursunzoda",
-                "Konibodom"
+                "Dushanbe", "Xo'jand", "Boxtar", "Kulob", "Panjakent", "Istaravshan", "Tursunzoda", "Konibodom"
             ],
             "Rossiya": [
-                "Moskva",
-                "Sankt-Peterburg",
-                "Novosibirsk",
-                "Yekaterinburg",
-                "Qozon",
-                "Nijniy Novgorod",
-                "Chelyabinsk",
-                "Samara",
-                "Omsk",
-                "Rostov-na-Donu",
-                "Ufa",
-                "Krasnoyarsk",
-                "Perm",
-                "Voronej",
-                "Volgograd"
+                "Moskva", "Sankt-Peterburg", "Novosibirsk", "Yekaterinburg", "Qozon", "Nijniy Novgorod",
+                "Chelyabinsk", "Samara", "Omsk", "Rostov-na-Donu", "Ufa", "Krasnoyarsk", "Perm", "Voronej", "Volgograd"
             ]
         };
+
+        // Dollar kursi (so'mda)
+        const USD_RATE = 12900;
+
+        // Google Apps Script URL (o'z URL ingiz bilan almashtiring!)
+        const scriptURL = 'https://script.google.com/macros/s/SIZNING_DEPLOYMENT_URL_ID/exec';
 
         // DOM elementlari
         const countrySelect = document.getElementById('country');
         const regionSelect = document.getElementById('region');
         const form = document.getElementById('orderForm');
-        const scriptURL = 'https://script.google.com/macros/s/SIZNING_DEPLOYMENT_URL_ID/exec';
 
         // Davlat tanlanganda viloyatlarni yangilash
         countrySelect.addEventListener('change', function() {
             const selectedCountry = this.value;
-            
-            // Region selectni tozalash
             regionSelect.innerHTML = '<option value="">Viloyatni tanlang</option>';
             
             if (selectedCountry && regionsByCountry[selectedCountry]) {
                 regionSelect.disabled = false;
                 const regions = regionsByCountry[selectedCountry];
-                
                 regions.forEach(region => {
                     const option = document.createElement('option');
                     option.value = region;
@@ -329,7 +277,6 @@
                 });
             } else {
                 regionSelect.disabled = true;
-                regionSelect.innerHTML = '<option value="">Avval davlatni tanlang</option>';
             }
         });
 
@@ -340,10 +287,10 @@
                 const stats = await response.json();
                 
                 document.getElementById('totalOrders').textContent = stats.totalOrders || 0;
-                document.getElementById('approvedOrders').textContent = stats.approvedOrders || 0;
-                document.getElementById('pendingOrders').textContent = stats.pendingOrders || 0;
-                document.getElementById('totalRevenue').textContent = '$' + (stats.totalRevenue || 0);
+                document.getElementById('totalRevenue').textContent = stats.totalRevenue || 0;
+                document.getElementById('totalRevenueUZS').textContent = ((stats.totalRevenue || 0) * USD_RATE).toLocaleString();
                 
+                // Davlatlar statistikasi
                 const countryDiv = document.getElementById('countryStats');
                 if (stats.byCountry) {
                     countryDiv.innerHTML = '';
@@ -352,11 +299,13 @@
                     }
                 }
                 
+                // Xizmatlar statistikasi
                 const serviceDiv = document.getElementById('serviceStats');
                 if (stats.byService) {
                     serviceDiv.innerHTML = '';
                     for (const [service, count] of Object.entries(stats.byService)) {
-                        serviceDiv.innerHTML += `<div class="flex justify-between py-2 border-b"><span>${service}</span><span class="font-bold">${count} ta</span></div>`;
+                        const revenue = stats.byServiceRevenue?.[service] || 0;
+                        serviceDiv.innerHTML += `<div class="flex justify-between py-2 border-b"><span>${service}</span><span class="font-bold">${count} ta (${revenue} dollar)</span></div>`;
                     }
                 }
             } catch(e) {
@@ -437,6 +386,7 @@
             });
         });
         
+        // Statistikani yuklash
         loadStatistics();
     </script>
 </body>
