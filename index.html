@@ -29,6 +29,7 @@
             to { transform: translateX(0); opacity: 1; }
         }
         select, input { transition: all 0.3s ease; }
+        select:disabled { background-color: #f3f4f6; cursor: not-allowed; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
@@ -198,7 +199,7 @@
                             <i class="fas fa-globe mr-2 text-blue-600"></i>Davlat
                         </label>
                         <select id="country" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <option value="">Tanlang</option>
+                            <option value="">Davlatni tanlang</option>
                             <option value="O'zbekiston">O'zbekiston</option>
                             <option value="Qirg'iziston">Qirg'iziston</option>
                             <option value="Qozog'iston">Qozog'iston</option>
@@ -210,7 +211,9 @@
                         <label class="block text-sm font-medium mb-2">
                             <i class="fas fa-city mr-2 text-blue-600"></i>Viloyat/Shahar
                         </label>
-                        <input type="text" id="region" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <select id="region" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="">Avval davlatni tanlang</option>
+                        </select>
                     </div>
                     <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-bold hover:shadow-lg transition-all">
                         <i class="fas fa-paper-plane mr-2"></i>Buyurtma berish
@@ -229,54 +232,154 @@
     <div id="toast-container"></div>
 
     <script>
+        // =============== DAVLAT VA VILOYATLAR MA'LUMOTLARI ===============
+        const regionsByCountry = {
+            "O'zbekiston": [
+                "Toshkent shahri",
+                "Toshkent viloyati",
+                "Samarqand",
+                "Buxoro",
+                "Namangan",
+                "Farg'ona",
+                "Andijon",
+                "Qashqadaryo",
+                "Surxondaryo",
+                "Navoiy",
+                "Jizzax",
+                "Sirdaryo",
+                "Xorazm",
+                "Qoraqalpog'iston"
+            ],
+            "Qirg'iziston": [
+                "Bishkek",
+                "Osh",
+                "Jalal-Abad",
+                "Karakol",
+                "Talas",
+                "Naryn",
+                "Batken",
+                "Chuy",
+                "Ysyk-Kol"
+            ],
+            "Qozog'iston": [
+                "Almati",
+                "Nur-Sulton",
+                "Shimkent",
+                "Qarag'andi",
+                "Aqto'be",
+                "Taraz",
+                "O'ral",
+                "Atirau",
+                "Qo'stanay",
+                "Petropavl",
+                "Semey",
+                "Temirtau"
+            ],
+            "Tojikiston": [
+                "Dushanbe",
+                "Xo'jand",
+                "Boxtar",
+                "Kulob",
+                "Panjakent",
+                "Istaravshan",
+                "Tursunzoda",
+                "Konibodom"
+            ],
+            "Rossiya": [
+                "Moskva",
+                "Sankt-Peterburg",
+                "Novosibirsk",
+                "Yekaterinburg",
+                "Qozon",
+                "Nijniy Novgorod",
+                "Chelyabinsk",
+                "Samara",
+                "Omsk",
+                "Rostov-na-Donu",
+                "Ufa",
+                "Krasnoyarsk",
+                "Perm",
+                "Voronej",
+                "Volgograd"
+            ]
+        };
+
+        // DOM elementlari
+        const countrySelect = document.getElementById('country');
+        const regionSelect = document.getElementById('region');
+        const form = document.getElementById('orderForm');
         const scriptURL = 'https://script.google.com/macros/s/SIZNING_DEPLOYMENT_URL_ID/exec';
-        
+
+        // Davlat tanlanganda viloyatlarni yangilash
+        countrySelect.addEventListener('change', function() {
+            const selectedCountry = this.value;
+            
+            // Region selectni tozalash
+            regionSelect.innerHTML = '<option value="">Viloyatni tanlang</option>';
+            
+            if (selectedCountry && regionsByCountry[selectedCountry]) {
+                regionSelect.disabled = false;
+                const regions = regionsByCountry[selectedCountry];
+                
+                regions.forEach(region => {
+                    const option = document.createElement('option');
+                    option.value = region;
+                    option.textContent = region;
+                    regionSelect.appendChild(option);
+                });
+            } else {
+                regionSelect.disabled = true;
+                regionSelect.innerHTML = '<option value="">Avval davlatni tanlang</option>';
+            }
+        });
+
         // Statistika yuklash
         async function loadStatistics() {
             try {
                 const response = await fetch(scriptURL + '?action=stats');
                 const stats = await response.json();
                 
-                document.getElementById('totalOrders').textContent = stats.totalOrders;
-                document.getElementById('approvedOrders').textContent = stats.approvedOrders;
-                document.getElementById('pendingOrders').textContent = stats.pendingOrders;
-                document.getElementById('totalRevenue').textContent = '$' + stats.totalRevenue;
+                document.getElementById('totalOrders').textContent = stats.totalOrders || 0;
+                document.getElementById('approvedOrders').textContent = stats.approvedOrders || 0;
+                document.getElementById('pendingOrders').textContent = stats.pendingOrders || 0;
+                document.getElementById('totalRevenue').textContent = '$' + (stats.totalRevenue || 0);
                 
-                // Davlatlar statistikasi
                 const countryDiv = document.getElementById('countryStats');
-                countryDiv.innerHTML = '';
-                for (const [country, count] of Object.entries(stats.byCountry)) {
-                    countryDiv.innerHTML += `<div class="flex justify-between py-2 border-b"><span>${country}</span><span class="font-bold">${count} ta</span></div>`;
+                if (stats.byCountry) {
+                    countryDiv.innerHTML = '';
+                    for (const [country, count] of Object.entries(stats.byCountry)) {
+                        countryDiv.innerHTML += `<div class="flex justify-between py-2 border-b"><span>${country}</span><span class="font-bold">${count} ta</span></div>`;
+                    }
                 }
                 
-                // Xizmatlar statistikasi
                 const serviceDiv = document.getElementById('serviceStats');
-                serviceDiv.innerHTML = '';
-                for (const [service, count] of Object.entries(stats.byService)) {
-                    serviceDiv.innerHTML += `<div class="flex justify-between py-2 border-b"><span>${service}</span><span class="font-bold">${count} ta</span></div>`;
+                if (stats.byService) {
+                    serviceDiv.innerHTML = '';
+                    for (const [service, count] of Object.entries(stats.byService)) {
+                        serviceDiv.innerHTML += `<div class="flex justify-between py-2 border-b"><span>${service}</span><span class="font-bold">${count} ta</span></div>`;
+                    }
                 }
             } catch(e) {
-                console.log('Statistika yuklanmadi');
+                console.log('Statistika yuklanmadi:', e);
             }
         }
-        
+
         // Forma yuborish
-        const form = document.getElementById('orderForm');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const data = {
-                name: document.getElementById('name').value.trim(),
-                phone: document.getElementById('phone').value.trim(),
-                service: document.getElementById('service').value,
-                country: document.getElementById('country').value,
-                region: document.getElementById('region').value.trim()
-            };
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const service = document.getElementById('service').value;
+            const country = document.getElementById('country').value;
+            const region = document.getElementById('region').value;
             
-            if (!data.name || !data.phone || !data.country || !data.region) {
+            if (!name || !phone || !country || !region) {
                 showToast('Barcha maydonlarni to\'ldiring!', 'error');
                 return;
             }
+            
+            const data = { name, phone, service, country, region };
             
             const btn = document.getElementById('submitBtn');
             btn.disabled = true;
@@ -290,11 +393,15 @@
                     body: JSON.stringify(data)
                 });
                 
-                showToast('Buyurtma qabul qilindi!', 'success');
+                showToast('Buyurtma qabul qilindi! Tez orada bog\'lanamiz.', 'success');
                 form.reset();
+                regionSelect.disabled = true;
+                regionSelect.innerHTML = '<option value="">Avval davlatni tanlang</option>';
                 loadStatistics();
+                
             } catch(error) {
-                showToast('Xatolik yuz berdi!', 'error');
+                console.error('Xatolik:', error);
+                showToast('Xatolik yuz berdi. Qaytadan urinib ko\'ring.', 'error');
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i>Buyurtma berish';
@@ -310,11 +417,15 @@
         }
         
         // Mobile menu
-        document.getElementById('menu-btn')?.addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+        
+        menuBtn?.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
-        document.getElementById('close-menu')?.addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.add('hidden');
+        closeMenu?.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
         });
         
         // Smooth scroll
