@@ -31,9 +31,12 @@
         .service-item-card { background: white; border-radius: 16px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
         .service-item-card:hover { transform: translateX(6px); border-color: #3b82f6; }
         .service-item-price { font-weight: bold; color: #3b82f6; background: #eff6ff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem; }
-        .stats-card { background: white; border-radius: 24px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .stats-card { background: white; border-radius: 24px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: all 0.2s; }
+        .stats-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
         .rotate-icon { transition: transform 0.3s ease; }
         .rotate-icon.open { transform: rotate(180deg); }
+        .stat-item { background: #f9fafb; border-radius: 16px; padding: 16px; transition: all 0.2s; border: 1px solid #eef2ff; }
+        .stat-item:hover { border-color: #c7d2fe; background: white; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
@@ -87,39 +90,42 @@
         </div>
     </section>
 
-    <!-- Statistics Section - TALAB BO'YICHA: Jami buyurtmalar, dollar summa, so'm summa + davlatlar bo'yicha (son va tushum) + xizmatlar tahlili (son va tushum) -->
+    <!-- Statistics Section - 3 blok: Jami ko'rsatkichlar, Davlatlar, Xizmatlar (bir xil kartochka uslubida) -->
     <section id="stats" class="py-20 bg-gray-100 px-4">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Statistika</h2>
             <p class="text-center text-gray-600 mb-12">Buyurtmalar bo'yicha umumiy tahlil: jami, davlatlar va xizmatlar kesimida (USD/so‘m)</p>
             
             <!-- 3 ta asosiy karta: jami buyurtmalar, jami dollar, jami so'm -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div class="stats-card text-center"><i class="fas fa-shopping-cart text-3xl text-blue-600 mb-3"></i><div class="text-3xl font-bold text-blue-600" id="totalOrders">0</div><div class="text-gray-600">Jami buyurtmalar</div></div>
-                <div class="stats-card text-center"><i class="fas fa-dollar-sign text-3xl text-green-600 mb-3"></i><div class="text-3xl font-bold text-green-600" id="totalRevenue">0</div><div class="text-gray-600">Umumiy summa (USD)</div></div>
-                <div class="stats-card text-center"><i class="fas fa-chart-line text-3xl text-purple-600 mb-3"></i><div class="text-3xl font-bold text-purple-600" id="totalRevenueUZS">0</div><div class="text-gray-600">Umumiy summa (so'm)</div></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                <div class="stats-card text-center"><i class="fas fa-shopping-cart text-4xl text-blue-600 mb-3"></i><div class="text-4xl font-bold text-blue-600" id="totalOrders">0</div><div class="text-gray-600 mt-1">Jami buyurtmalar</div></div>
+                <div class="stats-card text-center"><i class="fas fa-dollar-sign text-4xl text-green-600 mb-3"></i><div class="text-4xl font-bold text-green-600" id="totalRevenue">0</div><div class="text-gray-600 mt-1">Umumiy summa (USD)</div></div>
+                <div class="stats-card text-center"><i class="fas fa-chart-line text-4xl text-purple-600 mb-3"></i><div class="text-4xl font-bold text-purple-600" id="totalRevenueUZS">0</div><div class="text-gray-600 mt-1">Umumiy summa (so'm)</div></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Davlatlar bo'yicha STATISTIKA: ajratilgan holda (son va summa) -->
-                <div class="stats-card">
-                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-globe text-blue-600"></i> Davlatlar bo‘yicha tahlil</h3>
-                    <div id="countryStats" class="space-y-3 max-h-96 overflow-y-auto pr-2"></div>
-                    <div class="text-xs text-gray-500 mt-3 text-center">*Har bir davlat: buyurtmalar soni va umumiy tushum (USD)</div>
+            <!-- Davlatlar bo'yicha statistika - xuddi shunday kartochkalar ko'rinishida -->
+            <div class="mb-16">
+                <div class="flex items-center gap-3 mb-6">
+                    <i class="fas fa-globe text-3xl text-blue-600"></i>
+                    <h3 class="text-2xl font-bold text-gray-800">Davlatlar bo‘yicha tahlil</h3>
                 </div>
-                
-                <!-- Xizmatlar bo'yicha tahlil (son va dollar tushumi) -->
-                <div class="stats-card">
-                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-cogs text-blue-600"></i> Xizmatlar bo‘yicha tahlil</h3>
-                    <div id="serviceStats" class="space-y-3 max-h-96 overflow-y-auto pr-2"></div>
-                    <div class="text-xs text-gray-500 mt-3 text-center">*Har bir xizmat: necha marta buyurtma qilingan va umumiy daromad (USD)</div>
-                </div>
+                <div id="countryStats" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+                <p class="text-xs text-gray-500 text-center mt-4">*Har bir davlat: buyurtmalar soni va umumiy tushum (USD / so‘m)</p>
             </div>
-            <div class="mt-5 text-center text-sm text-gray-500 bg-white/70 rounded-xl p-2"><i class="fas fa-sync-alt mr-1"></i> Statistika real vaqtda yangilanadi (Google Sheets asosida)</div>
+            
+            <!-- Xizmatlar bo'yicha statistika - xuddi shunday kartochkalar ko'rinishida -->
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <i class="fas fa-cogs text-3xl text-purple-600"></i>
+                    <h3 class="text-2xl font-bold text-gray-800">Xizmatlar bo‘yicha tahlil</h3>
+                </div>
+                <div id="serviceStats" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+                <p class="text-xs text-gray-500 text-center mt-4">*Har bir xizmat: necha marta buyurtma qilingan va umumiy daromad (USD / so‘m)</p>
+            </div>
         </div>
     </section>
 
-    <!-- About & Contact -->
+    <!-- About Section -->
     <section id="about" class="py-20 max-w-7xl mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div><h2 class="text-3xl md:text-4xl font-bold mb-6">Biz haqimizda</h2><p class="text-gray-600 mb-4 leading-relaxed">DevPortfolio - innovatsion raqamli yechimlar markazi. Biz 2020-yildan beri mijozlarimizga yuqori sifatli veb-xizmatlarni taqdim etib kelmoqdamiz.</p><p class="text-gray-600 leading-relaxed">Bizning jamoamiz tajribali dasturchilar va dizaynerlardan iborat. Har bir loyihaga individual yondashib, mijoz ehtiyojlarini to'liq qondirishga harakat qilamiz.</p></div>
@@ -127,6 +133,7 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact" class="py-20 bg-gray-100 px-4">
         <div class="max-w-3xl mx-auto">
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
@@ -167,7 +174,7 @@
     <div id="toast-container"></div>
 
     <script>
-        // =============== ACCORDION ===============
+        // ACCORDION
         function setupAccordion(btnId, contentId) {
             const btn = document.getElementById(btnId);
             const content = document.getElementById(contentId);
@@ -183,7 +190,7 @@
         setupAccordion('salonBtn', 'salonContent');
         setupAccordion('medicalBtn', 'medicalContent');
 
-        // regions ma'lumotlari
+        // regions
         const regionsByCountry = {
             "O'zbekiston": ["Toshkent shahri","Toshkent viloyati","Samarqand","Buxoro","Namangan","Farg'ona","Andijon","Qashqadaryo","Surxondaryo","Navoiy","Jizzax","Sirdaryo","Xorazm","Qoraqalpog'iston"],
             "Qirg'iziston": ["Bishkek","Osh","Jalal-Abad","Karakol","Talas","Naryn","Batken","Chuy","Ysyk-Kol"],
@@ -207,33 +214,26 @@
             } else { regionSelect.disabled = true; }
         });
 
-        // Xizmat narxlarini aniqlash (select option value yoki matndan)
-        function getServicePrice(serviceValue, serviceTextFallback = '') {
-            const fullText = serviceValue || serviceTextFallback;
+        function getServicePrice(serviceValue, optionText = '') {
+            const fullText = optionText || serviceValue;
             const match = fullText.match(/(\d+)\$/);
             if (match) return parseInt(match[1], 10);
             const priceMap = { 'Soch parvarishi va dizayni':50, 'Tirnoq xizmati':40, 'Kosmetologiya va Teri parvarishi':80, 'Vizaj va Makiyaj':60, 'Qosh va Kiprik xizmati':45, 'Depilyatsiya va Epilyatsiya':55, 'Tana parvarishi va Massaj':100, 'Erkaklar uchun maxsus xizmatlar':70, 'Terapiya':80, 'Xirurgiya':200, 'Kardiologiya':150, 'Nevrologiya':120, 'Pediatriya':60, 'Ginekologiya':130, 'Stomatologiya':100, 'Dermatologiya':90, 'Gastroenterologiya':110, 'Endokrinologiya':100, 'Oftalmologiya':85, 'Diagnostika':70, 'Reabilitologiya':95 };
             return priceMap[serviceValue] || 0;
         }
 
-        // asosiy statistikani yuklash va hisoblash: raw ma'lumot keladi (orders array) yoki aggregatsiya. Ikkala holatda ham davlat va xizmat bo'yicha summani chiqaramiz.
         async function loadStatistics() {
             try {
                 const response = await fetch(scriptURL + '?action=stats');
                 const data = await response.json();
-                // data obyekti quyidagi tuzilishda bo'lishi mumkin: { orders: [], totalOrders, totalRevenue, byCountryCount, byServiceCount } 
-                // Lakin ishonchlilik uchun agar orders array kelsa, to'liq hisoblaymiz. aks holda berilgan aggregatlardan foydalanamiz.
                 let orders = data.orders || [];
-                let totalOrdersRaw = data.totalOrders;
-                let totalRevenueRaw = data.totalRevenue;
                 
-                // Agar orders array mavjud bo'lsa, aniq hisob-kitob qilamiz (davlat summalari va xizmat summalari)
                 if (orders && orders.length > 0) {
-                    // Har bir buyurtmada price, country, service nomi mavjud deb faraz (yangi yozuvlarda price saqlanadi)
                     let totalOrd = orders.length;
                     let totalRev = 0;
-                    const countryMap = new Map(); // key: country, value: {count, totalUSD}
-                    const serviceMap = new Map(); // key: serviceName, value: {count, totalUSD}
+                    const countryMap = new Map();
+                    const serviceMap = new Map();
+                    
                     for (let ord of orders) {
                         let price = ord.price || getServicePrice(ord.service, ord.service || '');
                         if (!price && ord.service) price = getServicePrice(ord.service, ord.service);
@@ -250,54 +250,81 @@
                     document.getElementById('totalOrders').textContent = totalOrd;
                     document.getElementById('totalRevenue').textContent = totalRev;
                     document.getElementById('totalRevenueUZS').textContent = (totalRev * USD_RATE).toLocaleString();
-                    // Davlat statistikasini chiqarish (son + dollar summa)
-                    const countryDiv = document.getElementById('countryStats');
-                    if (countryMap.size) {
-                        countryDiv.innerHTML = '';
-                        const sorted = Array.from(countryMap.entries()).sort((a,b)=>b[1].totalUSD - a[1].totalUSD);
-                        for (let [country, val] of sorted) {
-                            countryDiv.innerHTML += `<div class="bg-gray-50 p-3 rounded-xl shadow-sm border"><div class="flex justify-between items-center"><span class="font-semibold"><i class="fas fa-flag mr-1 text-blue-500"></i>${country}</span><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-sm">${val.count} ta</span></div><div class="flex justify-between mt-1 text-sm"><span class="text-gray-600">Jami tushum:</span><span class="font-bold text-green-700">${val.totalUSD} USD (${(val.totalUSD*USD_RATE).toLocaleString()} so‘m)</span></div></div>`;
-                        }
-                    } else { countryDiv.innerHTML = '<div class="text-gray-400">Maʼlumot yo‘q</div>'; }
-                    // Xizmatlar tahlili (son va umumiy dollar)
-                    const serviceDiv = document.getElementById('serviceStats');
-                    if (serviceMap.size) {
-                        serviceDiv.innerHTML = '';
-                        const sortedSrv = Array.from(serviceMap.entries()).sort((a,b)=>b[1].totalUSD - a[1].totalUSD);
-                        for (let [srvName, val] of sortedSrv) {
-                            let shortName = srvName.length > 40 ? srvName.substring(0,37)+'...' : srvName;
-                            serviceDiv.innerHTML += `<div class="bg-white p-3 rounded-xl border border-gray-200 hover:shadow-sm transition"><div class="flex justify-between items-center flex-wrap gap-1"><span class="font-medium text-gray-800"><i class="fas fa-briefcase-medical text-purple-500 mr-1"></i>${shortName}</span><span class="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full text-xs">${val.count} marta</span></div><div class="mt-1 text-sm flex justify-between"><span>Umumiy tushum:</span><span class="font-semibold text-green-600">${val.totalUSD} USD (~${(val.totalUSD*USD_RATE).toLocaleString()} so‘m)</span></div></div>`;
-                        }
-                    } else { serviceDiv.innerHTML = '<div class="text-gray-400">Xizmatlar bo‘yicha maʼlumot yo‘q</div>'; }
+                    
+                    // Davlatlar statistikasi - kartochkalar ko'rinishida
+                    const countryContainer = document.getElementById('countryStats');
+                    countryContainer.innerHTML = '';
+                    const sortedCountries = Array.from(countryMap.entries()).sort((a,b)=>b[1].totalUSD - a[1].totalUSD);
+                    for (let [country, val] of sortedCountries) {
+                        const revUZS = (val.totalUSD * USD_RATE).toLocaleString();
+                        countryContainer.innerHTML += `
+                            <div class="stat-item">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-bold text-lg text-gray-800"><i class="fas fa-flag text-blue-500 mr-2"></i>${country}</span>
+                                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">${val.count} ta</span>
+                                </div>
+                                <div class="border-t border-gray-200 pt-2 mt-1">
+                                    <div class="flex justify-between text-sm"><span class="text-gray-600">💰 Umumiy tushum:</span><span class="font-bold text-green-600">${val.totalUSD} USD</span></div>
+                                    <div class="flex justify-between text-sm mt-1"><span class="text-gray-600">💵 So‘mda:</span><span class="font-semibold text-purple-600">${revUZS} so‘m</span></div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    if (sortedCountries.length === 0) countryContainer.innerHTML = '<div class="col-span-full text-center text-gray-400 py-6">Hozircha maʼlumot yo‘q</div>';
+                    
+                    // Xizmatlar statistikasi - kartochkalar ko'rinishida
+                    const serviceContainer = document.getElementById('serviceStats');
+                    serviceContainer.innerHTML = '';
+                    const sortedServices = Array.from(serviceMap.entries()).sort((a,b)=>b[1].totalUSD - a[1].totalUSD);
+                    for (let [srvName, val] of sortedServices) {
+                        let shortName = srvName.length > 45 ? srvName.substring(0,42)+'...' : srvName;
+                        const revUZS = (val.totalUSD * USD_RATE).toLocaleString();
+                        serviceContainer.innerHTML += `
+                            <div class="stat-item">
+                                <div class="flex items-start justify-between mb-2 gap-2">
+                                    <span class="font-semibold text-gray-800 text-sm flex-1"><i class="fas fa-stethoscope text-purple-500 mr-1"></i>${shortName}</span>
+                                    <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full text-xs font-bold whitespace-nowrap">${val.count} marta</span>
+                                </div>
+                                <div class="border-t border-gray-200 pt-2 mt-1">
+                                    <div class="flex justify-between text-sm"><span class="text-gray-600">📊 Daromad:</span><span class="font-bold text-green-600">${val.totalUSD} USD</span></div>
+                                    <div class="flex justify-between text-sm mt-1"><span class="text-gray-600">💵 So‘mda:</span><span class="font-semibold text-purple-600">${revUZS} so‘m</span></div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    if (sortedServices.length === 0) serviceContainer.innerHTML = '<div class="col-span-full text-center text-gray-400 py-6">Xizmatlar bo‘yicha maʼlumot yo‘q</div>';
                 } 
                 else {
-                    // Agar orders array kelmagan bo'lsa, lekin aggregatsiya kelsa: byCountryCount, byServiceCount, totalRevenue
+                    // Fallback: agar orders array bo'lmasa, API dan kelgan aggregate ma'lumotlarni ishlatamiz
                     document.getElementById('totalOrders').textContent = data.totalOrders || 0;
                     const revenue = data.totalRevenue || 0;
                     document.getElementById('totalRevenue').textContent = revenue;
                     document.getElementById('totalRevenueUZS').textContent = (revenue * USD_RATE).toLocaleString();
-                    const countryDiv = document.getElementById('countryStats');
+                    
+                    const countryContainer = document.getElementById('countryStats');
                     if (data.byCountry && typeof data.byCountry === 'object') {
-                        countryDiv.innerHTML = '';
-                        // agar byCountryRevenue ham bo'lsa ishlatamiz, aks holda faqat son
+                        countryContainer.innerHTML = '';
                         for (let [country, count] of Object.entries(data.byCountry)) {
                             let revenueCountry = (data.byCountryRevenue && data.byCountryRevenue[country]) ? data.byCountryRevenue[country] : 0;
-                            countryDiv.innerHTML += `<div class="bg-gray-50 p-3 rounded-xl"><div class="flex justify-between"><span><i class="fas fa-map-marker-alt text-blue-500"></i> ${country}</span><span class="font-bold">${count} ta</span></div><div class="text-sm text-green-700">Jami: ${revenueCountry} USD (${(revenueCountry*USD_RATE).toLocaleString()} so‘m)</div></div>`;
+                            const revUZS = (revenueCountry * USD_RATE).toLocaleString();
+                            countryContainer.innerHTML += `<div class="stat-item"><div class="flex justify-between items-center"><span class="font-bold"><i class="fas fa-globe"></i> ${country}</span><span class="bg-blue-100 px-2 py-0.5 rounded-full">${count} ta</span></div><div class="mt-2 text-sm"><span class="text-green-700 font-medium">${revenueCountry} USD</span> <span class="text-gray-500">|</span> <span class="text-purple-600">${revUZS} so‘m</span></div></div>`;
                         }
-                    } else { countryDiv.innerHTML = '<div>Statistika mavjud emas</div>'; }
-                    const serviceDiv = document.getElementById('serviceStats');
+                    } else { countryContainer.innerHTML = '<div class="col-span-full text-center text-gray-400">Statistika mavjud emas</div>'; }
+                    
+                    const serviceContainer = document.getElementById('serviceStats');
                     if (data.byService && typeof data.byService === 'object') {
-                        serviceDiv.innerHTML = '';
+                        serviceContainer.innerHTML = '';
                         for (let [srv, count] of Object.entries(data.byService)) {
                             let srvRevenue = (data.byServiceRevenue && data.byServiceRevenue[srv]) ? data.byServiceRevenue[srv] : (count * getServicePrice(srv, srv));
-                            serviceDiv.innerHTML += `<div class="bg-white p-2 rounded border"><div class="flex justify-between"><span class="text-sm">${srv.length>35?srv.substring(0,32)+'...':srv}</span><span>${count} marta</span></div><div class="text-xs text-green-600">Daromad: ${srvRevenue} USD</div></div>`;
+                            const revUZS = (srvRevenue * USD_RATE).toLocaleString();
+                            serviceContainer.innerHTML += `<div class="stat-item"><div class="flex justify-between"><span class="font-semibold text-sm">${srv.length>40?srv.substring(0,37)+'...':srv}</span><span class="bg-purple-100 px-2 rounded-full text-xs">${count} marta</span></div><div class="mt-2 text-xs flex gap-2 flex-wrap"><span class="text-green-700">${srvRevenue} USD</span><span class="text-purple-600">${revUZS} so‘m</span></div></div>`;
                         }
-                    } else { serviceDiv.innerHTML = '<div>Xizmatlar tahlili mavjud emas</div>'; }
+                    } else { serviceContainer.innerHTML = '<div class="col-span-full text-center text-gray-400">Xizmatlar tahlili mavjud emas</div>'; }
                 }
-            } catch(e) { console.error("Statistika yuklashda xatolik:", e); document.getElementById('countryStats').innerHTML = '<div class="text-red-400">Statistika vaqtincha ishlamayapti</div>'; }
+            } catch(e) { console.error("Statistika xatosi:", e); document.getElementById('countryStats').innerHTML = '<div class="col-span-full text-red-400 text-center">Statistika vaqtincha ishlamayapti</div>'; }
         }
 
-        // Form submit (Google Apps Script)
+        // Form submit
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const name = document.getElementById('name').value.trim();
@@ -312,15 +339,15 @@
             btn.disabled = true; btn.innerHTML = 'Yuborilmoqda...';
             try {
                 await fetch(scriptURL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, phone, service, country, region, price }) });
-                showToast('Buyurtma qabul qilindi!', 'success');
+                showToast('✅ Buyurtma qabul qilindi!', 'success');
                 form.reset(); regionSelect.disabled = true; regionSelect.innerHTML = '<option value="">Avval davlatni tanlang</option>';
-                setTimeout(() => loadStatistics(), 700);
-            } catch(error) { showToast('Xatolik yuz berdi.', 'error'); } finally { btn.disabled = false; btn.innerHTML = 'Buyurtma berish'; }
+                setTimeout(() => loadStatistics(), 800);
+            } catch(error) { showToast('❌ Xatolik yuz berdi.', 'error'); } finally { btn.disabled = false; btn.innerHTML = 'Buyurtma berish'; }
         });
 
         function showToast(msg, type) { const toast = document.createElement('div'); toast.className = type === 'success' ? 'success-toast' : 'error-toast'; toast.innerHTML = msg; document.body.appendChild(toast); setTimeout(() => toast.remove(), 3000); }
 
-        // mobile menu + smooth scroll
+        // Mobile menu
         const menuBtn = document.getElementById('menu-btn'), mobileMenu = document.getElementById('mobile-menu'), closeMenu = document.getElementById('close-menu');
         menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
         closeMenu?.addEventListener('click', () => mobileMenu.classList.add('hidden'));
