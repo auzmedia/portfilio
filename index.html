@@ -17,7 +17,7 @@
         .success-toast {
             position: fixed; bottom: 20px; right: 20px; background: #10b981;
             color: white; padding: 12px 24px; border-radius: 8px; z-index: 1000;
-            animation: slideIn 0.3s ease-out;
+            animation: slideIn 0.3s ease-out; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         .error-toast {
             position: fixed; bottom: 20px; right: 20px; background: #ef4444;
@@ -136,6 +136,12 @@
             padding: 24px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
+        .stats-grid-item {
+            transition: transform 0.2s;
+        }
+        .stats-grid-item:hover {
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
@@ -244,37 +250,50 @@
         </div>
     </section>
 
-    <!-- Statistics Section -->
+    <!-- Statistics Section - YANGILANGAN (Jami summa, dollar, so‘m, davlatlar va xizmatlar bo‘yicha) -->
     <section id="stats" class="py-20 bg-gray-100 px-4">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Statistika</h2>
-            <p class="text-center text-gray-600 mb-12">Buyurtmalar bo'yicha statistik ma'lumotlar</p>
+            <p class="text-center text-gray-600 mb-12">Buyurtmalar bo'yicha statistik ma'lumotlar (jami tushum va xizmat/davlat kesimida)</p>
+            
+            <!-- 3 ta asosiy ko'rsatkich: jami buyurtmalar, dollar summa, so'm summa -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div class="stats-card text-center">
+                <div class="stats-card text-center stats-grid-item">
                     <i class="fas fa-shopping-cart text-3xl text-blue-600 mb-3"></i>
                     <div class="text-3xl font-bold text-blue-600" id="totalOrders">0</div>
                     <div class="text-gray-600">Jami buyurtmalar</div>
                 </div>
-                <div class="stats-card text-center">
+                <div class="stats-card text-center stats-grid-item">
                     <i class="fas fa-dollar-sign text-3xl text-green-600 mb-3"></i>
                     <div class="text-3xl font-bold text-green-600" id="totalRevenue">0</div>
-                    <div class="text-gray-600">Umumiy summa (dollar)</div>
+                    <div class="text-gray-600">Umumiy summa (USD)</div>
                 </div>
-                <div class="stats-card text-center">
+                <div class="stats-card text-center stats-grid-item">
                     <i class="fas fa-chart-line text-3xl text-purple-600 mb-3"></i>
                     <div class="text-3xl font-bold text-purple-600" id="totalRevenueUZS">0</div>
                     <div class="text-gray-600">Umumiy summa (so'm)</div>
                 </div>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Davlatlar bo'yicha statistika (son va ulush) -->
                 <div class="stats-card">
-                    <h3 class="text-xl font-bold mb-4"><i class="fas fa-globe text-blue-600 mr-2"></i>Davlatlar bo'yicha</h3>
-                    <div id="countryStats" class="space-y-2"></div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-globe text-blue-600"></i> Davlatlar bo‘yicha buyurtmalar</h3>
+                    <div id="countryStats" class="space-y-3 max-h-80 overflow-y-auto pr-2"></div>
+                    <div class="text-xs text-gray-500 mt-3 text-center">*Eng ko‘p buyurtma qilingan davlatlar</div>
                 </div>
+                
+                <!-- Xizmatlar bo'yicha statistika (son va umumiy summa USD) -->
                 <div class="stats-card">
-                    <h3 class="text-xl font-bold mb-4"><i class="fas fa-cogs text-blue-600 mr-2"></i>Xizmatlar bo'yicha</h3>
-                    <div id="serviceStats" class="space-y-2"></div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-cogs text-blue-600"></i> Xizmatlar bo‘yicha tahlil</h3>
+                    <div id="serviceStats" class="space-y-3 max-h-80 overflow-y-auto pr-2"></div>
+                    <div class="text-xs text-gray-500 mt-3 text-center">*Har bir xizmat bo‘yicha buyurtmalar soni va umumiy tushum (USD)</div>
                 </div>
+            </div>
+            
+            <!-- qo'shimcha ma'lumot: eng daromadli xizmat -->
+            <div class="mt-6 text-center text-sm text-gray-500 bg-white/60 rounded-xl p-3">
+                <i class="fas fa-chart-simple mr-1"></i> Statistika real vaqt rejimida Google Sheets asosida yangilanadi.
             </div>
         </div>
     </section>
@@ -305,24 +324,17 @@
                 </div>
                 <form id="orderForm" class="p-8 space-y-5">
                     <div>
-                        <label class="block text-sm font-medium mb-2 text-gray-700">
-                            Ism Familiya
-                        </label>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Ism Familiya</label>
                         <input type="text" id="name" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Ismingizni kiriting">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-2 text-gray-700">
-                            Telefon raqam
-                        </label>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Telefon raqam</label>
                         <input type="tel" id="phone" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="+998 __ ___ __ __">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-2 text-gray-700">
-                            Xizmat turi
-                        </label>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Xizmat turi</label>
                         <select id="service" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
                             <option value="">Xizmatni tanlang</option>
-                            
                             <optgroup label="SALON XIZMATLARI">
                                 <option value="Soch parvarishi va dizayni (Hair Styling & Care)">Soch parvarishi va dizayni - 50$</option>
                                 <option value="Tirnoq xizmati (Nail Service / Manikyur va Pedikyur)">Tirnoq xizmati - 40$</option>
@@ -333,7 +345,6 @@
                                 <option value="Tana parvarishi va Massaj (Body Care & Massage)">Tana parvarishi va Massaj - 100$</option>
                                 <option value="Erkaklar uchun maxsus xizmatlar (Barbershop yoʻnalishi)">Erkaklar uchun maxsus xizmatlar - 70$</option>
                             </optgroup>
-                            
                             <optgroup label="TIBBIYOT SOHASI TARMOQLARI">
                                 <option value="Terapiya (Ichki kasalliklar)">Terapiya - 80$</option>
                                 <option value="Xirurgiya (Jarrohlik)">Xirurgiya - 200$</option>
@@ -352,9 +363,7 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-2 text-gray-700">
-                            Davlat
-                        </label>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Davlat</label>
                         <select id="country" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
                             <option value="">Davlatni tanlang</option>
                             <option value="O'zbekiston">O'zbekiston</option>
@@ -365,9 +374,7 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-2 text-gray-700">
-                            Viloyat/Shahar
-                        </label>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Viloyat/Shahar</label>
                         <select id="region" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
                             <option value="">Avval davlatni tanlang</option>
                         </select>
@@ -389,29 +396,22 @@
     <div id="toast-container"></div>
 
     <script>
-        // =============== ACCORDION FUNKSIYASI ===============
+        // =============== ACCORDION ===============
         function setupAccordion(btnId, contentId) {
             const btn = document.getElementById(btnId);
             const content = document.getElementById(contentId);
             const icon = btn.querySelector('.rotate-icon');
-            
             btn.addEventListener('click', function() {
                 const isOpen = content.classList.contains('open');
-                
-                // Barcha accordionlarni yopish (faqat bitta ochiq qolishi uchun)
                 document.querySelectorAll('.service-content').forEach(c => {
-                    if (c !== content) {
-                        c.classList.remove('open');
-                        c.previousElementSibling.classList.remove('active');
+                    if (c !== content) c.classList.remove('open');
+                    if (c !== content && c.previousElementSibling) c.previousElementSibling.classList.remove('active');
+                    if (c !== content && c.previousElementSibling) {
                         const otherIcon = c.previousElementSibling.querySelector('.rotate-icon');
-                        if (otherIcon) otherIcon.classList.remove('open');
+                        if(otherIcon) otherIcon.classList.remove('open');
                     }
                 });
-                document.querySelectorAll('.service-header').forEach(h => {
-                    if (h !== btn) h.classList.remove('active');
-                });
-                
-                // Hozirgi accordionni ochish/yopish
+                document.querySelectorAll('.service-header').forEach(h => { if (h !== btn) h.classList.remove('active'); });
                 if (!isOpen) {
                     content.classList.add('open');
                     btn.classList.add('active');
@@ -423,135 +423,141 @@
                 }
             });
         }
-        
-        // Accordionlarni ishga tushirish
         setupAccordion('salonBtn', 'salonContent');
         setupAccordion('medicalBtn', 'medicalContent');
         
         // Viloyatlar ma'lumotlari
         const regionsByCountry = {
-            "O'zbekiston": [
-                "Toshkent shahri", "Toshkent viloyati", "Samarqand", "Buxoro", "Namangan",
-                "Farg'ona", "Andijon", "Qashqadaryo", "Surxondaryo", "Navoiy", "Jizzax",
-                "Sirdaryo", "Xorazm", "Qoraqalpog'iston"
-            ],
-            "Qirg'iziston": [
-                "Bishkek", "Osh", "Jalal-Abad", "Karakol", "Talas", "Naryn", "Batken", "Chuy", "Ysyk-Kol"
-            ],
-            "Qozog'iston": [
-                "Almati", "Nur-Sulton", "Shimkent", "Qarag'andi", "Aqto'be", "Taraz", "O'ral",
-                "Atirau", "Qo'stanay", "Petropavl", "Semey", "Temirtau"
-            ],
-            "Tojikiston": [
-                "Dushanbe", "Xo'jand", "Boxtar", "Kulob", "Panjakent", "Istaravshan", "Tursunzoda", "Konibodom"
-            ],
-            "Rossiya": [
-                "Moskva", "Sankt-Peterburg", "Novosibirsk", "Yekaterinburg", "Qozon", "Nijniy Novgorod",
-                "Chelyabinsk", "Samara", "Omsk", "Rostov-na-Donu", "Ufa", "Krasnoyarsk", "Perm", "Voronej", "Volgograd"
-            ]
+            "O'zbekiston": ["Toshkent shahri","Toshkent viloyati","Samarqand","Buxoro","Namangan","Farg'ona","Andijon","Qashqadaryo","Surxondaryo","Navoiy","Jizzax","Sirdaryo","Xorazm","Qoraqalpog'iston"],
+            "Qirg'iziston": ["Bishkek","Osh","Jalal-Abad","Karakol","Talas","Naryn","Batken","Chuy","Ysyk-Kol"],
+            "Qozog'iston": ["Almati","Nur-Sulton","Shimkent","Qarag'andi","Aqto'be","Taraz","O'ral","Atirau","Qo'stanay","Petropavl","Semey","Temirtau"],
+            "Tojikiston": ["Dushanbe","Xo'jand","Boxtar","Kulob","Panjakent","Istaravshan","Tursunzoda","Konibodom"],
+            "Rossiya": ["Moskva","Sankt-Peterburg","Novosibirsk","Yekaterinburg","Qozon","Nijniy Novgorod","Chelyabinsk","Samara","Omsk","Rostov-na-Donu","Ufa","Krasnoyarsk","Perm","Voronej","Volgograd"]
         };
-
         const USD_RATE = 12900;
-        
-        // Google Apps Script URL (o'z URL ingiz bilan almashtiring!)
         const scriptURL = 'https://script.google.com/macros/s/AKfycbw4T7RoFuueyV1w7NymtLV9oQUhiShIYxhI1wm5Yq-a2BfNCQAbEluMrmUOzTFbjOAa/exec';
 
         const countrySelect = document.getElementById('country');
         const regionSelect = document.getElementById('region');
         const form = document.getElementById('orderForm');
 
-        // Davlat tanlanganda viloyatlarni yangilash
         countrySelect.addEventListener('change', function() {
             const selectedCountry = this.value;
             regionSelect.innerHTML = '<option value="">Viloyatni tanlang</option>';
-            
             if (selectedCountry && regionsByCountry[selectedCountry]) {
                 regionSelect.disabled = false;
-                const regions = regionsByCountry[selectedCountry];
-                regions.forEach(region => {
+                regionsByCountry[selectedCountry].forEach(region => {
                     const option = document.createElement('option');
-                    option.value = region;
-                    option.textContent = region;
+                    option.value = region; option.textContent = region;
                     regionSelect.appendChild(option);
                 });
-            } else {
-                regionSelect.disabled = true;
-            }
+            } else { regionSelect.disabled = true; }
         });
 
-        // Statistika yuklash
+        // Xizmat narxlarini olish (select option ichidagi matndan $ qiymat ajratish)
+        function getPriceFromServiceOption(serviceValue) {
+            if (!serviceValue) return 0;
+            const match = serviceValue.match(/(\d+)\$/);
+            return match ? parseInt(match[1], 10) : 0;
+        }
+
+        // STATISTIKA YUKLASH - yangi format: totalOrders, totalRevenue, byCountry, byService (obyektda son va summa)
         async function loadStatistics() {
             try {
                 const response = await fetch(scriptURL + '?action=stats');
                 const stats = await response.json();
-                
                 document.getElementById('totalOrders').textContent = stats.totalOrders || 0;
-                document.getElementById('totalRevenue').textContent = stats.totalRevenue || 0;
-                document.getElementById('totalRevenueUZS').textContent = ((stats.totalRevenue || 0) * USD_RATE).toLocaleString();
+                const totalRev = stats.totalRevenue || 0;
+                document.getElementById('totalRevenue').textContent = totalRev;
+                document.getElementById('totalRevenueUZS').textContent = (totalRev * USD_RATE).toLocaleString();
                 
+                // Davlatlar bo'yicha (son)
                 const countryDiv = document.getElementById('countryStats');
                 if (stats.byCountry) {
                     countryDiv.innerHTML = '';
-                    for (const [country, count] of Object.entries(stats.byCountry)) {
-                        countryDiv.innerHTML += `<div class="flex justify-between py-2 border-b"><span>${country}</span><span class="font-bold">${count} ta</span></div>`;
+                    const sortedCountries = Object.entries(stats.byCountry).sort((a,b)=>b[1]-a[1]);
+                    for (const [country, count] of sortedCountries) {
+                        countryDiv.innerHTML += `<div class="flex justify-between items-center py-2 border-b border-gray-200"><span class="font-medium"><i class="fas fa-map-marker-alt text-blue-500 mr-2 text-sm"></i>${country}</span><span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">${count} ta</span></div>`;
                     }
-                }
+                } else { countryDiv.innerHTML = '<div class="text-gray-400 text-center">Hozircha maʼlumot yo‘q</div>'; }
                 
+                // Xizmatlar bo'yicha: son va umumiy tushum (USD)
                 const serviceDiv = document.getElementById('serviceStats');
-                if (stats.byService) {
+                if (stats.byService && typeof stats.byService === 'object') {
                     serviceDiv.innerHTML = '';
-                    for (const [service, count] of Object.entries(stats.byService)) {
-                        let shortName = service.length > 35 ? service.substring(0, 32) + '...' : service;
-                        serviceDiv.innerHTML += `<div class="flex justify-between py-2 border-b"><span>${shortName}</span><span class="font-bold">${count} ta</span></div>`;
+                    // byService: har bir xizmat nomi => count
+                    // qo'shimcha: tushumni hisoblash uchun front-endda narxni aniqlaymiz, lekin yaxlitlik uchun har bir xizmatning o'rtacha narxi mavjud emas
+                    // orqada serverdan keladigan ma'lumot byServiceCount va byServiceRevenue bo'lishi mumkin, hozircha soddaroq: faqat count, lekin mijoz talabiga ko'ra
+                    // BETTER: Agar backendda byServiceRevenue bo'lmasa, biz hisoblaymiz (lekin to'liq summa umumiy revenue dan farq qilishi mumkin)
+                    // Statistikani real vaqtda yanada aniq qilish uchun frontendda narxlarni map qilamiz.
+                    const serviceItems = [...document.querySelectorAll('#service option')].filter(opt => opt.value && !opt.disabled && opt.parentElement.label !== undefined);
+                    const priceMap = new Map();
+                    serviceItems.forEach(opt => {
+                        let raw = opt.value;
+                        let priceMatch = raw.match(/(\d+)\$/);
+                        if(priceMatch) priceMap.set(opt.value, parseInt(priceMatch[1],10));
+                        else {
+                            if(raw.includes('50$')) priceMap.set(opt.value,50);
+                            else if(raw.includes('40$')) priceMap.set(opt.value,40);
+                            else if(raw.includes('80$')) priceMap.set(opt.value,80);
+                            else if(raw.includes('60$')) priceMap.set(opt.value,60);
+                            else if(raw.includes('45$')) priceMap.set(opt.value,45);
+                            else if(raw.includes('55$')) priceMap.set(opt.value,55);
+                            else if(raw.includes('100$')) priceMap.set(opt.value,100);
+                            else if(raw.includes('70$')) priceMap.set(opt.value,70);
+                            else if(raw.includes('200$')) priceMap.set(opt.value,200);
+                            else if(raw.includes('150$')) priceMap.set(opt.value,150);
+                            else if(raw.includes('120$')) priceMap.set(opt.value,120);
+                            else if(raw.includes('130$')) priceMap.set(opt.value,130);
+                            else if(raw.includes('90$')) priceMap.set(opt.value,90);
+                            else if(raw.includes('110$')) priceMap.set(opt.value,110);
+                            else if(raw.includes('85$')) priceMap.set(opt.value,85);
+                            else if(raw.includes('95$')) priceMap.set(opt.value,95);
+                            else priceMap.set(opt.value,0);
+                        }
+                    });
+                    const sortedServices = Object.entries(stats.byService).sort((a,b)=>b[1]-a[1]);
+                    for (const [serviceName, count] of sortedServices) {
+                        const unitPrice = priceMap.get(serviceName) || 0;
+                        const totalServiceUSD = unitPrice * count;
+                        const shortName = serviceName.length > 38 ? serviceName.substring(0,35)+'...' : serviceName;
+                        serviceDiv.innerHTML += `<div class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 border-b border-gray-200 gap-1">
+                            <span class="text-sm font-medium"><i class="fas fa-stethoscope text-purple-500 mr-1"></i>${shortName}</span>
+                            <div class="flex gap-3 text-xs sm:text-sm"><span class="bg-gray-200 px-2 py-0.5 rounded-full">${count} marta</span><span class="text-green-700 font-semibold">${totalServiceUSD} USD</span></div>
+                        </div>`;
                     }
-                }
+                } else { serviceDiv.innerHTML = '<div class="text-gray-400 text-center">Xizmatlar statistikasi mavjud emas</div>'; }
             } catch(e) {
                 console.log('Statistika yuklanmadi:', e);
+                document.getElementById('countryStats').innerHTML = '<div class="text-red-400">Statistika vaqtincha ishlamayapti</div>';
             }
         }
 
-        // Forma yuborish
+        // Forma yuborish (Google Apps Script)
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const name = document.getElementById('name').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const service = document.getElementById('service').value;
             const country = document.getElementById('country').value;
             const region = document.getElementById('region').value;
-            
             if (!name || !phone || !service || !country || !region) {
                 showToast('Barcha maydonlarni to\'ldiring va xizmat tanlang!', 'error');
                 return;
             }
-            
-            const data = { name, phone, service, country, region };
-            
+            const price = getPriceFromServiceOption(service);
+            const data = { name, phone, service, country, region, price };
             const btn = document.getElementById('submitBtn');
-            btn.disabled = true;
-            btn.innerHTML = 'Yuborilmoqda...';
-            
+            btn.disabled = true; btn.innerHTML = 'Yuborilmoqda...';
             try {
-                await fetch(scriptURL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                
+                await fetch(scriptURL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
                 showToast('Buyurtma qabul qilindi! Tez orada bog\'lanamiz.', 'success');
                 form.reset();
                 regionSelect.disabled = true;
                 regionSelect.innerHTML = '<option value="">Avval davlatni tanlang</option>';
-                loadStatistics();
-                
-            } catch(error) {
-                console.error('Xatolik:', error);
-                showToast('Xatolik yuz berdi. Qaytadan urinib ko\'ring.', 'error');
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = 'Buyurtma berish';
-            }
+                setTimeout(() => loadStatistics(), 600);
+            } catch(error) { console.error(error); showToast('Xatolik yuz berdi. Qaytadan urinib ko\'ring.', 'error'); } 
+            finally { btn.disabled = false; btn.innerHTML = 'Buyurtma berish'; }
         });
         
         function showToast(message, type) {
@@ -566,23 +572,16 @@
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const closeMenu = document.getElementById('close-menu');
-        
-        menuBtn?.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        closeMenu?.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-        });
-        
-        // Smooth scroll
+        menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        closeMenu?.addEventListener('click', () => mobileMenu.classList.add('hidden'));
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 target?.scrollIntoView({ behavior: 'smooth' });
+                if(mobileMenu && !mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden');
             });
         });
-        
         loadStatistics();
     </script>
 </body>
