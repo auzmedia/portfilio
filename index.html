@@ -148,6 +148,12 @@
         .close:hover {
             color: #667eea;
         }
+        
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            ring: 2px solid #667eea;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -249,7 +255,7 @@
             <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">🚀 Xizmat turlari</h2>
             <p class="text-center text-gray-600 mb-12">100+ professional xizmatlar</p>
             
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6" id="servicesGrid">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6" id="servicesGrid">
                 <!-- Xizmatlar JS orqali qo'shiladi -->
             </div>
         </div>
@@ -390,34 +396,58 @@
         
         // Davlat va viloyatlar ma'lumotlari
         const regions = {
-            'Rossiya': ['Moskva', 'Sankt-Peterburg', 'Novosibirsk', 'Yekaterinburg', 'Qozon'],
-            'Uzbekiston': ['Toshkent', 'Samarqand', 'Buxoro', 'Namangan', 'Farg\'ona'],
-            'Qozogiston': ['Nur-Sulton', 'Almati', 'Shimkent', 'Qarag\'andi', 'Aktau'],
-            'Qirgiziston': ['Bishkek', 'Osh', 'Jalal-Abod', 'Karakol', 'Talas'],
+            'Rossiya': ['Moskva', 'Sankt-Peterburg', 'Novosibirsk', 'Yekaterinburg', 'Qozon', 'Nijniy Novgorod'],
+            'Uzbekiston': ['Toshkent', 'Samarqand', 'Buxoro', 'Namangan', 'Farg\'ona', 'Andijon', 'Qo\'qon'],
+            'Qozogiston': ['Nur-Sulton', 'Almati', 'Shimkent', 'Qarag\'andi', 'Aktau', 'Taraz'],
+            'Qirgiziston': ['Bishkek', 'Osh', 'Jalal-Abod', 'Karakol', 'Talas', 'Narin'],
             'Tojikiston': ['Dushanbe', 'Xujand', 'Boxtar', 'Xorug\'', 'Kulob'],
             'Turkmaniston': ['Ashxobod', 'Turkmanobod', 'Dashoguz', 'Mari', 'Balkanabad']
         };
         
-        // Xizmatlar ikonkalari bilan
+        // Xizmatlar ikonkalari bilan (TO'LIQ MOSLIK UCHUN)
         const servicesWithIcons = [
-            { name: 'Arxitektura', icon: 'fas fa-drafting-compass', color: 'text-blue-600' },
-            { name: 'Avto xizmat', icon: 'fas fa-car', color: 'text-red-600' },
-            { name: 'Dasturlash', icon: 'fas fa-code', color: 'text-purple-600' },
-            { name: 'Dizayn', icon: 'fas fa-paint-brush', color: 'text-pink-600' },
-            { name: 'IT xizmatlar', icon: 'fas fa-laptop-code', color: 'text-indigo-600' },
-            { name: 'Marketing', icon: 'fas fa-chart-line', color: 'text-green-600' },
-            { name: 'Qurilish', icon: 'fas fa-hard-hat', color: 'text-orange-600' },
-            { name: 'Tibbiyot', icon: 'fas fa-hospital', color: 'text-red-600' },
-            { name: 'Ta\'lim', icon: 'fas fa-graduation-cap', color: 'text-blue-600' },
-            { name: 'Restoran', icon: 'fas fa-utensils', color: 'text-yellow-600' },
-            { name: 'Go\'zallik', icon: 'fas fa-spa', color: 'text-pink-600' },
-            { name: 'Logistika', icon: 'fas fa-truck', color: 'text-green-600' },
-            { name: 'Huquq', icon: 'fas fa-gavel', color: 'text-gray-600' },
-            { name: 'SMM', icon: 'fas fa-share-alt', color: 'text-blue-600' },
-            { name: 'Foto', icon: 'fas fa-camera', color: 'text-purple-600' },
-            { name: 'Veterinariya', icon: 'fas fa-paw', color: 'text-brown-600' },
-            { name: 'Bank', icon: 'fas fa-university', color: 'text-green-600' },
-            { name: 'Sport', icon: 'fas fa-dumbbell', color: 'text-orange-600' }
+            { name: 'Arxitektura va loyiha ishlari', icon: 'fas fa-drafting-compass', color: 'text-blue-600' },
+            { name: 'Avto xizmatlar', icon: 'fas fa-car', color: 'text-red-600' },
+            { name: 'Avto ehtiyot qismlar', icon: 'fas fa-car-side', color: 'text-red-500' },
+            { name: 'Dasturlash xizmatlari', icon: 'fas fa-code', color: 'text-purple-600' },
+            { name: 'Dizayn xizmatlari', icon: 'fas fa-paint-brush', color: 'text-pink-600' },
+            { name: 'IT xizmatlari', icon: 'fas fa-laptop-code', color: 'text-indigo-600' },
+            { name: 'Marketing xizmatlari', icon: 'fas fa-chart-line', color: 'text-green-600' },
+            { name: 'Qurilish xizmatlari', icon: 'fas fa-hard-hat', color: 'text-orange-600' },
+            { name: 'Tibbiyot markazlari', icon: 'fas fa-hospital', color: 'text-red-600' },
+            { name: 'Ta\'lim muassasalari', icon: 'fas fa-graduation-cap', color: 'text-blue-600' },
+            { name: 'Restoranlar', icon: 'fas fa-utensils', color: 'text-yellow-600' },
+            { name: 'Go\'zallik salonlari', icon: 'fas fa-spa', color: 'text-pink-600' },
+            { name: 'Logistika xizmatlari', icon: 'fas fa-truck', color: 'text-green-600' },
+            { name: 'Huquqiy xizmatlar', icon: 'fas fa-gavel', color: 'text-gray-600' },
+            { name: 'SMM xizmatlari', icon: 'fas fa-share-alt', color: 'text-blue-600' },
+            { name: 'Foto xizmatlari', icon: 'fas fa-camera', color: 'text-purple-600' },
+            { name: 'Veterinariya', icon: 'fas fa-paw', color: 'text-yellow-600' },
+            { name: 'Bank xizmatlari', icon: 'fas fa-university', color: 'text-green-600' },
+            { name: 'Fitness markazlari', icon: 'fas fa-dumbbell', color: 'text-orange-600' },
+            { name: 'Kafe', icon: 'fas fa-coffee', color: 'text-yellow-700' },
+            { name: 'Mobil ilovalar ishlab chiqish', icon: 'fas fa-mobile-alt', color: 'text-purple-600' },
+            { name: 'Veb sayt yaratish', icon: 'fas fa-globe', color: 'text-blue-600' }
+        ];
+        
+        // Barcha xizmatlar (select dropdown uchun)
+        const allServicesList = [
+            'Arxitektura va loyiha ishlari', 'Avto xizmatlar', 'Avto ehtiyot qismlar', 'Aero va dron xizmatlari',
+            'Bank xizmatlari', 'Buxgalteriya xizmatlari', 'Bolalar bog\'chasi', 'Bosmaxona (poligrafiya)',
+            'Dasturlash xizmatlari', 'Dizayn xizmatlari', 'Dorixona', 'Do\'konlar', 'Elektr montaj xizmatlari',
+            'Elektronika savdosi', 'Ekskavator va Spestexnika xizmatlari', 'Fast Food', 'Foto xizmatlari',
+            'Fitness markazlari', 'Farmatsevtika', 'Go\'zallik salonlari', 'Grafik dizayn', 'Gul do\'konlari',
+            'Hunarmandchilik', 'Hostel va yotoqxonalar', 'Huquqiy xizmatlar', 'IT xizmatlari',
+            'Internet provayderlari', 'Interyer dizayni', 'Kafe', 'Klinikalar', 'Kosmetologiya', 'Kuryer xizmatlari',
+            'Kiyim-kechak savdosi', 'Logistika xizmatlari', 'Landshaft dizayni', 'Marketing xizmatlari',
+            'Mebel ishlab chiqarish', 'Mobil ilovalar ishlab chiqish', 'Mehmonxonalar', 'Nashriyot xizmatlari',
+            'Notarius xizmatlari', 'O\'quv markazlari', 'Ofis xizmatlari', 'Onlayn savdo', 'Pardozlash ishlari',
+            'Printer va kopir xizmatlari', 'Psixologiya markazlari', 'Qurilish xizmatlari', 'Qurilish materiallari',
+            'Qandolatchilik', 'Restoranlar', 'Reklama agentliklari', 'Remont xizmatlari', 'Savdo markazlari',
+            'Sartaroshxona', 'SMM xizmatlari', 'Stomatologiya', 'Sug\'urta xizmatlari', 'Ta\'lim muassasalari',
+            'Tibbiyot markazlari', 'Tikuvchilik', 'Turizm xizmatlari', 'Transport xizmatlari', 'Uy-joy xizmatlari',
+            'Uskunalar ijarasi', 'Video xizmatlari', 'Veterinariya', 'Veb sayt yaratish', 'Yuk tashish xizmatlari',
+            'Yuridik xizmatlar', 'Zargarlik buyumlari', 'Zamonaviy texnologiyalar xizmatlari'
         ];
         
         // Tayyor saytlar ro'yxati
@@ -460,6 +490,55 @@
             }
         ];
         
+        // Xizmat tanlash funksiyasi (MUHIM - formada tanlab qoladi)
+        function selectService(serviceName) {
+            console.log('Tanlandi:', serviceName);
+            
+            const select = document.getElementById('xizmat');
+            
+            // Selectda bor yoki yo'qligini tekshirish
+            let optionExists = false;
+            for(let i = 0; i < select.options.length; i++) {
+                if(select.options[i].value === serviceName) {
+                    select.selectedIndex = i;
+                    optionExists = true;
+                    break;
+                }
+            }
+            
+            // Agar bo'lmasa, qo'shish
+            if(!optionExists) {
+                const option = document.createElement('option');
+                option.value = serviceName;
+                option.textContent = serviceName;
+                select.appendChild(option);
+                select.value = serviceName;
+            }
+            
+            // Tanlanganini vizual ko'rsatish
+            select.style.backgroundColor = '#e0e7ff';
+            select.style.borderColor = '#667eea';
+            setTimeout(() => {
+                select.style.backgroundColor = '';
+                select.style.borderColor = '';
+            }, 500);
+            
+            // Formaga silliq o'tish
+            document.getElementById('order').scrollIntoView({behavior: 'smooth'});
+            
+            // Xabar ko'rsatish
+            const msgDiv = document.querySelector('.success-message');
+            const msgSpan = document.getElementById('successMessage');
+            msgSpan.innerHTML = '✅ ' + serviceName + ' tanlandi!';
+            msgDiv.style.backgroundColor = '#dbeafe';
+            msgDiv.style.borderColor = '#667eea';
+            msgDiv.style.color = '#1e40af';
+            msgDiv.style.display = 'block';
+            setTimeout(() => {
+                msgDiv.style.display = 'none';
+            }, 2000);
+        }
+        
         // Xizmatlarni ikonkalar bilan ko'rsatish
         function loadServicesWithIcons() {
             const servicesGrid = document.getElementById('servicesGrid');
@@ -467,38 +546,19 @@
             
             servicesWithIcons.forEach(service => {
                 const card = document.createElement('div');
-                card.className = 'service-icon-card bg-white rounded-xl p-6 text-center shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer';
-                card.onclick = () => selectService(service.name);
+                card.className = 'service-icon-card bg-white rounded-xl p-6 text-center shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105';
+                card.onclick = function() { selectService(service.name); };
                 card.innerHTML = `
                     <i class="${service.icon} text-5xl ${service.color} mb-3 transition-colors duration-300"></i>
-                    <h3 class="font-semibold text-gray-800 mt-2">${service.name}</h3>
-                    <p class="text-xs text-gray-500 mt-1">Professional xizmat</p>
+                    <h3 class="font-semibold text-gray-800 mt-2 text-sm">${service.name}</h3>
+                    <p class="text-xs text-gray-500 mt-1">Bosish uchun</p>
                 `;
                 servicesGrid.appendChild(card);
             });
             
-            // Qolgan xizmatlarni selectga qo'shish
-            const allServices = [
-                'Arxitektura va loyiha ishlari', 'Avto xizmatlar', 'Avto ehtiyot qismlar', 'Aero va dron xizmatlari',
-                'Bank xizmatlari', 'Buxgalteriya xizmatlari', 'Bolalar bog\'chasi', 'Bosmaxona (poligrafiya)',
-                'Dasturlash xizmatlari', 'Dizayn xizmatlari', 'Dorixona', 'Do\'konlar', 'Elektr montaj xizmatlari',
-                'Elektronika savdosi', 'Fast Food', 'Foto xizmatlari', 'Fitness markazlari', 'Farmatsevtika',
-                'Go\'zallik salonlari', 'Grafik dizayn', 'Gul do\'konlari', 'Hunarmandchilik', 'Hostel va yotoqxonalar',
-                'Huquqiy xizmatlar', 'IT xizmatlari', 'Internet provayderlari', 'Interyer dizayni', 'Kafe',
-                'Klinikalar', 'Kosmetologiya', 'Kuryer xizmatlari', 'Kiyim-kechak savdosi', 'Logistika xizmatlari',
-                'Landshaft dizayni', 'Marketing xizmatlari', 'Mebel ishlab chiqarish', 'Mobil ilovalar ishlab chiqish',
-                'Mehmonxonalar', 'Nashriyot xizmatlari', 'Notarius xizmatlari', 'O\'quv markazlari', 'Ofis xizmatlari',
-                'Onlayn savdo', 'Pardozlash ishlari', 'Printer va kopir xizmatlari', 'Psixologiya markazlari',
-                'Qurilish xizmatlari', 'Qurilish materiallari', 'Qandolatchilik', 'Restoranlar', 'Reklama agentliklari',
-                'Remont xizmatlari', 'Savdo markazlari', 'Sartaroshxona', 'SMM xizmatlari', 'Stomatologiya',
-                'Sug\'urta xizmatlari', 'Ta\'lim muassasalari', 'Tibbiyot markazlari', 'Tikuvchilik', 'Turizm xizmatlari',
-                'Transport xizmatlari', 'Uy-joy xizmatlari', 'Uskunalar ijarasi', 'Video xizmatlari', 'Veterinariya',
-                'Veb sayt yaratish', 'Yuk tashish xizmatlari', 'Yuridik xizmatlar', 'Zargarlik buyumlari',
-                'Zamonaviy texnologiyalar xizmatlari'
-            ];
-            
+            // Select dropdown uchun barcha xizmatlarni qo'shish
             const serviceSelect = document.getElementById('xizmat');
-            allServices.forEach(service => {
+            allServicesList.forEach(service => {
                 const option = document.createElement('option');
                 option.value = service;
                 option.textContent = service;
@@ -529,35 +589,24 @@
             });
         }
         
-        function selectService(service) {
-            const select = document.getElementById('xizmat');
-            for(let i = 0; i < select.options.length; i++) {
-                if(select.options[i].value === service) {
-                    select.selectedIndex = i;
-                    break;
-                }
-            }
-            document.getElementById('order').scrollIntoView({behavior: 'smooth'});
-            showNotification('Xizmat tanlandi: ' + service, 'success');
-        }
-        
         function openWebsite(url, name) {
             const modal = document.getElementById('websiteModal');
             const frame = document.getElementById('websiteFrame');
             frame.src = url;
             modal.style.display = 'block';
-            
-            // Close modal
-            document.querySelector('.close').onclick = function() {
+        }
+        
+        // Close modal
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('websiteModal').style.display = 'none';
+            document.getElementById('websiteFrame').src = '';
+        }
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById('websiteModal');
+            if (event.target == modal) {
                 modal.style.display = 'none';
-                frame.src = '';
-            }
-            
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = 'none';
-                    frame.src = '';
-                }
+                document.getElementById('websiteFrame').src = '';
             }
         }
         
@@ -671,7 +720,7 @@
                 
                 if (data && data.data) {
                     document.getElementById('totalOrders').textContent = data.data.length;
-                    document.getElementById('totalServices').textContent = '100+';
+                    document.getElementById('totalServices').textContent = allServicesList.length;
                     
                     const uniqueCountries = [...new Set(data.data.map(row => row[5]).filter(c => c))];
                     document.getElementById('totalCountries').textContent = uniqueCountries.length;
@@ -688,6 +737,8 @@
                 }
             } catch (error) {
                 console.error('Statistika yuklanmadi:', error);
+                // Fallback statistikalar
+                document.getElementById('totalServices').textContent = allServicesList.length;
             }
         }
         
