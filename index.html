@@ -1,358 +1,431 @@
 <!DOCTYPE html>
-<html lang="uz" class="scroll-smooth">
+<html lang="uz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevPortfolio | Professional Raqamli Yechimlar</title>
+    <title>Xizmatlar platformasi | Buyurtma berish</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fadeIn { animation: fadeIn 0.8s ease-out; }
-        .transition-all { transition: all 0.3s ease; }
-        .success-toast, .error-toast { position: fixed; bottom: 20px; right: 20px; color: white; padding: 12px 24px; border-radius: 8px; z-index: 1000; animation: slideIn 0.3s ease-out; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        .success-toast { background: #10b981; }
-        .error-toast { background: #ef4444; }
-        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        select, input { transition: all 0.3s ease; }
-        select:disabled { background-color: #f3f4f6; cursor: not-allowed; }
-        optgroup { font-weight: bold; color: #1e40af; }
-        .services-accordion { display: flex; flex-direction: column; gap: 24px; }
-        .service-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: all 0.3s ease; }
-        .service-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
-        .service-header { width: 100%; padding: 24px 32px; text-align: left; background: white; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 1.35rem; border-bottom: 2px solid transparent; }
-        .service-header:hover { background: #f8fafc; }
-        .service-header.active { background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; }
-        .service-header.active i { color: white; }
-        .service-icon { font-size: 1.8rem; margin-right: 12px; }
-        .service-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: #f8fafc; }
-        .service-content.open { max-height: 800px; transition: max-height 0.5s ease-in; }
-        .service-grid { padding: 24px 32px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-        .service-item-card { background: white; border-radius: 16px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
-        .service-item-card:hover { transform: translateX(6px); border-color: #3b82f6; }
-        .service-item-price { font-weight: bold; color: #3b82f6; background: #eff6ff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem; }
-        .stats-card { background: white; border-radius: 24px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: all 0.2s; }
-        .stats-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-        .rotate-icon { transition: transform 0.3s ease; }
-        .rotate-icon.open { transform: rotate(180deg); }
-        .stat-item { background: #f9fafb; border-radius: 16px; padding: 16px; transition: all 0.2s; border: 1px solid #eef2ff; }
-        .stat-item:hover { border-color: #c7d2fe; background: white; }
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .loading {
+            display: none;
+        }
+        .success-message {
+            display: none;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
-
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">DevPortfolio</div>
-                <div class="hidden md:flex space-x-8 text-sm font-medium">
-                    <a href="#home" class="hover:text-blue-600 transition-all">Bosh sahifa</a>
-                    <a href="#services" class="hover:text-blue-600 transition-all">Xizmatlar</a>
-                    <a href="#stats" class="hover:text-blue-600 transition-all">Statistika</a>
-                    <a href="#about" class="hover:text-blue-600 transition-all">Biz haqimizda</a>
-                    <a href="#contact" class="hover:text-blue-600 transition-all">Kontakt</a>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-indigo-600">
+                    <i class="fas fa-rocket mr-2"></i>ServiceHub
                 </div>
-                <button class="md:hidden text-2xl" id="menu-btn"><i class="fas fa-bars"></i></button>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-indigo-600 transition">Bosh sahifa</a>
+                    <a href="#services" class="text-gray-700 hover:text-indigo-600 transition">Xizmatlar</a>
+                    <a href="#order" class="text-gray-700 hover:text-indigo-600 transition">Buyurtma</a>
+                    <a href="#stats" class="text-gray-700 hover:text-indigo-600 transition">Statistika</a>
+                </div>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
             </div>
         </div>
     </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 hidden transform transition-transform duration-300 translate-x-full">
-        <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
-            <a href="#home" class="hover:text-blue-600 transition">Bosh sahifa</a>
-            <a href="#services" class="hover:text-blue-600 transition">Xizmatlar</a>
-            <a href="#stats" class="hover:text-blue-600 transition">Statistika</a>
-            <a href="#about" class="hover:text-blue-600 transition">Biz haqimizda</a>
-            <a href="#contact" class="hover:text-blue-600 transition">Kontakt</a>
-            <button id="close-menu" class="absolute top-6 right-6 text-2xl"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-
     <!-- Hero Section -->
-    <section id="home" class="pt-32 pb-20 px-4 text-center bg-gradient-to-b from-blue-50 to-white">
-        <div class="max-w-4xl mx-auto animate-fadeIn">
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Professional Raqamli Yechimlar</h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">Biz sizning g'oyalaringizni yuqori sifatli veb-ilovalar va telegram botlar ko'rinishida hayotga tatbiq etamiz.</p>
-            <div class="flex gap-4 justify-center flex-wrap">
-                <a href="#contact" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all shadow-lg">Buyurtma berish</a>
-                <a href="#stats" class="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition-all">Statistika</a>
+    <section id="home" class="pt-24 pb-16 px-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+                Xizmatingizni <span class="text-indigo-600">toping</span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Eng sifatli xizmatlarni bir joyda. Tez, ishonchli va qulay.
+            </p>
+            <a href="#order" class="bg-indigo-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-indigo-700 transition shadow-lg inline-flex items-center">
+                <i class="fas fa-shopping-cart mr-2"></i>Buyurtma berish
+            </a>
+        </div>
+    </section>
+
+    <!-- Xizmatlar Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Xizmat turlari</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 max-h-96 overflow-y-auto p-4 border rounded-lg">
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Arxitektura va loyiha ishlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Avto xizmatlar</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Avto ehtiyot qismlar</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Aero va dron xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Bank xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Buxgalteriya xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Bolalar bog‘chasi</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Bosmaxona (poligrafiya)</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Dasturlash xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Dizayn xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Dorixona</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Do‘konlar</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Elektr montaj xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Elektronika savdosi</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Ekskavator va Spestexnika xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Fast Food</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Foto xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Fitness markazlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Farmatsevtika</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Go‘zallik salonlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Grafik dizayn</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Gul do‘konlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Hunarmandchilik</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Hostel va yotoqxonalar</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Huquqiy xizmatlar</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">IT xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Internet provayderlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Interyer dizayni</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Kafe</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Klinikalar</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Kosmetologiya</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Kuryer xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Kiyim-kechak savdosi</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Logistika xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Landshaft dizayni</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Marketing xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Mebel ishlab chiqarish</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Mobil ilovalar ishlab chiqish</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Mehmonxonalar</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Nashriyot xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Notarius xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">O‘quv markazlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Ofis xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Onlayn savdo</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Pardozlash ishlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Printer va kopir xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Psixologiya markazlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Qurilish xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Qurilish materiallari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Qandolatchilik</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Restoranlar</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Reklama agentliklari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Remont xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Savdo markazlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Sartaroshxona</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">SMM xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Stomatologiya</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Sug‘urta xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Ta'lim muassasalari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Tibbiyot markazlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Tikuvchilik</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Turizm xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Transport xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Uy-joy xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Uskunalar ijarasi</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Video xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Veterinariya</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Veb sayt yaratish</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Yuk tashish xizmatlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Yuridik xizmatlar</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Zargarlik buyumlari</div>
+                <div class="service-item p-2 text-sm cursor-pointer hover:bg-indigo-50 rounded">Zamonaviy texnologiyalar xizmatlari</div>
             </div>
         </div>
     </section>
 
-    <!-- Services Accordion -->
-    <section id="services" class="py-20 max-w-5xl mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Xizmatlarimiz</h2>
-        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Xizmat turini tanlang va batafsil ma'lumot oling</p>
-        <div class="services-accordion">
-            <div class="service-card"><button class="service-header" id="salonBtn"><div><i class="fas fa-cut service-icon"></i><span>Salon xizmatlari</span></div><i class="fas fa-chevron-down rotate-icon"></i></button><div class="service-content" id="salonContent"><div class="service-grid"><div class="service-item-card"><span>Soch parvarishi va dizayni</span><span class="service-item-price">50$</span></div><div class="service-item-card"><span>Tirnoq xizmati</span><span class="service-item-price">40$</span></div><div class="service-item-card"><span>Kosmetologiya va Teri parvarishi</span><span class="service-item-price">80$</span></div><div class="service-item-card"><span>Vizaj va Makiyaj</span><span class="service-item-price">60$</span></div><div class="service-item-card"><span>Qosh va Kiprik xizmati</span><span class="service-item-price">45$</span></div><div class="service-item-card"><span>Depilyatsiya va Epilyatsiya</span><span class="service-item-price">55$</span></div><div class="service-item-card"><span>Tana parvarishi va Massaj</span><span class="service-item-price">100$</span></div><div class="service-item-card"><span>Erkaklar uchun maxsus xizmatlar</span><span class="service-item-price">70$</span></div></div></div></div>
-            <div class="service-card"><button class="service-header" id="medicalBtn"><div><i class="fas fa-hospital-user service-icon"></i><span>Tibbiyot xizmatlari</span></div><i class="fas fa-chevron-down rotate-icon"></i></button><div class="service-content" id="medicalContent"><div class="service-grid"><div class="service-item-card"><span>Terapiya</span><span class="service-item-price">80$</span></div><div class="service-item-card"><span>Xirurgiya</span><span class="service-item-price">200$</span></div><div class="service-item-card"><span>Kardiologiya</span><span class="service-item-price">150$</span></div><div class="service-item-card"><span>Nevrologiya</span><span class="service-item-price">120$</span></div><div class="service-item-card"><span>Pediatriya</span><span class="service-item-price">60$</span></div><div class="service-item-card"><span>Ginekologiya</span><span class="service-item-price">130$</span></div><div class="service-item-card"><span>Stomatologiya</span><span class="service-item-price">100$</span></div><div class="service-item-card"><span>Dermatologiya</span><span class="service-item-price">90$</span></div><div class="service-item-card"><span>Gastroenterologiya</span><span class="service-item-price">110$</span></div><div class="service-item-card"><span>Endokrinologiya</span><span class="service-item-price">100$</span></div><div class="service-item-card"><span>Oftalmologiya</span><span class="service-item-price">85$</span></div><div class="service-item-card"><span>Diagnostika</span><span class="service-item-price">70$</span></div><div class="service-item-card"><span>Reabilitologiya</span><span class="service-item-price">95$</span></div></div></div></div>
-        </div>
-    </section>
-
-    <!-- Statistics Section - 3 blok: Jami ko'rsatkichlar, Davlatlar, Xizmatlar (bir xil kartochka uslubida) -->
-    <section id="stats" class="py-20 bg-gray-100 px-4">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Statistika</h2>
-            <p class="text-center text-gray-600 mb-12">Buyurtmalar bo'yicha umumiy tahlil: jami, davlatlar va xizmatlar kesimida (USD/so‘m)</p>
-            
-            <!-- 3 ta asosiy karta: jami buyurtmalar, jami dollar, jami so'm -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-                <div class="stats-card text-center"><i class="fas fa-shopping-cart text-4xl text-blue-600 mb-3"></i><div class="text-4xl font-bold text-blue-600" id="totalOrders">0</div><div class="text-gray-600 mt-1">Jami buyurtmalar</div></div>
-                <div class="stats-card text-center"><i class="fas fa-dollar-sign text-4xl text-green-600 mb-3"></i><div class="text-4xl font-bold text-green-600" id="totalRevenue">0</div><div class="text-gray-600 mt-1">Umumiy summa (USD)</div></div>
-                <div class="stats-card text-center"><i class="fas fa-chart-line text-4xl text-purple-600 mb-3"></i><div class="text-4xl font-bold text-purple-600" id="totalRevenueUZS">0</div><div class="text-gray-600 mt-1">Umumiy summa (so'm)</div></div>
-            </div>
-
-            <!-- Davlatlar bo'yicha statistika - xuddi shunday kartochkalar ko'rinishida -->
-            <div class="mb-16">
-                <div class="flex items-center gap-3 mb-6">
-                    <i class="fas fa-globe text-3xl text-blue-600"></i>
-                    <h3 class="text-2xl font-bold text-gray-800">Davlatlar bo‘yicha tahlil</h3>
+    <!-- Buyurtma Forma Section -->
+    <section id="order" class="py-16">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Buyurtma berish</h2>
+                
+                <div class="success-message bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6">
+                    <i class="fas fa-check-circle mr-2"></i> Buyurtma muvaffaqiyatli qabul qilindi!
                 </div>
-                <div id="countryStats" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
-                <p class="text-xs text-gray-500 text-center mt-4">*Har bir davlat: buyurtmalar soni va umumiy tushum (USD / so‘m)</p>
-            </div>
-            
-            <!-- Xizmatlar bo'yicha statistika - xuddi shunday kartochkalar ko'rinishida -->
-            <div>
-                <div class="flex items-center gap-3 mb-6">
-                    <i class="fas fa-cogs text-3xl text-purple-600"></i>
-                    <h3 class="text-2xl font-bold text-gray-800">Xizmatlar bo‘yicha tahlil</h3>
-                </div>
-                <div id="serviceStats" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
-                <p class="text-xs text-gray-500 text-center mt-4">*Har bir xizmat: necha marta buyurtma qilingan va umumiy daromad (USD / so‘m)</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 max-w-7xl mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div><h2 class="text-3xl md:text-4xl font-bold mb-6">Biz haqimizda</h2><p class="text-gray-600 mb-4 leading-relaxed">DevPortfolio - innovatsion raqamli yechimlar markazi. Biz 2020-yildan beri mijozlarimizga yuqori sifatli veb-xizmatlarni taqdim etib kelmoqdamiz.</p><p class="text-gray-600 leading-relaxed">Bizning jamoamiz tajribali dasturchilar va dizaynerlardan iborat. Har bir loyihaga individual yondashib, mijoz ehtiyojlarini to'liq qondirishga harakat qilamiz.</p></div>
-            <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-8 text-white"><i class="fas fa-quote-left text-4xl opacity-50 mb-4"></i><p class="text-xl italic mb-4">"Sifatli xizmat va professional yondashuv - bizning asosiy tamoyilimiz"</p><p class="font-semibold">- DevPortfolio jamoasi</p></div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-100 px-4">
-        <div class="max-w-3xl mx-auto">
-            <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-white text-center"><h2 class="text-3xl font-bold mb-2">Buyurtma Qoldirish</h2><p class="opacity-90">Taklif va murojaatlaringizni kutib qolamiz</p></div>
-                <form id="orderForm" class="p-8 space-y-5">
-                    <div><label class="block text-sm font-medium mb-2">Ism Familiya</label><input type="text" id="name" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Ismingizni kiriting"></div>
-                    <div><label class="block text-sm font-medium mb-2">Telefon raqam</label><input type="tel" id="phone" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="+998 __ ___ __ __"></div>
-                    <div><label class="block text-sm font-medium mb-2">Xizmat turi</label>
-                        <select id="service" required class="w-full px-4 py-3 border rounded-lg">
-                            <option value="">Xizmatni tanlang</option>
-                            <optgroup label="SALON XIZMATLARI">
-                                <option value="Soch parvarishi va dizayni">Soch parvarishi va dizayni - 50$</option>
-                                <option value="Tirnoq xizmati">Tirnoq xizmati - 40$</option>
-                                <option value="Kosmetologiya va Teri parvarishi">Kosmetologiya va Teri parvarishi - 80$</option>
-                                <option value="Vizaj va Makiyaj">Vizaj va Makiyaj - 60$</option>
-                                <option value="Qosh va Kiprik xizmati">Qosh va Kiprik xizmati - 45$</option>
-                                <option value="Depilyatsiya va Epilyatsiya">Depilyatsiya va Epilyatsiya - 55$</option>
-                                <option value="Tana parvarishi va Massaj">Tana parvarishi va Massaj - 100$</option>
-                                <option value="Erkaklar uchun maxsus xizmatlar">Erkaklar uchun maxsus xizmatlar - 70$</option>
-                            </optgroup>
-                            <optgroup label="TIBBIYOT SOHASI">
-                                <option value="Terapiya">Terapiya - 80$</option><option value="Xirurgiya">Xirurgiya - 200$</option><option value="Kardiologiya">Kardiologiya - 150$</option>
-                                <option value="Nevrologiya">Nevrologiya - 120$</option><option value="Pediatriya">Pediatriya - 60$</option><option value="Ginekologiya">Ginekologiya - 130$</option>
-                                <option value="Stomatologiya">Stomatologiya - 100$</option><option value="Dermatologiya">Dermatologiya - 90$</option><option value="Gastroenterologiya">Gastroenterologiya - 110$</option>
-                                <option value="Endokrinologiya">Endokrinologiya - 100$</option><option value="Oftalmologiya">Oftalmologiya - 85$</option><option value="Diagnostika">Diagnostika - 70$</option><option value="Reabilitologiya">Reabilitologiya - 95$</option>
-                            </optgroup>
-                        </select>
+                
+                <form id="orderForm">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Ism *</label>
+                            <input type="text" id="ism" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Familiya *</label>
+                            <input type="text" id="familiya" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Telefon raqam *</label>
+                            <div class="flex">
+                                <span class="inline-flex items-center px-3 bg-gray-100 border border-r-0 border-gray-300 rounded-l-lg">+996</span>
+                                <input type="tel" id="nomer" maxlength="9" placeholder="700123456" required class="w-full px-4 py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:border-indigo-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Xizmat turi *</label>
+                            <select id="xizmat" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500">
+                                <option value="">Tanlang</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Davlat *</label>
+                            <select id="davlat" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500">
+                                <option value="">Tanlang</option>
+                                <option value="Rossiya">Rossiya</option>
+                                <option value="Uzbekiston">Uzbekiston</option>
+                                <option value="Qozogiston">Qozogiston</option>
+                                <option value="Qirgiziston">Qirgiziston</option>
+                                <option value="Tojikiston">Tojikiston</option>
+                                <option value="Turkmaniston">Turkmaniston</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Hudud/Viloyat *</label>
+                            <select id="hudud" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500">
+                                <option value="">Avval davlatni tanlang</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-gray-700 font-semibold mb-2">Izoh</label>
+                            <textarea id="izoh" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"></textarea>
+                        </div>
                     </div>
-                    <div><label class="block text-sm font-medium mb-2">Davlat</label><select id="country" required class="w-full px-4 py-3 border rounded-lg"><option value="">Davlatni tanlang</option><option value="O'zbekiston">O'zbekiston</option><option value="Qirg'iziston">Qirg'iziston</option><option value="Qozog'iston">Qozog'iston</option><option value="Tojikiston">Tojikiston</option><option value="Rossiya">Rossiya</option></select></div>
-                    <div><label class="block text-sm font-medium mb-2">Viloyat/Shahar</label><select id="region" required class="w-full px-4 py-3 border rounded-lg"><option value="">Avval davlatni tanlang</option></select></div>
-                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-bold hover:shadow-lg transition-all">Buyurtma berish</button>
+                    
+                    <div class="loading text-center mt-6">
+                        <i class="fas fa-spinner fa-spin text-2xl text-indigo-600"></i>
+                        <p class="text-gray-600 mt-2">Yuborilmoqda...</p>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn w-full mt-8 bg-indigo-600 text-white py-4 rounded-lg font-semibold hover:bg-indigo-700 transition shadow-lg">
+                        <i class="fas fa-paper-plane mr-2"></i>Buyurtma berish
+                    </button>
                 </form>
             </div>
         </div>
     </section>
 
-    <footer class="bg-gray-900 text-white py-12"><div class="max-w-7xl mx-auto px-4 text-center"><p>&copy; 2026 DevPortfolio. Barcha huquqlar himoyalangan.</p></div></footer>
-    <div id="toast-container"></div>
+    <!-- Statistika Section -->
+    <section id="stats" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Statistika</h2>
+            <div class="grid md:grid-cols-4 gap-6 mb-12">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl p-6 text-center">
+                    <i class="fas fa-shopping-cart text-4xl mb-3"></i>
+                    <div class="text-3xl font-bold" id="totalOrders">0</div>
+                    <div class="text-sm mt-2">Jami buyurtmalar</div>
+                </div>
+                <div class="bg-gradient-to-br from-green-500 to-green-600 text-white rounded-xl p-6 text-center">
+                    <i class="fas fa-building text-4xl mb-3"></i>
+                    <div class="text-3xl font-bold" id="totalServices">0</div>
+                    <div class="text-sm mt-2">Xizmat turlari</div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-xl p-6 text-center">
+                    <i class="fas fa-users text-4xl mb-3"></i>
+                    <div class="text-3xl font-bold" id="totalCountries">0</div>
+                    <div class="text-sm mt-2">Davlatlar</div>
+                </div>
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-xl p-6 text-center">
+                    <i class="fas fa-chart-line text-4xl mb-3"></i>
+                    <div class="text-3xl font-bold" id="todayOrders">0</div>
+                    <div class="text-sm mt-2">Bugungi buyurtmalar</div>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="border border-gray-300 p-3">ID</th>
+                            <th class="border border-gray-300 p-3">ISM</th>
+                            <th class="border border-gray-300 p-3">FAMILIYA</th>
+                            <th class="border border-gray-300 p-3">NOMER</th>
+                            <th class="border border-gray-300 p-3">XIZMAT</th>
+                            <th class="border border-gray-300 p-3">DAVLAT</th>
+                            <th class="border border-gray-300 p-3">HUDUD</th>
+                            <th class="border border-gray-300 p-3">IZOH</th>
+                            <th class="border border-gray-300 p-3">VAQT</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statsTable">
+                        <tr>
+                            <td colspan="9" class="text-center p-4">Ma'lumotlar yuklanmoqda...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 ServiceHub. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
 
     <script>
-        // ACCORDION
-        function setupAccordion(btnId, contentId) {
-            const btn = document.getElementById(btnId);
-            const content = document.getElementById(contentId);
-            const icon = btn.querySelector('.rotate-icon');
-            btn.addEventListener('click', () => {
-                const isOpen = content.classList.contains('open');
-                document.querySelectorAll('.service-content').forEach(c => { if(c !== content) c.classList.remove('open'); if(c !== content && c.previousElementSibling) c.previousElementSibling.classList.remove('active'); if(c !== content && c.previousElementSibling){ let ic = c.previousElementSibling.querySelector('.rotate-icon'); if(ic) ic.classList.remove('open'); } });
-                document.querySelectorAll('.service-header').forEach(h => { if(h !== btn) h.classList.remove('active'); });
-                if (!isOpen) { content.classList.add('open'); btn.classList.add('active'); icon.classList.add('open'); } 
-                else { content.classList.remove('open'); btn.classList.remove('active'); icon.classList.remove('open'); }
-            });
-        }
-        setupAccordion('salonBtn', 'salonContent');
-        setupAccordion('medicalBtn', 'medicalContent');
-
-        // regions
-        const regionsByCountry = {
-            "O'zbekiston": ["Toshkent shahri","Toshkent viloyati","Samarqand","Buxoro","Namangan","Farg'ona","Andijon","Qashqadaryo","Surxondaryo","Navoiy","Jizzax","Sirdaryo","Xorazm","Qoraqalpog'iston"],
-            "Qirg'iziston": ["Bishkek","Osh","Jalal-Abad","Karakol","Talas","Naryn","Batken","Chuy","Ysyk-Kol"],
-            "Qozog'iston": ["Almati","Nur-Sulton","Shimkent","Qarag'andi","Aqto'be","Taraz","O'ral","Atirau","Qo'stanay","Petropavl","Semey","Temirtau"],
-            "Tojikiston": ["Dushanbe","Xo'jand","Boxtar","Kulob","Panjakent","Istaravshan","Tursunzoda","Konibodom"],
-            "Rossiya": ["Moskva","Sankt-Peterburg","Novosibirsk","Yekaterinburg","Qozon","Nijniy Novgorod","Chelyabinsk","Samara","Omsk","Rostov-na-Donu","Ufa","Krasnoyarsk","Perm","Voronej","Volgograd"]
+        // Google Sheets Script URL (o'zgartiriladi)
+        const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+        
+        // Davlat va viloyatlar ma'lumotlari
+        const regions = {
+            'Rossiya': ['Moskva', 'Sankt-Peterburg', 'Novosibirsk', 'Yekaterinburg', 'Qozon'],
+            'Uzbekiston': ['Toshkent', 'Samarqand', 'Buxoro', 'Namangan', 'Farg\'ona', 'Andijon'],
+            'Qozogiston': ['Nur-Sulton', 'Almati', 'Shimkent', 'Qarag\'andi', 'Aktau'],
+            'Qirgiziston': ['Bishkek', 'Osh', 'Jalal-Abod', 'Karakol', 'Talas'],
+            'Tojikiston': ['Dushanbe', 'Xujand', 'Boxtar', 'Xorug\'', 'Kulob'],
+            'Turkmaniston': ['Ashxobod', 'Turkmanobod', 'Dashoguz', 'Mari', 'Balkanabad']
         };
-        const USD_RATE = 12900;
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbw4T7RoFuueyV1w7NymtLV9oQUhiShIYxhI1wm5Yq-a2BfNCQAbEluMrmUOzTFbjOAa/exec';
-
-        const countrySelect = document.getElementById('country');
-        const regionSelect = document.getElementById('region');
-        const form = document.getElementById('orderForm');
-
-        countrySelect.addEventListener('change', function() {
-            const selectedCountry = this.value;
-            regionSelect.innerHTML = '<option value="">Viloyatni tanlang</option>';
-            if (selectedCountry && regionsByCountry[selectedCountry]) {
-                regionSelect.disabled = false;
-                regionsByCountry[selectedCountry].forEach(region => { const opt = document.createElement('option'); opt.value = region; opt.textContent = region; regionSelect.appendChild(opt); });
-            } else { regionSelect.disabled = true; }
+        
+        // Xizmatlar ro'yxatini selectga qo'shish
+        const services = [
+            'Arxitektura va loyiha ishlari', 'Avto xizmatlar', 'Avto ehtiyot qismlar', 'Aero va dron xizmatlari',
+            'Bank xizmatlari', 'Buxgalteriya xizmatlari', 'Bolalar bog\'chasi', 'Bosmaxona (poligrafiya)',
+            'Dasturlash xizmatlari', 'Dizayn xizmatlari', 'Dorixona', 'Do\'konlar', 'Elektr montaj xizmatlari',
+            'Elektronika savdosi', 'Ekskavator va Spestexnika xizmatlari', 'Fast Food', 'Foto xizmatlari',
+            'Fitness markazlari', 'Farmatsevtika', 'Go\'zallik salonlari', 'Grafik dizayn', 'Gul do\'konlari',
+            'Hunarmandchilik', 'Hostel va yotoqxonalar', 'Huquqiy xizmatlar', 'IT xizmatlari',
+            'Internet provayderlari', 'Interyer dizayni', 'Kafe', 'Klinikalar', 'Kosmetologiya', 'Kuryer xizmatlari',
+            'Kiyim-kechak savdosi', 'Logistika xizmatlari', 'Landshaft dizayni', 'Marketing xizmatlari',
+            'Mebel ishlab chiqarish', 'Mobil ilovalar ishlab chiqish', 'Mehmonxonalar', 'Nashriyot xizmatlari',
+            'Notarius xizmatlari', 'O\'quv markazlari', 'Ofis xizmatlari', 'Onlayn savdo', 'Pardozlash ishlari',
+            'Printer va kopir xizmatlari', 'Psixologiya markazlari', 'Qurilish xizmatlari', 'Qurilish materiallari',
+            'Qandolatchilik', 'Restoranlar', 'Reklama agentliklari', 'Remont xizmatlari', 'Savdo markazlari',
+            'Sartaroshxona', 'SMM xizmatlari', 'Stomatologiya', 'Sug\'urta xizmatlari', 'Ta\'lim muassasalari',
+            'Tibbiyot markazlari', 'Tikuvchilik', 'Turizm xizmatlari', 'Transport xizmatlari', 'Uy-joy xizmatlari',
+            'Uskunalar ijarasi', 'Video xizmatlari', 'Veterinariya', 'Veb sayt yaratish', 'Yuk tashish xizmatlari',
+            'Yuridik xizmatlar', 'Zargarlik buyumlari', 'Zamonaviy texnologiyalar xizmatlari'
+        ];
+        
+        // Xizmatlarni selectga qo'shish
+        const serviceSelect = document.getElementById('xizmat');
+        services.forEach(service => {
+            const option = document.createElement('option');
+            option.value = service;
+            option.textContent = service;
+            serviceSelect.appendChild(option);
         });
-
-        function getServicePrice(serviceValue, optionText = '') {
-            const fullText = optionText || serviceValue;
-            const match = fullText.match(/(\d+)\$/);
-            if (match) return parseInt(match[1], 10);
-            const priceMap = { 'Soch parvarishi va dizayni':50, 'Tirnoq xizmati':40, 'Kosmetologiya va Teri parvarishi':80, 'Vizaj va Makiyaj':60, 'Qosh va Kiprik xizmati':45, 'Depilyatsiya va Epilyatsiya':55, 'Tana parvarishi va Massaj':100, 'Erkaklar uchun maxsus xizmatlar':70, 'Terapiya':80, 'Xirurgiya':200, 'Kardiologiya':150, 'Nevrologiya':120, 'Pediatriya':60, 'Ginekologiya':130, 'Stomatologiya':100, 'Dermatologiya':90, 'Gastroenterologiya':110, 'Endokrinologiya':100, 'Oftalmologiya':85, 'Diagnostika':70, 'Reabilitologiya':95 };
-            return priceMap[serviceValue] || 0;
-        }
-
+        
+        // Davlat tanlanganda viloyatlarni ko'rsatish
+        document.getElementById('davlat').addEventListener('change', function() {
+            const country = this.value;
+            const regionSelect = document.getElementById('hudud');
+            regionSelect.innerHTML = '<option value="">Tanlang</option>';
+            
+            if (country && regions[country]) {
+                regions[country].forEach(region => {
+                    const option = document.createElement('option');
+                    option.value = region;
+                    option.textContent = region;
+                    regionSelect.appendChild(option);
+                });
+            }
+        });
+        
+        // Formani yuborish
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const ism = document.getElementById('ism').value;
+            const familiya = document.getElementById('familiya').value;
+            const nomer = document.getElementById('nomer').value;
+            const xizmat = document.getElementById('xizmat').value;
+            const davlat = document.getElementById('davlat').value;
+            const hudud = document.getElementById('hudud').value;
+            const izoh = document.getElementById('izoh').value;
+            
+            if (nomer.length !== 9 || !/^\d+$/.test(nomer)) {
+                alert('Telefon raqam 9 xonali bo\'lishi kerak!');
+                return;
+            }
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            const loading = document.querySelector('.loading');
+            
+            submitBtn.style.display = 'none';
+            loading.style.display = 'block';
+            
+            const orderData = {
+                ism, familiya, nomer: '+996' + nomer, xizmat, davlat, hudud, izoh,
+                vaqt: new Date().toLocaleString('uz-UZ', {timeZone: 'Asia/Bishkek'})
+            };
+            
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(orderData)
+                });
+                
+                document.querySelector('.success-message').style.display = 'block';
+                document.getElementById('orderForm').reset();
+                setTimeout(() => {
+                    document.querySelector('.success-message').style.display = 'none';
+                }, 3000);
+                
+                loadStatistics();
+            } catch (error) {
+                alert('Xatolik yuz berdi. Qaytadan urinib ko\'ring.');
+            } finally {
+                submitBtn.style.display = 'block';
+                loading.style.display = 'none';
+            }
+        });
+        
+        // Statistikani yuklash
         async function loadStatistics() {
             try {
-                const response = await fetch(scriptURL + '?action=stats');
+                const response = await fetch(SCRIPT_URL + '?action=getData');
                 const data = await response.json();
-                let orders = data.orders || [];
                 
-                if (orders && orders.length > 0) {
-                    let totalOrd = orders.length;
-                    let totalRev = 0;
-                    const countryMap = new Map();
-                    const serviceMap = new Map();
+                if (data && data.data) {
+                    document.getElementById('totalOrders').textContent = data.data.length;
+                    document.getElementById('totalServices').textContent = services.length;
+                    const uniqueCountries = [...new Set(data.data.map(row => row[5]))];
+                    document.getElementById('totalCountries').textContent = uniqueCountries.length;
                     
-                    for (let ord of orders) {
-                        let price = ord.price || getServicePrice(ord.service, ord.service || '');
-                        if (!price && ord.service) price = getServicePrice(ord.service, ord.service);
-                        totalRev += price;
-                        const c = ord.country || 'Nomaʼlum';
-                        const srv = ord.service || 'Nomaʼlum xizmat';
-                        if (!countryMap.has(c)) countryMap.set(c, {count:0, totalUSD:0});
-                        let cData = countryMap.get(c);
-                        cData.count++; cData.totalUSD += price;
-                        if (!serviceMap.has(srv)) serviceMap.set(srv, {count:0, totalUSD:0});
-                        let sData = serviceMap.get(srv);
-                        sData.count++; sData.totalUSD += price;
-                    }
-                    document.getElementById('totalOrders').textContent = totalOrd;
-                    document.getElementById('totalRevenue').textContent = totalRev;
-                    document.getElementById('totalRevenueUZS').textContent = (totalRev * USD_RATE).toLocaleString();
+                    const today = new Date().toDateString();
+                    const todayOrders = data.data.filter(row => new Date(row[8]).toDateString() === today);
+                    document.getElementById('todayOrders').textContent = todayOrders.length;
                     
-                    // Davlatlar statistikasi - kartochkalar ko'rinishida
-                    const countryContainer = document.getElementById('countryStats');
-                    countryContainer.innerHTML = '';
-                    const sortedCountries = Array.from(countryMap.entries()).sort((a,b)=>b[1].totalUSD - a[1].totalUSD);
-                    for (let [country, val] of sortedCountries) {
-                        const revUZS = (val.totalUSD * USD_RATE).toLocaleString();
-                        countryContainer.innerHTML += `
-                            <div class="stat-item">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="font-bold text-lg text-gray-800"><i class="fas fa-flag text-blue-500 mr-2"></i>${country}</span>
-                                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">${val.count} ta</span>
-                                </div>
-                                <div class="border-t border-gray-200 pt-2 mt-1">
-                                    <div class="flex justify-between text-sm"><span class="text-gray-600">💰 Umumiy tushum:</span><span class="font-bold text-green-600">${val.totalUSD} USD</span></div>
-                                    <div class="flex justify-between text-sm mt-1"><span class="text-gray-600">💵 So‘mda:</span><span class="font-semibold text-purple-600">${revUZS} so‘m</span></div>
-                                </div>
-                            </div>
+                    const tableBody = document.getElementById('statsTable');
+                    tableBody.innerHTML = '';
+                    
+                    data.data.forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td class="border border-gray-300 p-2">${row[0]}</td>
+                            <td class="border border-gray-300 p-2">${row[1]}</td>
+                            <td class="border border-gray-300 p-2">${row[2]}</td>
+                            <td class="border border-gray-300 p-2">${row[3]}</td>
+                            <td class="border border-gray-300 p-2">${row[4]}</td>
+                            <td class="border border-gray-300 p-2">${row[5]}</td>
+                            <td class="border border-gray-300 p-2">${row[6]}</td>
+                            <td class="border border-gray-300 p-2">${row[7]}</td>
+                            <td class="border border-gray-300 p-2">${row[8]}</td>
                         `;
-                    }
-                    if (sortedCountries.length === 0) countryContainer.innerHTML = '<div class="col-span-full text-center text-gray-400 py-6">Hozircha maʼlumot yo‘q</div>';
-                    
-                    // Xizmatlar statistikasi - kartochkalar ko'rinishida
-                    const serviceContainer = document.getElementById('serviceStats');
-                    serviceContainer.innerHTML = '';
-                    const sortedServices = Array.from(serviceMap.entries()).sort((a,b)=>b[1].totalUSD - a[1].totalUSD);
-                    for (let [srvName, val] of sortedServices) {
-                        let shortName = srvName.length > 45 ? srvName.substring(0,42)+'...' : srvName;
-                        const revUZS = (val.totalUSD * USD_RATE).toLocaleString();
-                        serviceContainer.innerHTML += `
-                            <div class="stat-item">
-                                <div class="flex items-start justify-between mb-2 gap-2">
-                                    <span class="font-semibold text-gray-800 text-sm flex-1"><i class="fas fa-stethoscope text-purple-500 mr-1"></i>${shortName}</span>
-                                    <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full text-xs font-bold whitespace-nowrap">${val.count} marta</span>
-                                </div>
-                                <div class="border-t border-gray-200 pt-2 mt-1">
-                                    <div class="flex justify-between text-sm"><span class="text-gray-600">📊 Daromad:</span><span class="font-bold text-green-600">${val.totalUSD} USD</span></div>
-                                    <div class="flex justify-between text-sm mt-1"><span class="text-gray-600">💵 So‘mda:</span><span class="font-semibold text-purple-600">${revUZS} so‘m</span></div>
-                                </div>
-                            </div>
-                        `;
-                    }
-                    if (sortedServices.length === 0) serviceContainer.innerHTML = '<div class="col-span-full text-center text-gray-400 py-6">Xizmatlar bo‘yicha maʼlumot yo‘q</div>';
-                } 
-                else {
-                    // Fallback: agar orders array bo'lmasa, API dan kelgan aggregate ma'lumotlarni ishlatamiz
-                    document.getElementById('totalOrders').textContent = data.totalOrders || 0;
-                    const revenue = data.totalRevenue || 0;
-                    document.getElementById('totalRevenue').textContent = revenue;
-                    document.getElementById('totalRevenueUZS').textContent = (revenue * USD_RATE).toLocaleString();
-                    
-                    const countryContainer = document.getElementById('countryStats');
-                    if (data.byCountry && typeof data.byCountry === 'object') {
-                        countryContainer.innerHTML = '';
-                        for (let [country, count] of Object.entries(data.byCountry)) {
-                            let revenueCountry = (data.byCountryRevenue && data.byCountryRevenue[country]) ? data.byCountryRevenue[country] : 0;
-                            const revUZS = (revenueCountry * USD_RATE).toLocaleString();
-                            countryContainer.innerHTML += `<div class="stat-item"><div class="flex justify-between items-center"><span class="font-bold"><i class="fas fa-globe"></i> ${country}</span><span class="bg-blue-100 px-2 py-0.5 rounded-full">${count} ta</span></div><div class="mt-2 text-sm"><span class="text-green-700 font-medium">${revenueCountry} USD</span> <span class="text-gray-500">|</span> <span class="text-purple-600">${revUZS} so‘m</span></div></div>`;
-                        }
-                    } else { countryContainer.innerHTML = '<div class="col-span-full text-center text-gray-400">Statistika mavjud emas</div>'; }
-                    
-                    const serviceContainer = document.getElementById('serviceStats');
-                    if (data.byService && typeof data.byService === 'object') {
-                        serviceContainer.innerHTML = '';
-                        for (let [srv, count] of Object.entries(data.byService)) {
-                            let srvRevenue = (data.byServiceRevenue && data.byServiceRevenue[srv]) ? data.byServiceRevenue[srv] : (count * getServicePrice(srv, srv));
-                            const revUZS = (srvRevenue * USD_RATE).toLocaleString();
-                            serviceContainer.innerHTML += `<div class="stat-item"><div class="flex justify-between"><span class="font-semibold text-sm">${srv.length>40?srv.substring(0,37)+'...':srv}</span><span class="bg-purple-100 px-2 rounded-full text-xs">${count} marta</span></div><div class="mt-2 text-xs flex gap-2 flex-wrap"><span class="text-green-700">${srvRevenue} USD</span><span class="text-purple-600">${revUZS} so‘m</span></div></div>`;
-                        }
-                    } else { serviceContainer.innerHTML = '<div class="col-span-full text-center text-gray-400">Xizmatlar tahlili mavjud emas</div>'; }
+                        tableBody.appendChild(tr);
+                    });
                 }
-            } catch(e) { console.error("Statistika xatosi:", e); document.getElementById('countryStats').innerHTML = '<div class="col-span-full text-red-400 text-center">Statistika vaqtincha ishlamayapti</div>'; }
+            } catch (error) {
+                console.error('Statistika yuklanmadi:', error);
+            }
         }
-
-        // Form submit
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const serviceSelect = document.getElementById('service');
-            const service = serviceSelect.value;
-            const country = document.getElementById('country').value;
-            const region = document.getElementById('region').value;
-            if (!name || !phone || !service || !country || !region) { showToast('Barcha maydonlarni to\'ldiring!', 'error'); return; }
-            const price = getServicePrice(service, serviceSelect.options[serviceSelect.selectedIndex]?.text || '');
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true; btn.innerHTML = 'Yuborilmoqda...';
-            try {
-                await fetch(scriptURL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, phone, service, country, region, price }) });
-                showToast('✅ Buyurtma qabul qilindi!', 'success');
-                form.reset(); regionSelect.disabled = true; regionSelect.innerHTML = '<option value="">Avval davlatni tanlang</option>';
-                setTimeout(() => loadStatistics(), 800);
-            } catch(error) { showToast('❌ Xatolik yuz berdi.', 'error'); } finally { btn.disabled = false; btn.innerHTML = 'Buyurtma berish'; }
-        });
-
-        function showToast(msg, type) { const toast = document.createElement('div'); toast.className = type === 'success' ? 'success-toast' : 'error-toast'; toast.innerHTML = msg; document.body.appendChild(toast); setTimeout(() => toast.remove(), 3000); }
-
-        // Mobile menu
-        const menuBtn = document.getElementById('menu-btn'), mobileMenu = document.getElementById('mobile-menu'), closeMenu = document.getElementById('close-menu');
-        menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-        closeMenu?.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => anchor.addEventListener('click', function(e) { e.preventDefault(); document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' }); if(mobileMenu && !mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden'); }));
+        
         loadStatistics();
+        
+        // Xizmatlarni click bilan tanlash
+        document.querySelectorAll('.service-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.getElementById('xizmat').value = this.textContent;
+                document.getElementById('order').scrollIntoView({behavior: 'smooth'});
+            });
+        });
     </script>
 </body>
 </html>
