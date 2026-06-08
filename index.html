@@ -81,15 +81,6 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
         
-        .order-table-row {
-            transition: all 0.2s ease;
-        }
-        
-        .order-table-row:hover {
-            background: linear-gradient(90deg, #f3e8ff 0%, #e0e7ff 100%);
-            transform: scale(1.01);
-        }
-        
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -103,7 +94,6 @@
             border-radius: 5px;
         }
         
-        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -156,9 +146,12 @@
             }
         }
         
-        .counter {
-            font-size: 2.5rem;
-            font-weight: bold;
+        .about-card {
+            transition: all 0.3s ease;
+        }
+        
+        .about-card:hover {
+            transform: translateY(-5px);
         }
         
         .badge {
@@ -169,9 +162,9 @@
             font-weight: 600;
         }
         
-        .badge-new {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
+        .counter {
+            font-size: 2.5rem;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -196,10 +189,10 @@
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#home" class="text-gray-700 hover:text-indigo-600 transition font-medium">Bosh sahifa</a>
+                    <a href="#about" class="text-gray-700 hover:text-indigo-600 transition font-medium">Biz haqimizda</a>
                     <a href="#stats" class="text-gray-700 hover:text-indigo-600 transition font-medium">Statistika</a>
                     <a href="#services" class="text-gray-700 hover:text-indigo-600 transition font-medium">Xizmatlar</a>
                     <a href="#websites" class="text-gray-700 hover:text-indigo-600 transition font-medium">Saytlar</a>
-                    <a href="#orders-list" class="text-gray-700 hover:text-indigo-600 transition font-medium">Buyurtmalar</a>
                     <a href="#order" class="text-gray-700 hover:text-indigo-600 transition font-medium">Buyurtma berish</a>
                 </div>
                 <button class="md:hidden text-gray-700" onclick="toggleMobileMenu()">
@@ -210,10 +203,10 @@
             <!-- Mobile menu -->
             <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-2">
                 <a href="#home" class="block py-2 text-gray-700 hover:text-indigo-600">Bosh sahifa</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-indigo-600">Biz haqimizda</a>
                 <a href="#stats" class="block py-2 text-gray-700 hover:text-indigo-600">Statistika</a>
                 <a href="#services" class="block py-2 text-gray-700 hover:text-indigo-600">Xizmatlar</a>
                 <a href="#websites" class="block py-2 text-gray-700 hover:text-indigo-600">Saytlar</a>
-                <a href="#orders-list" class="block py-2 text-gray-700 hover:text-indigo-600">Buyurtmalar</a>
                 <a href="#order" class="block py-2 text-gray-700 hover:text-indigo-600">Buyurtma berish</a>
             </div>
         </div>
@@ -232,15 +225,70 @@
                 <a href="#order" class="bg-white text-indigo-600 px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition inline-flex items-center">
                     <i class="fas fa-shopping-cart mr-2"></i>Buyurtma berish
                 </a>
-                <a href="#stats" class="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-indigo-600 transition inline-flex items-center">
-                    <i class="fas fa-chart-line mr-2"></i>Statistika
+                <a href="#about" class="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-indigo-600 transition inline-flex items-center">
+                    <i class="fas fa-info-circle mr-2"></i>Biz haqimizda
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Statistika Section - CHIROYLI -->
-    <section id="stats" class="py-20 bg-white">
+    <!-- Xizmatlarimiz haqida qisqacha tushuncha bloki -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">💎 Xizmatlarimiz haqida</h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Biz sizga eng sifatli va professional xizmatlarni taqdim etamiz</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="about-card bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 text-center shadow-lg">
+                    <div class="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-clock text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Tez va ishonchli</h3>
+                    <p class="text-gray-600">Buyurtmangizni qabul qilib, eng qisqa vaqt ichida bajarib beramiz. Sifat kafolati bilan ishlaymiz.</p>
+                </div>
+                
+                <div class="about-card bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 text-center shadow-lg">
+                    <div class="bg-gradient-to-br from-purple-500 to-pink-600 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Xavfsiz va ishonchli</h3>
+                    <p class="text-gray-600">Barcha ma'lumotlaringiz xavfsiz saqlanadi. Shaxsiy ma'lumotlar himoya qilinadi.</p>
+                </div>
+                
+                <div class="about-card bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl p-8 text-center shadow-lg">
+                    <div class="bg-gradient-to-br from-green-500 to-teal-600 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-headset text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">24/7 Qo'llab-quvvatlash</h3>
+                    <p class="text-gray-600">Har qanday savol va muammolaringiz bo'yicha doim yordam beramiz. Professional yordam xizmati.</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <div class="inline-flex items-center gap-8 bg-gray-100 rounded-full px-8 py-4">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold gradient-text">100+</div>
+                        <div class="text-sm text-gray-600">Xizmat turlari</div>
+                    </div>
+                    <div class="w-px h-10 bg-gray-300"></div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold gradient-text">6+</div>
+                        <div class="text-sm text-gray-600">Davlatlar</div>
+                    </div>
+                    <div class="w-px h-10 bg-gray-300"></div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold gradient-text">1000+</div>
+                        <div class="text-sm text-gray-600">Mijozlar</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistika Section -->
+    <section id="stats" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12 fade-in">
                 <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">📊 Statistika</h2>
@@ -283,68 +331,27 @@
         </div>
     </section>
 
-    <!-- Xizmatlar Section - CHIROYLI ICONKALAR -->
-    <section id="services" class="py-20 bg-gray-50">
+    <!-- Xizmatlar Section -->
+    <section id="services" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12 fade-in">
                 <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">🚀 Xizmat turlari</h2>
                 <p class="text-gray-600 text-lg">100+ professional xizmatlar sizni kutmoqda</p>
             </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6" id="servicesGrid">
-                <!-- Xizmatlar JS orqali qo'shiladi -->
-            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6" id="servicesGrid"></div>
         </div>
     </section>
 
-    <!-- Tayyor Saytlar Section - CHIROYLI -->
-    <section id="websites" class="py-20 bg-white">
+    <!-- Tayyor Saytlar Section -->
+    <section id="websites" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12 fade-in">
                 <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">🌐 Tayyor saytlar</h2>
                 <p class="text-gray-600 text-lg">Portfolio saytlari va loyihalar</p>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="websitesGrid">
-                <!-- Saytlar JS orqali qo'shiladi -->
-            </div>
-        </div>
-    </section>
-
-    <!-- So'nggi buyurtmalar - CHIROYLI JADVAL -->
-    <section id="orders-list" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12 fade-in">
-                <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">📋 So'nggi buyurtmalar</h2>
-                <p class="text-gray-600 text-lg">Eng so'nggi 10 ta buyurtma</p>
-            </div>
-            
-            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden fade-in">
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead>
-                            <tr class="gradient-bg text-white">
-                                <th class="p-4 text-left"><i class="fas fa-hashtag mr-2"></i>ID</th>
-                                <th class="p-4 text-left"><i class="fas fa-user mr-2"></i>ISM</th>
-                                <th class="p-4 text-left"><i class="fas fa-user-friends mr-2"></i>FAMILIYA</th>
-                                <th class="p-4 text-left"><i class="fas fa-phone mr-2"></i>NOMER</th>
-                                <th class="p-4 text-left"><i class="fas fa-briefcase mr-2"></i>XIZMAT</th>
-                                <th class="p-4 text-left"><i class="fas fa-globe mr-2"></i>DAVLAT</th>
-                                <th class="p-4 text-left"><i class="fas fa-map-marker-alt mr-2"></i>HUDUD</th>
-                                <th class="p-4 text-left"><i class="fas fa-clock mr-2"></i>VAQT</th>
-                            </tr>
-                        </thead>
-                        <tbody id="recentOrdersTable">
-                            <tr>
-                                <td colspan="8" class="text-center p-8 text-gray-500">
-                                    <i class="fas fa-spinner fa-spin text-3xl text-indigo-600"></i>
-                                    <p class="mt-2">Ma'lumotlar yuklanmoqda...</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="websitesGrid"></div>
         </div>
     </section>
 
@@ -454,10 +461,8 @@
     </footer>
 
     <script>
-        // Google Sheets Script URL (o'zgartiriladi)
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzIRAgFBb5Q8hy8xr83yq9iKfTKa1Q1jJrBGbFm6E7Ejfc0l1ZXOBQmnQpaa20LudIc/exec';
         
-        // Davlat va viloyatlar ma'lumotlari
         const regions = {
             'Rossiya': ['Moskva', 'Sankt-Peterburg', 'Novosibirsk', 'Yekaterinburg', 'Qozon'],
             'Uzbekiston': ['Toshkent', 'Samarqand', 'Buxoro', 'Namangan', 'Farg\'ona'],
@@ -467,7 +472,6 @@
             'Turkmaniston': ['Ashxobod', 'Turkmanobod', 'Dashoguz', 'Mari', 'Balkanabad']
         };
         
-        // Xizmatlar ikonkalari bilan
         const servicesWithIcons = [
             { name: 'Arxitektura va loyiha ishlari', icon: 'fas fa-drafting-compass', color: 'text-blue-600' },
             { name: 'Avto xizmatlar', icon: 'fas fa-car', color: 'text-red-600' },
@@ -486,28 +490,16 @@
             { name: 'Foto xizmatlari', icon: 'fas fa-camera', color: 'text-purple-600' },
             { name: 'Veterinariya', icon: 'fas fa-paw', color: 'text-yellow-600' },
             { name: 'Bank xizmatlari', icon: 'fas fa-university', color: 'text-green-600' },
-            { name: 'Fitness markazlari', icon: 'fas fa-dumbbell', color: 'text-orange-600' },
-            { name: 'Kafe', icon: 'fas fa-coffee', color: 'text-yellow-700' },
-            { name: 'Mobil ilovalar ishlab chiqish', icon: 'fas fa-mobile-alt', color: 'text-purple-600' }
+            { name: 'Fitness markazlari', icon: 'fas fa-dumbbell', color: 'text-orange-600' }
         ];
         
         const allServicesList = [
-            'Arxitektura va loyiha ishlari', 'Avto xizmatlar', 'Avto ehtiyot qismlar', 'Aero va dron xizmatlari',
-            'Bank xizmatlari', 'Buxgalteriya xizmatlari', 'Bolalar bog\'chasi', 'Bosmaxona (poligrafiya)',
-            'Dasturlash xizmatlari', 'Dizayn xizmatlari', 'Dorixona', 'Do\'konlar', 'Elektr montaj xizmatlari',
-            'Elektronika savdosi', 'Ekskavator va Spestexnika xizmatlari', 'Fast Food', 'Foto xizmatlari',
-            'Fitness markazlari', 'Farmatsevtika', 'Go\'zallik salonlari', 'Grafik dizayn', 'Gul do\'konlari',
-            'Hunarmandchilik', 'Hostel va yotoqxonalar', 'Huquqiy xizmatlar', 'IT xizmatlari',
-            'Internet provayderlari', 'Interyer dizayni', 'Kafe', 'Klinikalar', 'Kosmetologiya', 'Kuryer xizmatlari',
-            'Kiyim-kechak savdosi', 'Logistika xizmatlari', 'Landshaft dizayni', 'Marketing xizmatlari',
-            'Mebel ishlab chiqarish', 'Mobil ilovalar ishlab chiqish', 'Mehmonxonalar', 'Nashriyot xizmatlari',
-            'Notarius xizmatlari', 'O\'quv markazlari', 'Ofis xizmatlari', 'Onlayn savdo', 'Pardozlash ishlari',
-            'Printer va kopir xizmatlari', 'Psixologiya markazlari', 'Qurilish xizmatlari', 'Qurilish materiallari',
-            'Qandolatchilik', 'Restoranlar', 'Reklama agentliklari', 'Remont xizmatlari', 'Savdo markazlari',
-            'Sartaroshxona', 'SMM xizmatlari', 'Stomatologiya', 'Sug\'urta xizmatlari', 'Ta\'lim muassasalari',
-            'Tibbiyot markazlari', 'Tikuvchilik', 'Turizm xizmatlari', 'Transport xizmatlari', 'Uy-joy xizmatlari',
-            'Uskunalar ijarasi', 'Video xizmatlari', 'Veterinariya', 'Veb sayt yaratish', 'Yuk tashish xizmatlari',
-            'Yuridik xizmatlar', 'Zargarlik buyumlari', 'Zamonaviy texnologiyalar xizmatlari'
+            'Arxitektura va loyiha ishlari', 'Avto xizmatlar', 'Avto ehtiyot qismlar',
+            'Bank xizmatlari', 'Buxgalteriya xizmatlari', 'Bolalar bog\'chasi',
+            'Dasturlash xizmatlari', 'Dizayn xizmatlari', 'IT xizmatlari',
+            'Marketing xizmatlari', 'Qurilish xizmatlari', 'Tibbiyot markazlari',
+            'Ta\'lim muassasalari', 'Restoranlar', 'Go\'zallik salonlari',
+            'Logistika xizmatlari', 'SMM xizmatlari', 'Veterinariya'
         ];
         
         const websitesList = [
@@ -551,15 +543,15 @@
         
         function selectService(serviceName) {
             const select = document.getElementById('xizmat');
-            let optionExists = false;
+            let found = false;
             for(let i = 0; i < select.options.length; i++) {
                 if(select.options[i].value === serviceName) {
                     select.selectedIndex = i;
-                    optionExists = true;
+                    found = true;
                     break;
                 }
             }
-            if(!optionExists) {
+            if(!found) {
                 const option = document.createElement('option');
                 option.value = serviceName;
                 option.textContent = serviceName;
@@ -567,9 +559,7 @@
                 select.value = serviceName;
             }
             select.style.backgroundColor = '#e0e7ff';
-            setTimeout(() => {
-                select.style.backgroundColor = '';
-            }, 500);
+            setTimeout(() => select.style.backgroundColor = '', 500);
             document.getElementById('order').scrollIntoView({behavior: 'smooth'});
             showNotification('✅ ' + serviceName + ' tanlandi!', 'success');
         }
@@ -624,18 +614,18 @@
             modal.style.display = 'block';
         }
         
-        document.querySelector('.close').onclick = function() {
+        document.querySelector('.close').onclick = () => {
             document.getElementById('websiteModal').style.display = 'none';
             document.getElementById('websiteFrame').src = '';
-        }
+        };
         
-        window.onclick = function(event) {
+        window.onclick = (event) => {
             const modal = document.getElementById('websiteModal');
             if (event.target == modal) {
                 modal.style.display = 'none';
                 document.getElementById('websiteFrame').src = '';
             }
-        }
+        };
         
         document.getElementById('davlat').addEventListener('change', function() {
             const country = this.value;
@@ -666,7 +656,7 @@
                 return;
             }
             if (nomer.length !== 9 || !/^\d+$/.test(nomer)) {
-                showNotification('Telefon raqam 9 xonali bo\'lishi kerak (faqat raqamlar)!', 'error');
+                showNotification('Telefon raqam 9 xonali bo\'lishi kerak!', 'error');
                 return;
             }
             
@@ -690,7 +680,7 @@
                 });
                 showNotification('✅ Buyurtma muvaffaqiyatli qabul qilindi!', 'success');
                 document.getElementById('orderForm').reset();
-                setTimeout(() => { loadStatistics(); loadRecentOrders(); }, 1000);
+                setTimeout(() => { loadStatistics(); }, 1000);
             } catch(error) {
                 showNotification('❌ Xatolik yuz berdi. Qaytadan urinib ko\'ring.', 'error');
             } finally {
@@ -714,7 +704,7 @@
                 successDiv.style.color = '#166534';
             }
             successDiv.style.display = 'block';
-            setTimeout(() => { successDiv.style.display = 'none'; }, 3000);
+            setTimeout(() => successDiv.style.display = 'none', 3000);
         }
         
         async function loadStatistics() {
@@ -738,35 +728,6 @@
             }
         }
         
-        async function loadRecentOrders() {
-            try {
-                const response = await fetch(SCRIPT_URL + '?action=getData');
-                const data = await response.json();
-                if (data && data.data && data.data.length > 0) {
-                    const recentOrders = data.data.slice(-10).reverse();
-                    const tableBody = document.getElementById('recentOrdersTable');
-                    tableBody.innerHTML = '';
-                    recentOrders.forEach((row, index) => {
-                        const tr = document.createElement('tr');
-                        tr.className = 'order-table-row border-b hover:bg-gradient-to-r hover:from-purple-50 hover:to-indigo-50 transition-all duration-300';
-                        tr.innerHTML = `
-                            <td class="p-4 font-semibold">${row[0] || ''}</td>
-                            <td class="p-4"><span class="font-medium">${row[1] || ''}</span></td>
-                            <td class="p-4">${row[2] || ''}</td>
-                            <td class="p-4"><span class="badge badge-new">${row[3] || ''}</span></td>
-                            <td class="p-4">${row[4] || ''}</td>
-                            <td class="p-4">${row[5] || ''}</td>
-                            <td class="p-4">${row[6] || ''}</td>
-                            <td class="p-4 text-sm text-gray-500">${new Date(row[8]).toLocaleString('uz-UZ') || ''}</td>
-                        `;
-                        tableBody.appendChild(tr);
-                    });
-                }
-            } catch (error) {
-                console.error('Buyurtmalar yuklanmadi:', error);
-            }
-        }
-        
         function toggleMobileMenu() {
             document.getElementById('mobileMenu').classList.toggle('hidden');
         }
@@ -775,8 +736,7 @@
             loadServicesWithIcons();
             loadWebsites();
             loadStatistics();
-            loadRecentOrders();
-            setInterval(() => { loadStatistics(); loadRecentOrders(); }, 30000);
+            setInterval(() => loadStatistics(), 30000);
         });
     </script>
 </body>
