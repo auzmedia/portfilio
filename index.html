@@ -17,13 +17,11 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
         
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .loading {
@@ -52,22 +50,7 @@
         }
         
         .stat-card:hover {
-            transform: scale(1.05);
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            transform: translateY(-8px);
         }
         
         .service-icon-card {
@@ -95,10 +78,18 @@
         
         .website-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
         
-        /* Custom scrollbar */
+        .order-table-row {
+            transition: all 0.2s ease;
+        }
+        
+        .order-table-row:hover {
+            background: linear-gradient(90deg, #f3e8ff 0%, #e0e7ff 100%);
+            transform: scale(1.01);
+        }
+        
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -143,16 +134,44 @@
             font-weight: bold;
             cursor: pointer;
             color: #333;
+            z-index: 1001;
         }
         
         .close:hover {
             color: #667eea;
         }
         
-        select:focus, input:focus, textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            ring: 2px solid #667eea;
+        .fade-in {
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .counter {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-new {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
         }
     </style>
 </head>
@@ -170,8 +189,10 @@
     <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <div class="text-2xl font-bold gradient-bg bg-clip-text text-transparent">
-                    <i class="fas fa-rocket mr-2 text-indigo-600"></i>ServiceHub
+                <div class="text-2xl font-bold">
+                    <span class="gradient-text">
+                        <i class="fas fa-rocket mr-2"></i>ServiceHub
+                    </span>
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#home" class="text-gray-700 hover:text-indigo-600 transition font-medium">Bosh sahifa</a>
@@ -218,42 +239,57 @@
         </div>
     </section>
 
-    <!-- Statistika Section -->
-    <section id="stats" class="py-16 bg-white">
+    <!-- Statistika Section - CHIROYLI -->
+    <section id="stats" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">📊 Statistika</h2>
-            <p class="text-center text-gray-600 mb-12">Real vaqt rejimidagi ma'lumotlar</p>
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">📊 Statistika</h2>
+                <p class="text-gray-600 text-lg">Real vaqt rejimidagi ma'lumotlar</p>
+            </div>
             
-            <div class="grid md:grid-cols-4 gap-6 mb-12">
-                <div class="stat-card bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl p-6 text-center shadow-lg">
-                    <i class="fas fa-shopping-cart text-5xl mb-3"></i>
-                    <div class="text-4xl font-bold" id="totalOrders">0</div>
-                    <div class="text-sm mt-2 opacity-90">Jami buyurtmalar</div>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="stat-card bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl p-8 text-center shadow-xl">
+                    <div class="bg-white/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shopping-cart text-4xl"></i>
+                    </div>
+                    <div class="counter text-5xl font-bold mb-2" id="totalOrders">0</div>
+                    <div class="text-sm uppercase tracking-wide opacity-90">Jami buyurtmalar</div>
                 </div>
-                <div class="stat-card bg-gradient-to-br from-green-500 to-green-600 text-white rounded-2xl p-6 text-center shadow-lg">
-                    <i class="fas fa-building text-5xl mb-3"></i>
-                    <div class="text-4xl font-bold" id="totalServices">0</div>
-                    <div class="text-sm mt-2 opacity-90">Xizmat turlari</div>
+                
+                <div class="stat-card bg-gradient-to-br from-green-500 to-green-600 text-white rounded-2xl p-8 text-center shadow-xl">
+                    <div class="bg-white/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-building text-4xl"></i>
+                    </div>
+                    <div class="counter text-5xl font-bold mb-2" id="totalServices">0</div>
+                    <div class="text-sm uppercase tracking-wide opacity-90">Xizmat turlari</div>
                 </div>
-                <div class="stat-card bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl p-6 text-center shadow-lg">
-                    <i class="fas fa-users text-5xl mb-3"></i>
-                    <div class="text-4xl font-bold" id="totalCountries">0</div>
-                    <div class="text-sm mt-2 opacity-90">Davlatlar</div>
+                
+                <div class="stat-card bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl p-8 text-center shadow-xl">
+                    <div class="bg-white/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-4xl"></i>
+                    </div>
+                    <div class="counter text-5xl font-bold mb-2" id="totalCountries">0</div>
+                    <div class="text-sm uppercase tracking-wide opacity-90">Davlatlar</div>
                 </div>
-                <div class="stat-card bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-2xl p-6 text-center shadow-lg">
-                    <i class="fas fa-calendar-day text-5xl mb-3"></i>
-                    <div class="text-4xl font-bold" id="todayOrders">0</div>
-                    <div class="text-sm mt-2 opacity-90">Bugungi buyurtmalar</div>
+                
+                <div class="stat-card bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-2xl p-8 text-center shadow-xl">
+                    <div class="bg-white/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-calendar-day text-4xl"></i>
+                    </div>
+                    <div class="counter text-5xl font-bold mb-2" id="todayOrders">0</div>
+                    <div class="text-sm uppercase tracking-wide opacity-90">Bugungi buyurtmalar</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Xizmatlar Section (Icons bilan) -->
-    <section id="services" class="py-16 bg-gray-50">
+    <!-- Xizmatlar Section - CHIROYLI ICONKALAR -->
+    <section id="services" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">🚀 Xizmat turlari</h2>
-            <p class="text-center text-gray-600 mb-12">100+ professional xizmatlar</p>
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">🚀 Xizmat turlari</h2>
+                <p class="text-gray-600 text-lg">100+ professional xizmatlar sizni kutmoqda</p>
+            </div>
             
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6" id="servicesGrid">
                 <!-- Xizmatlar JS orqali qo'shiladi -->
@@ -261,11 +297,13 @@
         </div>
     </section>
 
-    <!-- Tayyor Saytlar Section -->
-    <section id="websites" class="py-16 bg-white">
+    <!-- Tayyor Saytlar Section - CHIROYLI -->
+    <section id="websites" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">🌐 Tayyor saytlar</h2>
-            <p class="text-center text-gray-600 mb-12">Portfolio saytlari va loyihalar</p>
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">🌐 Tayyor saytlar</h2>
+                <p class="text-gray-600 text-lg">Portfolio saytlari va loyihalar</p>
+            </div>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="websitesGrid">
                 <!-- Saytlar JS orqali qo'shiladi -->
@@ -273,31 +311,33 @@
         </div>
     </section>
 
-    <!-- So'nggi buyurtmalar -->
-    <section id="orders-list" class="py-16 bg-gray-50">
+    <!-- So'nggi buyurtmalar - CHIROYLI JADVAL -->
+    <section id="orders-list" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">📋 So'nggi buyurtmalar</h2>
-            <p class="text-center text-gray-600 mb-12">Eng so'nggi 10 ta buyurtma</p>
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">📋 So'nggi buyurtmalar</h2>
+                <p class="text-gray-600 text-lg">Eng so'nggi 10 ta buyurtma</p>
+            </div>
             
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden fade-in">
                 <div class="overflow-x-auto">
                     <table class="w-full">
-                        <thead class="gradient-bg text-white">
-                            <tr>
-                                <th class="p-4 text-left">ID</th>
-                                <th class="p-4 text-left">ISM</th>
-                                <th class="p-4 text-left">FAMILIYA</th>
-                                <th class="p-4 text-left">NOMER</th>
-                                <th class="p-4 text-left">XIZMAT</th>
-                                <th class="p-4 text-left">DAVLAT</th>
-                                <th class="p-4 text-left">HUDUD</th>
-                                <th class="p-4 text-left">VAQT</th>
+                        <thead>
+                            <tr class="gradient-bg text-white">
+                                <th class="p-4 text-left"><i class="fas fa-hashtag mr-2"></i>ID</th>
+                                <th class="p-4 text-left"><i class="fas fa-user mr-2"></i>ISM</th>
+                                <th class="p-4 text-left"><i class="fas fa-user-friends mr-2"></i>FAMILIYA</th>
+                                <th class="p-4 text-left"><i class="fas fa-phone mr-2"></i>NOMER</th>
+                                <th class="p-4 text-left"><i class="fas fa-briefcase mr-2"></i>XIZMAT</th>
+                                <th class="p-4 text-left"><i class="fas fa-globe mr-2"></i>DAVLAT</th>
+                                <th class="p-4 text-left"><i class="fas fa-map-marker-alt mr-2"></i>HUDUD</th>
+                                <th class="p-4 text-left"><i class="fas fa-clock mr-2"></i>VAQT</th>
                             </tr>
                         </thead>
                         <tbody id="recentOrdersTable">
                             <tr>
                                 <td colspan="8" class="text-center p-8 text-gray-500">
-                                    <i class="fas fa-spinner fa-spin text-2xl"></i>
+                                    <i class="fas fa-spinner fa-spin text-3xl text-indigo-600"></i>
                                     <p class="mt-2">Ma'lumotlar yuklanmoqda...</p>
                                 </td>
                             </tr>
@@ -309,10 +349,13 @@
     </section>
 
     <!-- Buyurtma Forma Section -->
-    <section id="order" class="py-16 gradient-bg">
+    <section id="order" class="py-20 gradient-bg">
         <div class="container mx-auto px-6 max-w-4xl">
             <div class="bg-white rounded-2xl shadow-2xl p-8 fade-in">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">📝 Buyurtma berish</h2>
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-2">📝 Buyurtma berish</h2>
+                    <p class="text-gray-600">Quyidagi formani to'ldiring</p>
+                </div>
                 
                 <div class="success-message bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6">
                     <i class="fas fa-check-circle mr-2"></i> 
@@ -322,15 +365,21 @@
                 <form id="orderForm">
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Ism *</label>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-user text-indigo-600 mr-2"></i>Ism *
+                            </label>
                             <input type="text" id="ism" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition">
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Familiya *</label>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-user-friends text-indigo-600 mr-2"></i>Familiya *
+                            </label>
                             <input type="text" id="familiya" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition">
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Telefon raqam *</label>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-phone text-indigo-600 mr-2"></i>Telefon raqam *
+                            </label>
                             <div class="flex">
                                 <span class="inline-flex items-center px-3 bg-gray-100 border border-r-0 border-gray-300 rounded-l-lg font-semibold">+996</span>
                                 <input type="tel" id="nomer" maxlength="9" placeholder="700123456" required class="w-full px-4 py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition">
@@ -338,31 +387,39 @@
                             <p class="text-xs text-gray-500 mt-1">9 xonali raqam (masalan: 700123456)</p>
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Xizmat turi *</label>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-briefcase text-indigo-600 mr-2"></i>Xizmat turi *
+                            </label>
                             <select id="xizmat" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition">
                                 <option value="">Tanlang</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Davlat *</label>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-globe text-indigo-600 mr-2"></i>Davlat *
+                            </label>
                             <select id="davlat" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition">
                                 <option value="">Tanlang</option>
-                                <option value="Rossiya">Rossiya</option>
-                                <option value="Uzbekiston">O'zbekiston</option>
-                                <option value="Qozogiston">Qozog'iston</option>
-                                <option value="Qirgiziston">Qirg'iziston</option>
-                                <option value="Tojikiston">Tojikiston</option>
-                                <option value="Turkmaniston">Turkmaniston</option>
+                                <option value="Rossiya">🇷🇺 Rossiya</option>
+                                <option value="Uzbekiston">🇺🇿 O'zbekiston</option>
+                                <option value="Qozogiston">🇰🇿 Qozog'iston</option>
+                                <option value="Qirgiziston">🇰🇬 Qirg'iziston</option>
+                                <option value="Tojikiston">🇹🇯 Tojikiston</option>
+                                <option value="Turkmaniston">🇹🇲 Turkmaniston</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Hudud/Viloyat *</label>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-map-marker-alt text-indigo-600 mr-2"></i>Hudud/Viloyat *
+                            </label>
                             <select id="hudud" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition">
                                 <option value="">Avval davlatni tanlang</option>
                             </select>
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-gray-700 font-semibold mb-2">Izoh</label>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-pen text-indigo-600 mr-2"></i>Izoh
+                            </label>
                             <textarea id="izoh" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition" placeholder="Qo'shimcha ma'lumotlar..."></textarea>
                         </div>
                     </div>
@@ -383,9 +440,15 @@
     <footer class="bg-gray-900 text-white py-12">
         <div class="container mx-auto px-6 text-center">
             <div class="text-2xl font-bold mb-4">
-                <i class="fas fa-rocket mr-2"></i>ServiceHub
+                <span class="gradient-text">ServiceHub</span>
             </div>
             <p class="text-gray-400 mb-4">Professional xizmatlar platformasi</p>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-telegram text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-whatsapp text-xl"></i></a>
+            </div>
             <p>&copy; 2024 ServiceHub. Barcha huquqlar himoyalangan.</p>
         </div>
     </footer>
@@ -396,19 +459,18 @@
         
         // Davlat va viloyatlar ma'lumotlari
         const regions = {
-            'Rossiya': ['Moskva', 'Sankt-Peterburg', 'Novosibirsk', 'Yekaterinburg', 'Qozon', 'Nijniy Novgorod'],
-            'Uzbekiston': ['Toshkent', 'Samarqand', 'Buxoro', 'Namangan', 'Farg\'ona', 'Andijon', 'Qo\'qon'],
-            'Qozogiston': ['Nur-Sulton', 'Almati', 'Shimkent', 'Qarag\'andi', 'Aktau', 'Taraz'],
-            'Qirgiziston': ['Bishkek', 'Osh', 'Jalal-Abod', 'Karakol', 'Talas', 'Narin'],
+            'Rossiya': ['Moskva', 'Sankt-Peterburg', 'Novosibirsk', 'Yekaterinburg', 'Qozon'],
+            'Uzbekiston': ['Toshkent', 'Samarqand', 'Buxoro', 'Namangan', 'Farg\'ona'],
+            'Qozogiston': ['Nur-Sulton', 'Almati', 'Shimkent', 'Qarag\'andi', 'Aktau'],
+            'Qirgiziston': ['Bishkek', 'Osh', 'Jalal-Abod', 'Karakol', 'Talas'],
             'Tojikiston': ['Dushanbe', 'Xujand', 'Boxtar', 'Xorug\'', 'Kulob'],
             'Turkmaniston': ['Ashxobod', 'Turkmanobod', 'Dashoguz', 'Mari', 'Balkanabad']
         };
         
-        // Xizmatlar ikonkalari bilan (TO'LIQ MOSLIK UCHUN)
+        // Xizmatlar ikonkalari bilan
         const servicesWithIcons = [
             { name: 'Arxitektura va loyiha ishlari', icon: 'fas fa-drafting-compass', color: 'text-blue-600' },
             { name: 'Avto xizmatlar', icon: 'fas fa-car', color: 'text-red-600' },
-            { name: 'Avto ehtiyot qismlar', icon: 'fas fa-car-side', color: 'text-red-500' },
             { name: 'Dasturlash xizmatlari', icon: 'fas fa-code', color: 'text-purple-600' },
             { name: 'Dizayn xizmatlari', icon: 'fas fa-paint-brush', color: 'text-pink-600' },
             { name: 'IT xizmatlari', icon: 'fas fa-laptop-code', color: 'text-indigo-600' },
@@ -426,11 +488,9 @@
             { name: 'Bank xizmatlari', icon: 'fas fa-university', color: 'text-green-600' },
             { name: 'Fitness markazlari', icon: 'fas fa-dumbbell', color: 'text-orange-600' },
             { name: 'Kafe', icon: 'fas fa-coffee', color: 'text-yellow-700' },
-            { name: 'Mobil ilovalar ishlab chiqish', icon: 'fas fa-mobile-alt', color: 'text-purple-600' },
-            { name: 'Veb sayt yaratish', icon: 'fas fa-globe', color: 'text-blue-600' }
+            { name: 'Mobil ilovalar ishlab chiqish', icon: 'fas fa-mobile-alt', color: 'text-purple-600' }
         ];
         
-        // Barcha xizmatlar (select dropdown uchun)
         const allServicesList = [
             'Arxitektura va loyiha ishlari', 'Avto xizmatlar', 'Avto ehtiyot qismlar', 'Aero va dron xizmatlari',
             'Bank xizmatlari', 'Buxgalteriya xizmatlari', 'Bolalar bog\'chasi', 'Bosmaxona (poligrafiya)',
@@ -450,7 +510,6 @@
             'Yuridik xizmatlar', 'Zargarlik buyumlari', 'Zamonaviy texnologiyalar xizmatlari'
         ];
         
-        // Tayyor saytlar ro'yxati
         const websitesList = [
             {
                 name: 'Premium Stomatologiya',
@@ -490,13 +549,8 @@
             }
         ];
         
-        // Xizmat tanlash funksiyasi (MUHIM - formada tanlab qoladi)
         function selectService(serviceName) {
-            console.log('Tanlandi:', serviceName);
-            
             const select = document.getElementById('xizmat');
-            
-            // Selectda bor yoki yo'qligini tekshirish
             let optionExists = false;
             for(let i = 0; i < select.options.length; i++) {
                 if(select.options[i].value === serviceName) {
@@ -505,8 +559,6 @@
                     break;
                 }
             }
-            
-            // Agar bo'lmasa, qo'shish
             if(!optionExists) {
                 const option = document.createElement('option');
                 option.value = serviceName;
@@ -514,49 +566,27 @@
                 select.appendChild(option);
                 select.value = serviceName;
             }
-            
-            // Tanlanganini vizual ko'rsatish
             select.style.backgroundColor = '#e0e7ff';
-            select.style.borderColor = '#667eea';
             setTimeout(() => {
                 select.style.backgroundColor = '';
-                select.style.borderColor = '';
             }, 500);
-            
-            // Formaga silliq o'tish
             document.getElementById('order').scrollIntoView({behavior: 'smooth'});
-            
-            // Xabar ko'rsatish
-            const msgDiv = document.querySelector('.success-message');
-            const msgSpan = document.getElementById('successMessage');
-            msgSpan.innerHTML = '✅ ' + serviceName + ' tanlandi!';
-            msgDiv.style.backgroundColor = '#dbeafe';
-            msgDiv.style.borderColor = '#667eea';
-            msgDiv.style.color = '#1e40af';
-            msgDiv.style.display = 'block';
-            setTimeout(() => {
-                msgDiv.style.display = 'none';
-            }, 2000);
+            showNotification('✅ ' + serviceName + ' tanlandi!', 'success');
         }
         
-        // Xizmatlarni ikonkalar bilan ko'rsatish
         function loadServicesWithIcons() {
             const servicesGrid = document.getElementById('servicesGrid');
             servicesGrid.innerHTML = '';
-            
             servicesWithIcons.forEach(service => {
                 const card = document.createElement('div');
                 card.className = 'service-icon-card bg-white rounded-xl p-6 text-center shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105';
-                card.onclick = function() { selectService(service.name); };
+                card.onclick = () => selectService(service.name);
                 card.innerHTML = `
-                    <i class="${service.icon} text-5xl ${service.color} mb-3 transition-colors duration-300"></i>
+                    <i class="${service.icon} text-5xl ${service.color} mb-3"></i>
                     <h3 class="font-semibold text-gray-800 mt-2 text-sm">${service.name}</h3>
-                    <p class="text-xs text-gray-500 mt-1">Bosish uchun</p>
                 `;
                 servicesGrid.appendChild(card);
             });
-            
-            // Select dropdown uchun barcha xizmatlarni qo'shish
             const serviceSelect = document.getElementById('xizmat');
             allServicesList.forEach(service => {
                 const option = document.createElement('option');
@@ -566,11 +596,9 @@
             });
         }
         
-        // Saytlarni ko'rsatish
         function loadWebsites() {
             const websitesGrid = document.getElementById('websitesGrid');
             websitesGrid.innerHTML = '';
-            
             websitesList.forEach(website => {
                 const card = document.createElement('div');
                 card.className = 'website-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300';
@@ -596,7 +624,6 @@
             modal.style.display = 'block';
         }
         
-        // Close modal
         document.querySelector('.close').onclick = function() {
             document.getElementById('websiteModal').style.display = 'none';
             document.getElementById('websiteFrame').src = '';
@@ -610,12 +637,10 @@
             }
         }
         
-        // Davlat va viloyatlar
         document.getElementById('davlat').addEventListener('change', function() {
             const country = this.value;
             const regionSelect = document.getElementById('hudud');
             regionSelect.innerHTML = '<option value="">Tanlang</option>';
-            
             if (country && regions[country]) {
                 regions[country].forEach(region => {
                     const option = document.createElement('option');
@@ -626,10 +651,8 @@
             }
         });
         
-        // Formani yuborish
         document.getElementById('orderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             const ism = document.getElementById('ism').value.trim();
             const familiya = document.getElementById('familiya').value.trim();
             const nomer = document.getElementById('nomer').value.trim();
@@ -642,7 +665,6 @@
                 showNotification('Iltimos, barcha majburiy maydonlarni to\'ldiring!', 'error');
                 return;
             }
-            
             if (nomer.length !== 9 || !/^\d+$/.test(nomer)) {
                 showNotification('Telefon raqam 9 xonali bo\'lishi kerak (faqat raqamlar)!', 'error');
                 return;
@@ -650,19 +672,12 @@
             
             const submitBtn = document.querySelector('.submit-btn');
             const loading = document.querySelector('.loading');
-            
             submitBtn.style.opacity = '0.5';
             submitBtn.disabled = true;
             loading.style.display = 'block';
             
             const orderData = {
-                ism: ism,
-                familiya: familiya,
-                nomer: '+996' + nomer,
-                xizmat: xizmat,
-                davlat: davlat,
-                hudud: hudud,
-                izoh: izoh,
+                ism, familiya, nomer: '+996' + nomer, xizmat, davlat, hudud, izoh,
                 vaqt: new Date().toLocaleString('uz-UZ', {timeZone: 'Asia/Bishkek'})
             };
             
@@ -673,15 +688,9 @@
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(orderData)
                 });
-                
                 showNotification('✅ Buyurtma muvaffaqiyatli qabul qilindi!', 'success');
                 document.getElementById('orderForm').reset();
-                
-                setTimeout(() => {
-                    loadStatistics();
-                    loadRecentOrders();
-                }, 1000);
-                
+                setTimeout(() => { loadStatistics(); loadRecentOrders(); }, 1000);
             } catch(error) {
                 showNotification('❌ Xatolik yuz berdi. Qaytadan urinib ko\'ring.', 'error');
             } finally {
@@ -695,7 +704,6 @@
             const successDiv = document.querySelector('.success-message');
             const messageSpan = document.getElementById('successMessage');
             messageSpan.textContent = message;
-            
             if (type === 'error') {
                 successDiv.style.backgroundColor = '#fee2e2';
                 successDiv.style.borderColor = '#ef4444';
@@ -705,66 +713,51 @@
                 successDiv.style.borderColor = '#22c55e';
                 successDiv.style.color = '#166534';
             }
-            
             successDiv.style.display = 'block';
-            setTimeout(() => {
-                successDiv.style.display = 'none';
-            }, 3000);
+            setTimeout(() => { successDiv.style.display = 'none'; }, 3000);
         }
         
-        // Statistikani yuklash
         async function loadStatistics() {
             try {
                 const response = await fetch(SCRIPT_URL + '?action=getData');
                 const data = await response.json();
-                
                 if (data && data.data) {
                     document.getElementById('totalOrders').textContent = data.data.length;
                     document.getElementById('totalServices').textContent = allServicesList.length;
-                    
                     const uniqueCountries = [...new Set(data.data.map(row => row[5]).filter(c => c))];
                     document.getElementById('totalCountries').textContent = uniqueCountries.length;
-                    
                     const today = new Date().toDateString();
                     const todayOrders = data.data.filter(row => {
-                        if (row[8]) {
-                            const orderDate = new Date(row[8]);
-                            return orderDate.toDateString() === today;
-                        }
+                        if (row[8]) return new Date(row[8]).toDateString() === today;
                         return false;
                     });
                     document.getElementById('todayOrders').textContent = todayOrders.length;
                 }
             } catch (error) {
-                console.error('Statistika yuklanmadi:', error);
-                // Fallback statistikalar
                 document.getElementById('totalServices').textContent = allServicesList.length;
             }
         }
         
-        // So'nggi buyurtmalarni yuklash
         async function loadRecentOrders() {
             try {
                 const response = await fetch(SCRIPT_URL + '?action=getData');
                 const data = await response.json();
-                
                 if (data && data.data && data.data.length > 0) {
                     const recentOrders = data.data.slice(-10).reverse();
                     const tableBody = document.getElementById('recentOrdersTable');
                     tableBody.innerHTML = '';
-                    
-                    recentOrders.forEach(row => {
+                    recentOrders.forEach((row, index) => {
                         const tr = document.createElement('tr');
-                        tr.className = 'border-b hover:bg-gray-50 transition';
+                        tr.className = 'order-table-row border-b hover:bg-gradient-to-r hover:from-purple-50 hover:to-indigo-50 transition-all duration-300';
                         tr.innerHTML = `
-                            <td class="p-4">${row[0] || ''}</td>
-                            <td class="p-4 font-medium">${row[1] || ''}</td>
+                            <td class="p-4 font-semibold">${row[0] || ''}</td>
+                            <td class="p-4"><span class="font-medium">${row[1] || ''}</span></td>
                             <td class="p-4">${row[2] || ''}</td>
-                            <td class="p-4">${row[3] || ''}</td>
+                            <td class="p-4"><span class="badge badge-new">${row[3] || ''}</span></td>
                             <td class="p-4">${row[4] || ''}</td>
                             <td class="p-4">${row[5] || ''}</td>
                             <td class="p-4">${row[6] || ''}</td>
-                            <td class="p-4 text-sm text-gray-500">${row[8] || ''}</td>
+                            <td class="p-4 text-sm text-gray-500">${new Date(row[8]).toLocaleString('uz-UZ') || ''}</td>
                         `;
                         tableBody.appendChild(tr);
                     });
@@ -775,22 +768,15 @@
         }
         
         function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
+            document.getElementById('mobileMenu').classList.toggle('hidden');
         }
         
-        // Sahifa yuklanganda
         window.addEventListener('DOMContentLoaded', () => {
             loadServicesWithIcons();
             loadWebsites();
             loadStatistics();
             loadRecentOrders();
-            
-            // Har 30 sekundda yangilash
-            setInterval(() => {
-                loadStatistics();
-                loadRecentOrders();
-            }, 30000);
+            setInterval(() => { loadStatistics(); loadRecentOrders(); }, 30000);
         });
     </script>
 </body>
