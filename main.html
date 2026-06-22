@@ -197,7 +197,7 @@ header.hero{
   background:rgba(255,255,255,.05);
   backdrop-filter:blur(14px);
   box-shadow:0 10px 30px rgba(0,0,0,.2);
-  flex-wrap:nowrap;
+  flex-wrap:wrap;
 }
 .lang-label{
   display:flex;
@@ -207,7 +207,6 @@ header.hero{
   font-size:13px;
   font-weight:700;
   padding:0 6px;
-  white-space:nowrap;
 }
 .lang-btn{
   display:flex;
@@ -221,8 +220,6 @@ header.hero{
   font-size:13px;
   font-weight:700;
   transition:.25s;
-  white-space:nowrap;
-  flex-shrink:0;
 }
 .lang-btn img{
   width:18px;
@@ -526,7 +523,6 @@ input:focus,select:focus,textarea:focus{
     justify-content:flex-start;
     border-radius:18px;
     padding:12px;
-    flex-wrap:wrap;
   }
   .hero-content{
     padding-top:140px;
@@ -558,7 +554,7 @@ input:focus,select:focus,textarea:focus{
         <div class="logo">DC</div>
         <div>
           <div>DEV Code</div>
-          <small style="color:var(--muted);font-weight:600">Портфолио буйрутмалар</small>
+          <small style="color:var(--muted);font-weight:600">Портфолио и заказы</small>
         </div>
       </div>
 
@@ -569,13 +565,13 @@ input:focus,select:focus,textarea:focus{
       <div class="nav-links" id="navLinks">
         <div class="nav-main">
           <a href="#stats">Статистика</a>
-          <a href="#services">Кызматтар</a>
-          <a href="#works">Сайттар</a>
-          <a href="#contact">Буйрутма</a>
+          <a href="#services">Услуги</a>
+          <a href="#works">Сайты</a>
+          <a href="#contact">Заказ</a>
         </div>
 
         <div class="lang-switch">
-          <span class="lang-label"><i class="fa fa-flag"></i> Тил</span>
+          <span class="lang-label"><i class="fa fa-flag"></i> Язык</span>
           <a href="index.html" class="lang-btn">
             <img src="https://flagcdn.com/w20/ru.png" alt="Русский"> Русский
           </a>
@@ -583,13 +579,13 @@ input:focus,select:focus,textarea:focus{
             <img src="https://flagcdn.com/w20/kg.png" alt="Кыргызча"> Кыргызча
           </a>
           <a href="uz.html" class="lang-btn">
-            <img src="https://flagcdn.com/16x12/uz.png" alt="O‘zbekcha"> O‘zbekча
+            <img src="https://flagcdn.com/16x12/uz.png" alt="O‘zbekcha"> O‘zbekcha
           </a>
         </div>
       </div>
     </div>
   </div>
-
+  
   <div class="hero-content">
     <div>
       <div class="eyebrow">Web programming • Brutal design • 3D mood</div>
