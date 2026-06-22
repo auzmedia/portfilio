@@ -882,10 +882,10 @@ document.getElementById('menuToggle').addEventListener('click', function(){
 
 document.getElementById('nomer').addEventListener('input', function(){
   let v = this.value.replace(/\D/g,'');
-  if(v.startsWith('996')) v = v.slice(3);
+  if(v.startsWith('')) v = v.slice(3);
   v = v.slice(0,9);
   const p1 = v.slice(0,3), p2 = v.slice(3,6), p3 = v.slice(6,9);
-  this.value = '+996' + (v.length ? ' ' : '') + [p1,p2,p3].filter(Boolean).join(' ');
+  this.value = '+' + (v.length ? ' ' : '') + [p1,p2,p3].filter(Boolean).join(' ');
 });
 
 document.getElementById('orderForm').addEventListener('submit', async function(e){
@@ -904,7 +904,7 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
 
   const digits = nomer.replace(/\D/g,'');
   if(!nomer.startsWith('+') || digits.length !== 12){
-    showNotification('Telefon raqam davlat kodi bilan bo‘lishi kerak! Misol: +998 XX XXXXXXX', 'error');
+    showNotification('Telefon raqamini davlat kodi bilan yozing.', 'error');
     return;
   }
 
