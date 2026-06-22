@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DEVCode — Portfolio & Order Landing</title>
+<title>DEVCode — Портфолио и заказ сайта</title>
 <meta name="description" content="Брутальный профессиональный лендинг для портфолио и заказа сайта: разработка, автоматизация, таргетинг, кейсы и форма заявки." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,6 @@
   --bg:#09090d;
   --bg2:#0f1016;
   --card:#14141d;
-  --card2:#1a1b26;
   --text:#f5f5f7;
   --muted:#a4a4b5;
   --gold:#d6b46a;
@@ -152,7 +151,6 @@ header.hero{
   font-weight:900;
   box-shadow:0 8px 30px rgba(214,180,106,.28);
 }
-
 .menu-toggle{
   display:none;
   width:46px;
@@ -166,7 +164,6 @@ header.hero{
   justify-content:center;
   font-size:20px;
 }
-
 .nav-links{
   display:flex;
   align-items:center;
@@ -190,7 +187,6 @@ header.hero{
   background:rgba(214,180,106,.12);
   color:#fff;
 }
-
 .lang-switch{
   display:flex;
   align-items:center;
@@ -558,7 +554,7 @@ input:focus,select:focus,textarea:focus{
         <div class="logo">DC</div>
         <div>
           <div>DEV Code</div>
-          <small style="color:var(--muted);font-weight:600">Portfolio & Web Orders</small>
+          <small style="color:var(--muted);font-weight:600">Портфолио и заказы</small>
         </div>
       </div>
 
@@ -575,11 +571,11 @@ input:focus,select:focus,textarea:focus{
         </div>
 
         <div class="lang-switch">
-          <span class="lang-label"><i class="fa fa-flag"></i> Тил</span>
-          <a href="index.html" class="lang-btn active">
+          <span class="lang-label"><i class="fa fa-flag"></i> Язык</span>
+          <a href="index.html" class="lang-btn">
             <img src="https://flagcdn.com/w20/ru.png" alt="Русский"> Русский
           </a>
-          <a href="main.html" class="lang-btn">
+          <a href="main.html" class="lang-btn active">
             <img src="https://flagcdn.com/w20/kg.png" alt="Кыргызча"> Кыргызча
           </a>
         </div>
@@ -613,7 +609,7 @@ input:focus,select:focus,textarea:focus{
 <section class="section" id="stats">
   <div class="container">
     <h2 class="title">Статистика сайта</h2>
-    <p class="sub">Покажи здесь цифры, которые усиливают доверие и подчёркивают масштаб работы.</p>
+    <p class="sub">Здесь можно показать цифры, которые усиливают доверие и подчёркивают масштаб работы.</p>
     <div class="grid-3">
       <div class="service-card">
         <div class="service-icon"><i class="fa fa-line-chart"></i></div>
@@ -742,10 +738,10 @@ input:focus,select:focus,textarea:focus{
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzd9y2Vr0Ma4KlNI6EOtlXcNOGzHQ9mh_nbyralhsFaVh7mRffS2SOXC8Yvnnng1LkPcQ/exec';
 
 const servicesWithIcons = [
-  { name: 'Архитектурно-дизайнерские', icon: 'fa fa-diamond' },
-  { name: 'Автосервисы', icon: 'fa fa-car' },
-  { name: 'Маркетинговые', icon: 'fa fa-bullhorn' },
-  { name: 'Строительные', icon: 'fa fa-building' },
+  { name: 'Архитектура и дизайн', icon: 'fa fa-diamond' },
+  { name: 'Автосервис', icon: 'fa fa-car' },
+  { name: 'Маркетинговые услуги', icon: 'fa fa-bullhorn' },
+  { name: 'Строительные услуги', icon: 'fa fa-building' },
   { name: 'Медицинские центры', icon: 'fa fa-hospital-o' },
   { name: 'Образовательные учреждения', icon: 'fa fa-graduation-cap' },
   { name: 'Рестораны', icon: 'fa fa-cutlery' },
@@ -758,8 +754,8 @@ const servicesWithIcons = [
 ];
 
 const allServicesList = [
-  'Архитектурно-дизайнерские','Автосервисы','Маркетинговые',
-  'Строительные','Медицинские центры','Образовательные учреждения',
+  'Архитектура и дизайн','Автосервис','Маркетинговые услуги',
+  'Строительные услуги','Медицинские центры','Образовательные учреждения',
   'Рестораны','Салоны красоты','Логистические услуги',
   'Юридические услуги','Фотоуслуги','Банковские услуги',
   'Фитнес-центры'
@@ -767,28 +763,28 @@ const allServicesList = [
 
 const websitesList = [
   {
-    name: 'Стомотология',
+    name: 'Стоматология',
     url: 'https://bahtiyoraxmedov.github.io/stomatologiya/',
     image: 'https://auzmedia.github.io/portfilio/images/stom.png',
-    description: 'Zamonaviy stomatologiya klinikasi sayti'
+    description: 'Современный сайт стоматологической клиники'
   },
   {
     name: 'Автосервис',
     url: 'https://auzmedia.github.io/AVTO/',
     image: 'https://auzmedia.github.io/portfilio/images/avto.png',
-    description: 'Avtoservis Pro xizmatlari'
+    description: 'Сайт автосервиса Pro'
   },
   {
     name: 'Барбершоп',
     url: 'https://bahtiyoraxmedov.github.io/barber/',
     image: 'https://auzmedia.github.io/portfilio/images/barber.png',
-    description: 'Elite Barbershop markazi'
+    description: 'Elite Barbershop центр'
   },
   {
     name: 'Косметология',
     url: 'https://bahtiyoraxmedov.github.io/cosn/',
     image: 'https://auzmedia.github.io/portfilio/images/cosn.png',
-    description: 'Zamonaviy cosmetology xizmati'
+    description: 'Современные косметологические услуги'
   }
 ];
 
@@ -827,7 +823,7 @@ function selectService(serviceName){
     select.value = serviceName;
   }
   document.getElementById('orderForm').scrollIntoView({behavior:'smooth'});
-  showNotification('✅ ' + serviceName + ' танланды!', 'success');
+  showNotification('✅ ' + serviceName + ' выбрано!', 'success');
 }
 
 function loadServicesWithIcons(){
@@ -841,7 +837,7 @@ function loadServicesWithIcons(){
     card.innerHTML = `
       <div class="service-icon"><i class="${service.icon}"></i></div>
       <h3>${service.name}</h3>
-      <p>Нажми, чтобы автоматически выбрать услугу в форме.</p>
+      <p>Нажмите, чтобы автоматически выбрать услугу в форме.</p>
     `;
     servicesGrid.appendChild(card);
   });
@@ -866,7 +862,7 @@ function loadWebsites(){
       <div style="padding:22px">
         <h3 style="margin:0 0 10px;font-size:22px">${website.name}</h3>
         <p style="color:var(--muted);line-height:1.75;margin:0 0 16px">${website.description}</p>
-        <button onclick="openWebsite('${website.url}')" class="btn" style="width:100%">Сайтни көрүү</button>
+        <button onclick="openWebsite('${website.url}')" class="btn" style="width:100%">Посмотреть сайт</button>
       </div>
     `;
     websitesGrid.appendChild(card);
@@ -899,13 +895,13 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
   const izoh = document.getElementById('izoh').value.trim();
 
   if(!ism || !familiya || !nomer || !xizmat){
-    showNotification('Iltimos, barcha majburiy maydonlarni to\'ldiring!', 'error');
+    showNotification('Пожалуйста, заполните все обязательные поля!', 'error');
     return;
   }
 
   const digits = nomer.replace(/\D/g,'');
   if(!nomer.startsWith('+996') || digits.length !== 12){
-    showNotification('Телефон номер должен быть в формате +996 XXX XXX XXX!', 'error');
+    showNotification('Номер телефона должен быть в формате +996 XXX XXX XXX!', 'error');
     return;
   }
 
@@ -931,10 +927,10 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify(orderData)
     });
-    showNotification('✅ Buyurtma muvaffaqiyatli qabul qilindi!', 'success');
+    showNotification('✅ Заказ успешно принят!', 'success');
     document.getElementById('orderForm').reset();
   }catch(error){
-    showNotification('❌ Ошибка отправки. Попробуйте еще раз.', 'error');
+    showNotification('❌ Ошибка отправки. Попробуйте ещё раз.', 'error');
   }finally{
     submitBtn.style.opacity = '1';
     submitBtn.disabled = false;
