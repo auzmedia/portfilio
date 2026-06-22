@@ -457,10 +457,39 @@ input:focus,select:focus,textarea:focus{
   border-color:rgba(214,180,106,.5);
   box-shadow:0 0 0 4px rgba(214,180,106,.08);
 }
+
+/* ВАЖНО: исправление белого фона у select */
+#phoneCode{
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
+  color:var(--text);
+  border:1px solid rgba(255,255,255,.1);
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--gold2) 50%),
+    linear-gradient(135deg, var(--gold2) 50%, transparent 50%),
+    linear-gradient(to right, rgba(255,255,255,.04), rgba(255,255,255,.04));
+  background-position:
+    calc(100% - 18px) calc(1em + 2px),
+    calc(100% - 13px) calc(1em + 2px),
+    0 0;
+  background-size:
+    5px 5px,
+    5px 5px,
+    100% 100%;
+  background-repeat:no-repeat;
+  padding-right:42px;
+}
+#phoneCode option{
+  background:#111118;
+  color:#f4f4f7;
+}
 #xizmat option{
   background:#111118;
   color:#f4f4f7;
 }
+
 .hidden{display:none}
 .footer{
   padding:34px 0;
