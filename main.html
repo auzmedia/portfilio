@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DEVCode — Портфолио жана буйрутмалар</title>
+<title>DEVCode — Портфолио и заказ сайта</title>
 <meta name="description" content="Брутальный профессиональный лендинг для портфолио и заказа сайта: разработка, автоматизация, таргетинг, кейсы и форма заявки." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -197,7 +197,7 @@ header.hero{
   background:rgba(255,255,255,.05);
   backdrop-filter:blur(14px);
   box-shadow:0 10px 30px rgba(0,0,0,.2);
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
 }
 .lang-label{
   display:flex;
@@ -207,6 +207,7 @@ header.hero{
   font-size:13px;
   font-weight:700;
   padding:0 6px;
+  white-space:nowrap;
 }
 .lang-btn{
   display:flex;
@@ -220,6 +221,8 @@ header.hero{
   font-size:13px;
   font-weight:700;
   transition:.25s;
+  white-space:nowrap;
+  flex-shrink:0;
 }
 .lang-btn img{
   width:18px;
@@ -523,6 +526,7 @@ input:focus,select:focus,textarea:focus{
     justify-content:flex-start;
     border-radius:18px;
     padding:12px;
+    flex-wrap:wrap;
   }
   .hero-content{
     padding-top:140px;
@@ -565,27 +569,27 @@ input:focus,select:focus,textarea:focus{
       <div class="nav-links" id="navLinks">
         <div class="nav-main">
           <a href="#stats">Статистика</a>
-          <a href="#services">Услуги</a>
-          <a href="#works">Сайты</a>
-          <a href="#contact">Заказ</a>
+          <a href="#services">Кызматтар</a>
+          <a href="#works">Сайттар</a>
+          <a href="#contact">Буйрутма</a>
         </div>
 
         <div class="lang-switch">
-          <span class="lang-label"><i class="fa fa-flag"></i> Язык</span>
-          <a href="index.html" class="lang-btn">
-            <img src="https://flagcdn.com/w20/ru.png" alt="Русский"> Русский
+          <span class="lang-label"><i class="fa fa-flag"></i> Тил</span>
+          <a href="index.html" class="lang-btn active">
+            <img src="https://flagcdn.com/w20/ru.png" alt="Русский"> RU
           </a>
-          <a href="main.html" class="lang-btn active">
-            <img src="https://flagcdn.com/w20/kg.png" alt="Кыргызча"> Кыргызча
+          <a href="main.html" class="lang-btn">
+            <img src="https://flagcdn.com/w20/kg.png" alt="Кыргызча"> KG
           </a>
           <a href="uz.html" class="lang-btn">
-            <img src="https://flagcdn.com/16x12/uz.png" alt="O‘zbekcha"> O‘zbekcha
+            <img src="https://flagcdn.com/16x12/uz.png" alt="O‘zbekcha"> UZ
           </a>
         </div>
       </div>
     </div>
   </div>
-  
+
   <div class="hero-content">
     <div>
       <div class="eyebrow">Web programming • Brutal design • 3D mood</div>
