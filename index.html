@@ -490,8 +490,13 @@ input:focus,select:focus,textarea:focus{
 
 .phone-row{
   display:grid;
-  grid-template-columns:130px 1fr;
+  grid-template-columns:120px 1fr;
   gap:12px;
+  align-items:end;
+}
+.phone-code{
+  width:100%;
+  padding:14px 10px;
 }
 
 @media (max-width:980px){
@@ -697,28 +702,29 @@ input:focus,select:focus,textarea:focus{
             <label for="ism">Имя</label>
             <input id="ism" type="text" placeholder="Введите имя">
           </div>
+        </div>
 
+        <div class="phone-row">
           <div>
             <label for="phoneCode">Код страны</label>
-            <select id="phoneCode">
+            <select id="phoneCode" class="phone-code">
               <option value="+996">+996</option>
               <option value="+998">+998</option>
               <option value="+992">+992</option>
               <option value="+7">+7</option>
             </select>
           </div>
-
           <div>
             <label for="nomer">Номер телефона</label>
             <input id="nomer" type="tel" placeholder="700 123 456" inputmode="numeric">
           </div>
+        </div>
 
-          <div>
-            <label for="xizmat">Выбор услуг</label>
-            <select id="xizmat">
-              <option value="">Услуги</option>
-            </select>
-          </div>
+        <div>
+          <label for="xizmat">Выбор услуг</label>
+          <select id="xizmat">
+            <option value="">Услуги</option>
+          </select>
         </div>
 
         <div>
