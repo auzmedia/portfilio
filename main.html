@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ky">
+<html lang="ru">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DEVCode — Портфолио жана сайтка заказ</title>
-<meta name="description" content="Портфолио жана сайт заказ кылуу үчүн бруталдуу профессионалдык лендинг: иштеп чыгуу, автоматташтыруу, таргетинг, кейстер жана арыз формасы." />
+<title>DEVCode — Портфолио и заказ сайта</title>
+<meta name="description" content="Брутальный профессиональный лендинг для портфолио и заказа сайта: разработка, автоматизация, таргетинг, кейсы и форма заявки." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -197,7 +197,7 @@ header.hero{
   background:rgba(255,255,255,.05);
   backdrop-filter:blur(14px);
   box-shadow:0 10px 30px rgba(0,0,0,.2);
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
 }
 .lang-label{
   display:flex;
@@ -207,6 +207,7 @@ header.hero{
   font-size:13px;
   font-weight:700;
   padding:0 6px;
+  white-space:nowrap;
 }
 .lang-btn{
   display:flex;
@@ -220,6 +221,8 @@ header.hero{
   font-size:13px;
   font-weight:700;
   transition:.25s;
+  white-space:nowrap;
+  flex-shrink:0;
 }
 .lang-btn img{
   width:18px;
@@ -523,6 +526,7 @@ input:focus,select:focus,textarea:focus{
     justify-content:flex-start;
     border-radius:18px;
     padding:12px;
+    flex-wrap:wrap;
   }
   .hero-content{
     padding-top:140px;
@@ -579,7 +583,7 @@ input:focus,select:focus,textarea:focus{
             <img src="https://flagcdn.com/w20/kg.png" alt="Кыргызча"> Кыргызча
           </a>
           <a href="uz.html" class="lang-btn">
-            <img src="https://flagcdn.com/16x12/uz.png" alt="O‘zbekcha"> O‘zbekcha
+            <img src="https://flagcdn.com/16x12/uz.png" alt="O‘zbekcha"> O‘zbekча
           </a>
         </div>
       </div>
@@ -590,7 +594,7 @@ input:focus,select:focus,textarea:focus{
     <div>
       <div class="eyebrow">Web programming • Brutal design • 3D mood</div>
       <h1>Саткан сайттарды жаратам</h1>
-      <p>Лендингдер, корпоративдик сайттар, бизнес автоматташтыруу, таргетинг жана нөлдөн даяр чечимдер. Күчтүү дизайн, тез жүктөлүү жана ыңгайлуу заказ формасы.</p>
+      <p>Лендингдер, корпоративдик сайттар, бизнес автоматташтыруу, таргетинг жана нөлдөн даяр чечимдер. Күчтүү дизайн, тез жүктөлүү жана ыңгайлуу буйрутма формасы.</p>
       <div class="hero-actions">
         <a class="btn" href="#contact">Брондоо</a>
         <a class="btn out" href="#services">Кызматтар</a>
@@ -636,7 +640,7 @@ input:focus,select:focus,textarea:focus{
 <section class="section" id="services">
   <div class="container">
     <h2 class="title">Сайт жасоо кызматтары</h2>
-    <p class="sub">Керектүү кызматты басасыз — ал төмөнкү заказ формасында автоматтык түрдө тандалат.</p>
+    <p class="sub">Керектүү кызматты басасыз — ал төмөнкү буйрутма формасында автоматтык түрдө тандалат.</p>
     <div class="grid-3" id="servicesGrid"></div>
   </div>
 </section>
@@ -649,12 +653,12 @@ input:focus,select:focus,textarea:focus{
       <div class="service-card">
         <div class="service-icon"><i class="fa fa-robot"></i></div>
         <h3>Автоматташтыруу</h3>
-        <p>Кол менен иштөөнү азайтабыз жана заказдарды тез иштетебиз.</p>
+        <p>Кол менен иштөөнү азайтабыз жана буйрутмаларды тез иштетебиз.</p>
       </div>
       <div class="service-card">
         <div class="service-icon"><i class="fa fa-bullseye"></i></div>
         <h3>Таргетинг</h3>
-        <p>Реклама жана landing аркылуу максаттуу кайрылууларды топтойбуз.</p>
+        <p>Жарнама жана landing аркылуу максаттуу кайрылууларды топтойбуз.</p>
       </div>
       <div class="service-card">
         <div class="service-icon"><i class="fa fa-code"></i></div>
