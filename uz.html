@@ -676,7 +676,7 @@ input:focus,select:focus,textarea:focus{
 <section class="section" id="contact">
   <div class="container">
     <h2 class="title">Aloqa formasi</h2>
-    <p class="sub">Telefon raqami +996 XXX XXX XXX formatida kiritiladi. Xizmat kartochkadan tanlansa, formaga avtomatik o‘tadi.</p>
+    <p class="sub">Buyurtma berish uchun formani to\'ldiring va raqamni davlat kodi bilan yozing! Misol +996 yoki +7</p>
     <div class="form-box">
       <form id="orderForm" class="form">
         <div class="grid-2">
@@ -903,8 +903,8 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
   }
 
   const digits = nomer.replace(/\D/g,'');
-  if(!nomer.startsWith('+996') || digits.length !== 12){
-    showNotification('Telefon raqam +996 XXX XXX XXX formatida bo‘lishi kerak!', 'error');
+  if(!nomer.startsWith('+') || digits.length !== 12){
+    showNotification('Telefon raqam davlat kodi bilan bo‘lishi kerak! Misol: +998 XX XXXXXXX', 'error');
     return;
   }
 
