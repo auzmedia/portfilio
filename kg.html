@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kg">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DEVCode — Портфолио и заказ сайта</title>
-<meta name="description" content="Брутальный профессиональный лендинг для портфолио и заказа сайта: разработка, автоматизация, таргетинг, кейсы и форма заявки." />
+<title>DEVCode — Портфолио жана сайт заказ кылуу</title>
+<meta name="description" content="Портфолио жана сайт заказ кылуу үчүн бруталдык профессионалдуу лендинг: иштеп чыгуу, автоматташтыруу, таргетинг, кейстер жана арыз формасы." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -197,7 +197,7 @@ header.hero{
   background:rgba(255,255,255,.05);
   backdrop-filter:blur(14px);
   box-shadow:0 10px 30px rgba(0,0,0,.2);
-  flex-wrap:nowrap;
+  flex-wrap:wrap;
 }
 .lang-label{
   display:flex;
@@ -207,7 +207,6 @@ header.hero{
   font-size:13px;
   font-weight:700;
   padding:0 6px;
-  white-space:nowrap;
 }
 .lang-btn{
   display:flex;
@@ -221,8 +220,6 @@ header.hero{
   font-size:13px;
   font-weight:700;
   transition:.25s;
-  white-space:nowrap;
-  flex-shrink:0;
 }
 .lang-btn img{
   width:18px;
@@ -526,7 +523,6 @@ input:focus,select:focus,textarea:focus{
     justify-content:flex-start;
     border-radius:18px;
     padding:12px;
-    flex-wrap:wrap;
   }
   .hero-content{
     padding-top:140px;
@@ -558,7 +554,7 @@ input:focus,select:focus,textarea:focus{
         <div class="logo">DC</div>
         <div>
           <div>DEV Code</div>
-          <small style="color:var(--muted);font-weight:600">Портфолио жана буйрутмалар</small>
+          <small style="color:var(--muted);font-weight:600">Портфолио жана заказдар</small>
         </div>
       </div>
 
@@ -571,15 +567,15 @@ input:focus,select:focus,textarea:focus{
           <a href="#stats">Статистика</a>
           <a href="#services">Кызматтар</a>
           <a href="#works">Сайттар</a>
-          <a href="#contact">Буйрутма</a>
+          <a href="#contact">Заказ</a>
         </div>
 
         <div class="lang-switch">
           <span class="lang-label"><i class="fa fa-flag"></i> Тил</span>
-          <a href="index.html" class="lang-btn">
+          <a href="index.html" class="lang-btn active">
             <img src="https://flagcdn.com/w20/ru.png" alt="Русский"> RU
           </a>
-          <a href="kg.html" class="lang-btn active">
+          <a href="kg.html" class="lang-btn">
             <img src="https://flagcdn.com/w20/kg.png" alt="Кыргызча"> KG
           </a>
           <a href="uz.html" class="lang-btn">
@@ -593,8 +589,8 @@ input:focus,select:focus,textarea:focus{
   <div class="hero-content">
     <div>
       <div class="eyebrow">Web programming • Brutal design • 3D mood</div>
-      <h1>Буюртма кабыл алуу сайттарын жаратабыз</h1>
-      <p>Лендингдер, корпоративдик сайттар, бизнес автоматташтыруу, таргетинг жана нөлдөн даяр чечимдер. Күчтүү дизайн, тез жүктөлүү жана ыңгайлуу буйрутма формасы.</p>
+      <h1>Биз буйрутма кабыл алган веб-сайттарды түзөбүз.</h1>
+      <p>Лендингдер, корпоративдик сайттар, бизнес автоматташтыруу, таргетинг жана нөлдөн баштап иштеп чыгуу. Күчтүү дизайн, ылдам жүктөлүү жана ыңгайлуу заказ формасы.</p>
       <div class="hero-actions">
         <a class="btn" href="#contact">Брондоо</a>
         <a class="btn out" href="#services">Кызматтар</a>
@@ -616,12 +612,12 @@ input:focus,select:focus,textarea:focus{
 <section class="section" id="stats">
   <div class="container">
     <h2 class="title">Сайт статистикасы</h2>
-    <p class="sub">Бул жерде иштин көлөмүн жана ишенимди күчөтө турган сандарды көрсөтсөңүз болот.</p>
+    <p class="sub">Бул жерде ишенимди күчөтүп, иштин көлөмүн көрсөтгөн сандарды бере аласыз.</p>
     <div class="grid-3">
       <div class="service-card">
         <div class="service-icon"><i class="fa fa-line-chart"></i></div>
         <h3>150+</h3>
-        <p>Ийгиликтүү ишке киргизилген жана даяр чечимдер.</p>
+        <p>Ийгиликтүү ишке киргизилген даяр чечимдер.</p>
       </div>
       <div class="service-card">
         <div class="service-icon"><i class="fa fa-bolt"></i></div>
@@ -631,7 +627,7 @@ input:focus,select:focus,textarea:focus{
       <div class="service-card">
         <div class="service-icon"><i class="fa fa-globe"></i></div>
         <h3>6 өлкө</h3>
-        <p>Буйрутмалардын жана долбоорлордун географиясы.</p>
+        <p>Заказдардын жана долбоорлордун географиясы.</p>
       </div>
     </div>
   </div>
@@ -639,8 +635,8 @@ input:focus,select:focus,textarea:focus{
 
 <section class="section" id="services">
   <div class="container">
-    <h2 class="title">Сайт жасоо кызматтары</h2>
-    <p class="sub">Керектүү кызматты басасыз — ал төмөнкү буйрутма формасында автоматтык түрдө тандалат.</p>
+    <h2 class="title">Сайт иштеп чыгуу кызматтары</h2>
+    <p class="sub">Керектүү кызматты басыңыз — ал төмөнкү заказ формасында автоматтык түрдө тандалат.</p>
     <div class="grid-3" id="servicesGrid"></div>
   </div>
 </section>
@@ -648,22 +644,22 @@ input:focus,select:focus,textarea:focus{
 <section class="section">
   <div class="container">
     <h2 class="title">Бизнес автоматташтыруу</h2>
-    <p class="sub">Арыздарды, CRM процесстерин, эскертмелерди жана аналитиканы автоматташтырабыз. Таргетинг, лид-формалар, онлайн жазылуу жана сатуулар үчүн ыңгайлуу түзүм кошобуз.</p>
+    <p class="sub">Арыздарды, CRM процессин, билдирүүлөрдү жана аналитиканы автоматташтырабыз. Таргетинг, лид-формалар, онлайн жазылуу жана сатуу үчүн ыңгайлуу түзүм кошобуз.</p>
     <div class="grid-3">
       <div class="service-card">
         <div class="service-icon"><i class="fa fa-robot"></i></div>
         <h3>Автоматташтыруу</h3>
-        <p>Кол менен иштөөнү азайтабыз жана буйрутмаларды тез иштетебиз.</p>
+        <p>Кол жумушун азайтып, заказдарды тез иштетебиз.</p>
       </div>
       <div class="service-card">
         <div class="service-icon"><i class="fa fa-bullseye"></i></div>
         <h3>Таргетинг</h3>
-        <p>Жарнама жана landing аркылуу максаттуу кайрылууларды топтойбуз.</p>
+        <p>Жарнама жана landing барактар аркылуу максаттуу кайрылууларды топтойбуз.</p>
       </div>
       <div class="service-card">
         <div class="service-icon"><i class="fa fa-code"></i></div>
         <h3>Сайт түзүү</h3>
-        <p>Сиздин нишаңызга жана максатыңызга ылайык заманбап сайт жасайбыз.</p>
+        <p>Сиздин нишага жана максатка ылайык заманбап сайт жасайбыз.</p>
       </div>
     </div>
   </div>
@@ -672,7 +668,7 @@ input:focus,select:focus,textarea:focus{
 <section class="section" id="works">
   <div class="container">
     <h2 class="title">Биз жасаган сайттар</h2>
-    <p class="sub">Карточкалар түрүндө берилген иштер жана долбоорлор.</p>
+    <p class="sub">Иштердин галереясы жана долбоорлордун карточкалары.</p>
     <div class="grid-3" id="websitesGrid"></div>
   </div>
 </section>
@@ -680,7 +676,7 @@ input:focus,select:focus,textarea:focus{
 <section class="section" id="contact">
   <div class="container">
     <h2 class="title">Байланыш формасы</h2>
-    <p class="sub">Телефон номери +996 XXX XXX XXX форматында киргизилет. Кызмат карточкадан тандалса, формага автоматтык өтөт.</p>
+    <p class="sub">Телефон номери +996 XXX XXX XXX форматында киргизилет. Кызмат карточкадан тандалса, ал формага автоматтык өтөт.</p>
     <div class="form-box">
       <form id="orderForm" class="form">
         <div class="grid-2">
@@ -728,10 +724,10 @@ input:focus,select:focus,textarea:focus{
       </div>
       <div style="color:var(--muted)">Web development • Portfolio • Orders</div>
     </div>
-    <div class="socials">
+   <div class="socials">
   <a href="#"><i class="fa-brands fa-instagram"></i></a>
   <a href="#"><i class="fa-brands fa-telegram"></i></a>
-  <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+  <a href="#"><i class="fa-brands fa-youtube"></i></a>
   <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
 </div>
     <div>
@@ -746,25 +742,25 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzd9y2Vr0Ma4KlNI6EOt
 
 const servicesWithIcons = [
   { name: 'Архитектура жана дизайн', icon: 'fa fa-diamond' },
-  { name: 'Автосервис', icon: 'fa fa-car' },
+  { name: 'Авто тейлөө', icon: 'fa fa-car' },
   { name: 'Маркетинг кызматтары', icon: 'fa fa-bullhorn' },
   { name: 'Курулуш кызматтары', icon: 'fa fa-building' },
-  { name: 'Медицина борборлору', icon: 'fa fa-hospital' },
+  { name: 'Медициналык борборлор', icon: 'fa fa-hospital' },
   { name: 'Билим берүү мекемелери', icon: 'fa fa-graduation-cap' },
   { name: 'Ресторандар', icon: 'fa fa-cutlery' },
   { name: 'Сулуулук салондору', icon: 'fa fa-scissors' },
   { name: 'Логистика кызматтары', icon: 'fa fa-truck' },
   { name: 'Юридикалык кызматтар', icon: 'fa fa-balance-scale' },
-  { name: 'Фото кызматтары', icon: 'fa fa-camera' },
+  { name: 'Фото кызматтар', icon: 'fa fa-camera' },
   { name: 'Банк кызматтары', icon: 'fa fa-university' },
   { name: 'Фитнес борборлор', icon: 'fa fa-dumbbell' }
 ];
 
 const allServicesList = [
-  'Архитектура жана дизайн','Автосервис','Маркетинг кызматтары',
-  'Курулуш кызматтары','Медицина борборлору','Билим берүү мекемелери',
+  'Архитектура жана дизайн','Авто тейлөө','Маркетинг кызматтары',
+  'Курулуш кызматтары','Медициналык борборлор','Билим берүү мекемелери',
   'Ресторандар','Сулуулук салондору','Логистика кызматтары',
-  'Юридикалык кызматтар','Фото кызматтары','Банк кызматтары',
+  'Юридикалык кызматтар','Фото кызматтар','Банк кызматтары',
   'Фитнес борборлор'
 ];
 
@@ -776,10 +772,10 @@ const websitesList = [
     description: 'Заманбап стоматология клиникасынын сайты'
   },
   {
-    name: 'Автосервис',
+    name: 'Авто тейлөө',
     url: 'https://auzmedia.github.io/AVTO/',
     image: 'https://auzmedia.github.io/portfilio/images/avto.png',
-    description: 'Автосервис Pro кызматы'
+    description: 'Авто тейлөө Pro сайты'
   },
   {
     name: 'Барбершоп',
@@ -791,7 +787,7 @@ const websitesList = [
     name: 'Косметология',
     url: 'https://bahtiyoraxmedov.github.io/cosn/',
     image: 'https://auzmedia.github.io/portfilio/images/cosn.png',
-    description: 'Заманбап косметология кызматы'
+    description: 'Заманбап косметология кызматтары'
   }
 ];
 
@@ -886,10 +882,10 @@ document.getElementById('menuToggle').addEventListener('click', function(){
 
 document.getElementById('nomer').addEventListener('input', function(){
   let v = this.value.replace(/\D/g,'');
-  if(v.startsWith('')) v = v.slice(3);
+  if(v.startsWith('996')) v = v.slice(3);
   v = v.slice(0,9);
   const p1 = v.slice(0,3), p2 = v.slice(3,6), p3 = v.slice(6,9);
-  this.value = '+' + (v.length ? ' ' : '') + [p1,p2,p3].filter(Boolean).join(' ');
+  this.value = '+996' + (v.length ? ' ' : '') + [p1,p2,p3].filter(Boolean).join(' ');
 });
 
 document.getElementById('orderForm').addEventListener('submit', async function(e){
@@ -907,8 +903,8 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
   }
 
   const digits = nomer.replace(/\D/g,'');
-  if(!nomer.startsWith('+') || digits.length !== 12){
-    showNotification('Телефон номери +996 XXX XXX XXX форматында киргизилет.', 'error');
+  if(!nomer.startsWith('+996') || digits.length !== 12){
+    showNotification('Телефон номери +996 XXX XXX XXX форматында болушу керек!', 'error');
     return;
   }
 
@@ -924,7 +920,7 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
     nomer,
     xizmat,
     izoh,
-    vaqt: new Date().toLocaleString('ky-KG', { timeZone: 'Asia/Bishkek' })
+    vaqt: new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Bishkek' })
   };
 
   try{
@@ -934,7 +930,7 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify(orderData)
     });
-    showNotification('✅ Буйрутма ийгиликтүү кабыл алынды!', 'success');
+    showNotification('✅ Заказ ийгиликтүү кабыл алынды!', 'success');
     document.getElementById('orderForm').reset();
   }catch(error){
     showNotification('❌ Жөнөтүүдө ката кетти. Кайра аракет кылыңыз.', 'error');
