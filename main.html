@@ -465,74 +465,76 @@ input:focus,select:focus,textarea:focus{
   .nav-links{display:none}
   .section{padding:72px 0}
 }
-.nav-links{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  flex-wrap:wrap;
-}
-
-.nav-main{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  flex-wrap:wrap;
-}
-
-.lang-switch{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:8px 10px;
+  .menu-toggle{
+  display:none;
+  width:46px;
+  height:46px;
+  border-radius:14px;
   border:1px solid rgba(255,255,255,.08);
-  border-radius:999px;
-  background:rgba(255,255,255,.05);
-  backdrop-filter:blur(14px);
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
-  flex-wrap:wrap;
-}
-
-.lang-label{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  color:#f2d89b;
-  font-size:13px;
-  font-weight:700;
-  padding:0 6px;
-}
-
-.lang-btn{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 14px;
-  border-radius:999px;
-  border:1px solid transparent;
   background:rgba(255,255,255,.04);
   color:#fff;
-  font-size:13px;
-  font-weight:700;
-  transition:.25s;
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
 }
 
-.lang-btn img{
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  object-fit:cover;
+@media (max-width:980px){
+  .menu-toggle{
+    display:flex;
+  }
+
+  .nav{
+    position:relative;
+  }
+
+  .nav-links{
+    position:absolute;
+    top:76px;
+    left:0;
+    width:100%;
+    display:none;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+    padding:18px 4%;
+    background:rgba(10,10,15,.98);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+
+  .nav-main{
+    width:100%;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+
+  .nav-main a{
+    width:100%;
+  }
+
+  .lang-switch{
+    width:100%;
+    justify-content:flex-start;
+    border-radius:18px;
+    padding:12px;
+  }
 }
 
-.lang-btn:hover{
-  transform:translateY(-1px);
-  background:rgba(214,180,106,.12);
-  border-color:rgba(214,180,106,.25);
-}
+@media (max-width:576px){
+  .lang-switch{
+    flex-wrap:wrap;
+  }
 
-.lang-btn.active{
-  background:linear-gradient(135deg,#d6b46a,#8d6b2b);
-  color:#111;
+  .lang-btn{
+    width:100%;
+    justify-content:center;
+  }
 }
 </style>
 </head>
@@ -546,15 +548,20 @@ input:focus,select:focus,textarea:focus{
   </div>
 
   <div class="topbar">
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo">DC</div>
-        <div>
-          <div>DEV Code</div>
-          <small style="color:var(--muted);font-weight:600">Портфолио жана заказдар</small>
-        </div>
+  <div class="container nav">
+    <div class="brand">
+      <div class="logo">DC</div>
+      <div>
+        <div>DEV Code</div>
+        <small style="color:var(--muted);font-weight:600">Портфолио жана заказдар</small>
       </div>
-      <div class="nav-links">
+    </div>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Меню">
+      <i class="fa fa-bars"></i>
+    </button>
+
+    <div class="nav-links" id="navLinks">
       <div class="nav-main">
         <a href="#stats">Статистика</a>
         <a href="#services">Кызматтар</a>
@@ -563,16 +570,17 @@ input:focus,select:focus,textarea:focus{
       </div>
 
       <div class="lang-switch">
-        <a href="index.html" class="lang-btn">
+        <span class="lang-label"><i class="fa fa-flag"></i> Тил</span>
+        <a href="index.html" class="lang-btn active">
           <img src="https://flagcdn.com/w20/ru.png" alt="Русский"> Русский
         </a>
-        <a href="main.html" class="lang-btn active">
+        <a href="main.html" class="lang-btn">
           <img src="https://flagcdn.com/w20/kg.png" alt="Кыргызча"> Кыргызча
         </a>
       </div>
-      </div>
     </div>
   </div>
+</div>
 
   <div class="hero-content">
     <div>
@@ -726,6 +734,13 @@ input:focus,select:focus,textarea:focus{
 </footer>
 
 <script>
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+  
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzIRAgFBb5Q8hy8xr83yq9iKfTKa1Q1jJrBGbFm6E7Ejfc0l1ZXOBQmnQpaa20LudIc/exec';
 
 const servicesWithIcons = [
