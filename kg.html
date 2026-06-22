@@ -729,11 +729,11 @@ input:focus,select:focus,textarea:focus{
       <div style="color:var(--muted)">Web development • Portfolio • Orders</div>
     </div>
     <div class="socials">
-      <a href="#" aria-label="Instagram">IG</a>
-      <a href="#" aria-label="Telegram">TG</a>
-      <a href="#" aria-label="WhatsApp">WA</a>
-      <a href="#" aria-label="Facebook">FB</a>
-    </div>
+  <a href="#"><i class="fa-brands fa-instagram"></i></a>
+  <a href="#"><i class="fa-brands fa-telegram"></i></a>
+  <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+  <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+</div>
     <div>
       <div>+996 999112234</div>
       <div>info@yourdomain.com</div>
@@ -886,10 +886,10 @@ document.getElementById('menuToggle').addEventListener('click', function(){
 
 document.getElementById('nomer').addEventListener('input', function(){
   let v = this.value.replace(/\D/g,'');
-  if(v.startsWith('996')) v = v.slice(3);
+  if(v.startsWith('')) v = v.slice(3);
   v = v.slice(0,9);
   const p1 = v.slice(0,3), p2 = v.slice(3,6), p3 = v.slice(6,9);
-  this.value = '+996' + (v.length ? ' ' : '') + [p1,p2,p3].filter(Boolean).join(' ');
+  this.value = '+' + (v.length ? ' ' : '') + [p1,p2,p3].filter(Boolean).join(' ');
 });
 
 document.getElementById('orderForm').addEventListener('submit', async function(e){
@@ -907,8 +907,8 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
   }
 
   const digits = nomer.replace(/\D/g,'');
-  if(!nomer.startsWith('+996') || digits.length !== 12){
-    showNotification('Телефон номери +996 XXX XXX XXX форматында болушу керек!', 'error');
+  if(!nomer.startsWith('+') || digits.length !== 12){
+    showNotification('Телефон номери +996 XXX XXX XXX форматында киргизилет.', 'error');
     return;
   }
 
