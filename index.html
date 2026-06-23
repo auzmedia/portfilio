@@ -336,11 +336,6 @@ header.hero{
   grid-template-columns:repeat(3,1fr);
   gap:22px;
 }
-.grid-2{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:22px;
-}
 .service-card,
 .room-card,
 .spec-card,
@@ -370,56 +365,17 @@ header.hero{
   margin-bottom:18px;
   color:var(--gold2);
 }
-.service-card h3,
-.room-card h3,
-.spec-card h3,
-.review-card h3{
+.service-card h3{
   margin:0 0 10px;
   font-size:22px;
 }
-.service-card p,
-.room-card p,
-.spec-card p,
-.review-card p,
-.contact-card p{
+.service-card p{
   margin:0;
   color:var(--muted);
   line-height:1.75;
 }
-.spec-card{padding:18px}
-.spec-card .photo{
-  height:270px;
-  border-radius:20px;
+.form-box{
   overflow:hidden;
-  margin-bottom:16px;
-}
-.spec-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.spec-card .role{
-  color:var(--gold2);
-  font-size:13px;
-  font-weight:700;
-  margin-bottom:8px;
-}
-.review-card{padding:24px}
-.stars{
-  color:var(--gold2);
-  letter-spacing:2px;
-  margin-bottom:12px;
-}
-.reviewer{
-  margin-top:18px;
-  color:#fff;
-  font-weight:800;
-}
-.reviewer small{
-  display:block;
-  color:var(--muted);
-  font-weight:500;
-  margin-top:4px;
 }
 .form{
   display:grid;
@@ -458,7 +414,6 @@ input:focus,select:focus,textarea:focus{
   box-shadow:0 0 0 4px rgba(214,180,106,.08);
 }
 
-/* ВАЖНО: исправление белого фона у select */
 #phoneCode{
   background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
   color:var(--text);
@@ -516,7 +471,6 @@ input:focus,select:focus,textarea:focus{
   background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.08);
 }
-
 .phone-row{
   display:grid;
   grid-template-columns:110px 1fr;
@@ -530,10 +484,9 @@ input:focus,select:focus,textarea:focus{
 .comment-full{
   grid-column:1 / -1;
 }
-
 @media (max-width:980px){
   .section{padding:72px 0}
-  .hero-content,.grid-3,.grid-2,.form-grid{grid-template-columns:1fr}
+  .hero-content,.grid-3,.form-grid{grid-template-columns:1fr}
   .menu-toggle{display:flex}
   .nav-links{
     position:absolute;
@@ -567,9 +520,7 @@ input:focus,select:focus,textarea:focus{
     border-radius:18px;
     padding:12px;
   }
-  .hero-content{
-    padding-top:140px;
-  }
+  .hero-content{padding-top:140px;}
 }
 @media (max-width:576px){
   .brand small{display:none}
@@ -579,9 +530,7 @@ input:focus,select:focus,textarea:focus{
     justify-content:center;
     font-size:12px;
   }
-  .phone-row{
-    grid-template-columns:1fr;
-  }
+  .phone-row{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -687,30 +636,6 @@ input:focus,select:focus,textarea:focus{
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <h2 class="title">Автоматизация бизнеса</h2>
-    <p class="sub">Автоматизируем заявки, CRM-процессы, уведомления и аналитику. Подключаем таргетинг, лид-формы, онлайн-запись и удобную структуру для продаж.</p>
-    <div class="grid-3">
-      <div class="service-card">
-        <div class="service-icon"><i class="fa fa-robot"></i></div>
-        <h3>Автоматизация</h3>
-        <p>Снижаем ручную работу и ускоряем обработку заказов.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fa fa-bullseye"></i></div>
-        <h3>Таргетинг</h3>
-        <p>Собираем целевые заявки из рекламы и посадочных страниц.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fa fa-code"></i></div>
-        <h3>Создание сайта</h3>
-        <p>Делаем современный сайт под вашу нишу и задачу.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="section" id="works">
   <div class="container">
     <h2 class="title">Сайты, которые мы сделали</h2>
@@ -722,7 +647,7 @@ input:focus,select:focus,textarea:focus{
 <section class="section" id="contact">
   <div class="container">
     <h2 class="title">Контактная форма</h2>
-    <p class="sub">Поле телефона сделано компактно: код страны и номер находятся рядом. Комментарий занимает всю ширину формы.</p>
+    <p class="sub">Телефон отправляется в Apps Script как строка, а DAVLAT вычисляется на сервере по коду страны.</p>
     <div class="form-box">
       <form id="orderForm" class="form">
         <div class="form-grid">
@@ -799,7 +724,7 @@ input:focus,select:focus,textarea:focus{
 </footer>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzd9y2Vr0Ma4KlNI6EOtlXcNOGzHQ9mh_nbyralhsFaVh7mRffS2SOXC8Yvnnng1LkPcQ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxrZv6rWAcAjyjB_EnW4h94htf5waiM_vaHXBA_efVApIo4lfD9cej9sHycZouF5DoNMQ/exec';
 
 const servicesWithIcons = [
   { name: 'Архитектура и дизайн', icon: 'fa fa-diamond' },
@@ -817,13 +742,7 @@ const servicesWithIcons = [
   { name: 'Фитнес-центры', icon: 'fa fa-dumbbell' }
 ];
 
-const allServicesList = [
-  'Архитектура и дизайн','Автосервис','Маркетинговые услуги',
-  'Строительные услуги','Медицинские центры','Образовательные учреждения',
-  'Рестораны','Салоны красоты','Логистические услуги',
-  'Юридические услуги','Фотоуслуги','Банковские услуги',
-  'Фитнес-центры'
-];
+const allServicesList = servicesWithIcons.map(s => s.name);
 
 const websitesList = [
   {
@@ -856,6 +775,7 @@ function showNotification(message, type){
   const box = document.querySelector('.success-message');
   const span = document.getElementById('successMessage');
   span.textContent = message;
+  box.classList.remove('hidden');
   box.style.display = 'block';
   if(type === 'error'){
     box.style.backgroundColor = '#fee2e2';
@@ -866,7 +786,10 @@ function showNotification(message, type){
     box.style.borderColor = '#22c55e';
     box.style.color = '#166534';
   }
-  setTimeout(() => box.style.display = 'none', 3000);
+  setTimeout(() => {
+    box.classList.add('hidden');
+    box.style.display = 'none';
+  }, 3000);
 }
 
 function selectService(serviceName){
@@ -1001,6 +924,7 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
   const loading = document.querySelector('.loading');
   submitBtn.style.opacity = '0.5';
   submitBtn.disabled = true;
+  loading.classList.remove('hidden');
   loading.style.display = 'block';
 
   const orderData = {
@@ -1013,12 +937,13 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
   };
 
   try{
-    await fetch(SCRIPT_URL, {
+    const res = await fetch(SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: {'Content-Type':'application/json'},
+      headers: {'Content-Type':'text/plain;charset=utf-8'},
       body: JSON.stringify(orderData)
     });
+    const text = await res.text();
+    console.log(text);
     showNotification('✅ Заказ успешно принят!', 'success');
     document.getElementById('orderForm').reset();
   }catch(error){
@@ -1026,6 +951,7 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
   }finally{
     submitBtn.style.opacity = '1';
     submitBtn.disabled = false;
+    loading.classList.add('hidden');
     loading.style.display = 'none';
   }
 });
