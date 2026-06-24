@@ -67,12 +67,14 @@ img{max-width:100%;display:block}
   font-weight:800;
   box-shadow:var(--shadow);
   transition:.25s;
+  cursor:pointer;
 }
 .btn:hover{transform:translateY(-2px) scale(1.01)}
 .btn.out{
   background:transparent;
   color:var(--text);
 }
+.btn:disabled{opacity:0.5;cursor:not-allowed}
 .glass,.card,.form-box{
   background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
   border:1px solid rgba(255,255,255,.08);
@@ -484,6 +486,109 @@ input:focus,select:focus,textarea:focus{
 .comment-full{
   grid-column:1 / -1;
 }
+
+/* ===== БЛОКИРОВКА ===== */
+#blockedOverlay{
+  display:none;
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.85);
+  z-index:9999;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+#blockedOverlay.active{
+  display:flex;
+}
+.blocked-message{
+  max-width:500px;
+  width:100%;
+  background:rgba(20,20,30,0.95);
+  backdrop-filter:blur(20px);
+  border:2px solid #ef4444;
+  border-radius:var(--radius);
+  padding:32px 28px;
+  text-align:center;
+  color:#f5f5f7;
+}
+.blocked-message .icon{
+  font-size:48px;
+  margin-bottom:16px;
+}
+.blocked-message strong{
+  color:#ef4444;
+  font-size:1.4em;
+  display:block;
+  margin-bottom:12px;
+}
+.blocked-message .reason{
+  color:#d1d1d1;
+  margin:12px 0 16px;
+  font-size:16px;
+  line-height:1.6;
+}
+.blocked-message .timer-label{
+  color:#8d8d99;
+  font-size:14px;
+}
+.blocked-message .timer{
+  color:#fcd34d;
+  font-weight:bold;
+  font-size:1.3em;
+  display:block;
+  margin-top:4px;
+}
+.blocked-message .btn-retry{
+  margin-top:20px;
+  padding:12px 24px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.05);
+  color:#fff;
+  cursor:pointer;
+  font-weight:600;
+  transition:.25s;
+}
+.blocked-message .btn-retry:hover{
+  background:rgba(255,255,255,0.1);
+}
+
+/* ===== УВЕДОМЛЕНИЯ ===== */
+.notification{
+  position:fixed;
+  top:80px;
+  right:20px;
+  z-index:9998;
+  padding:16px 24px;
+  border-radius:16px;
+  max-width:420px;
+  width:100%;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  transform:translateX(120%);
+  transition:transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-weight:600;
+  border:1px solid transparent;
+}
+.notification.show{
+  transform:translateX(0);
+}
+.notification.success{
+  background:#065f46;
+  border-color:#10b981;
+  color:#d1fae5;
+}
+.notification.error{
+  background:#7f1d1d;
+  border-color:#ef4444;
+  color:#fecaca;
+}
+.notification.info{
+  background:#1e3a5f;
+  border-color:#3b82f6;
+  color:#bfdbfe;
+}
+
 @media (max-width:980px){
   .section{padding:72px 0}
   .hero-content,.grid-3,.form-grid{grid-template-columns:1fr}
@@ -521,6 +626,7 @@ input:focus,select:focus,textarea:focus{
     padding:12px;
   }
   .hero-content{padding-top:140px;}
+  .notification{top:70px;right:10px;max-width:calc(100% - 20px);}
 }
 @media (max-width:576px){
   .brand small{display:none}
@@ -531,6 +637,7 @@ input:focus,select:focus,textarea:focus{
     font-size:12px;
   }
   .phone-row{grid-template-columns:1fr;}
+  .blocked-message{padding:24px 16px;}
 }
 </style>
 </head>
@@ -653,12 +760,12 @@ input:focus,select:focus,textarea:focus{
         <div class="form-grid">
           <div>
             <label for="ism">Имя</label>
-            <input id="ism" type="text" placeholder="Введите имя">
+            <input id="ism" type="text" placeholder="Введите имя" required>
           </div>
 
           <div>
             <label for="familiya">Фамилия</label>
-            <input id="familiya" type="text" placeholder="Введите фамилию">
+            <input id="familiya" type="text" placeholder="Введите фамилию" required>
           </div>
 
           <div class="phone-row">
@@ -669,19 +776,21 @@ input:focus,select:focus,textarea:focus{
                 <option value="+998">+998</option>
                 <option value="+992">+992</option>
                 <option value="+7">+7</option>
+                <option value="+380">+380</option>
+                <option value="+375">+375</option>
               </select>
             </div>
 
             <div>
               <label for="nomer">Номер телефона</label>
-              <input id="nomer" type="tel" placeholder="700 123 456" inputmode="numeric">
+              <input id="nomer" type="tel" placeholder="700 123 456" inputmode="numeric" required>
             </div>
           </div>
 
           <div>
             <label for="xizmat">Выбор услуг</label>
-            <select id="xizmat">
-              <option value="">Услуги</option>
+            <select id="xizmat" required>
+              <option value="">Выберите услугу</option>
             </select>
           </div>
 
@@ -723,10 +832,33 @@ input:focus,select:focus,textarea:focus{
   </div>
 </footer>
 
-<script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxrZv6rWAcAjyjB_EnW4h94htf5waiM_vaHXBA_efVApIo4lfD9cej9sHycZouF5DoNMQ/exec';
+<!-- ===== БЛОКИРОВКА ===== -->
+<div id="blockedOverlay">
+  <div class="blocked-message">
+    <div class="icon">🚫</div>
+    <strong>ДОСТУП ЗАБЛОКИРОВАН</strong>
+    <div class="reason" id="blockReason">Превышен лимит заказов</div>
+    <div>
+      <div class="timer-label">Разблокировка через:</div>
+      <div class="timer" id="blockTimer">--:--</div>
+    </div>
+    <button class="btn-retry" onclick="location.reload()">Проверить снова</button>
+  </div>
+</div>
 
-const servicesWithIcons = [
+<!-- ===== УВЕДОМЛЕНИЕ ===== -->
+<div id="notification" class="notification">
+  <span id="notificationText"></span>
+</div>
+
+<script>
+// ======================================================
+// КОНФИГУРАЦИЯ
+// ======================================================
+
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxoZ5AP6TociFcqJyJ0P7qdFXsvLzHPcL2pYYuWW1Of-zdgOy0hZNhgN92C64JZI0ODIg/exec';
+
+var servicesWithIcons = [
   { name: 'Архитектура и дизайн', icon: 'fa fa-diamond' },
   { name: 'Автосервис', icon: 'fa fa-car' },
   { name: 'Маркетинговые услуги', icon: 'fa fa-bullhorn' },
@@ -742,9 +874,7 @@ const servicesWithIcons = [
   { name: 'Фитнес-центры', icon: 'fa fa-dumbbell' }
 ];
 
-const allServicesList = servicesWithIcons.map(s => s.name);
-
-const websitesList = [
+var websitesList = [
   {
     name: 'Стоматология',
     url: 'https://bahtiyoraxmedov.github.io/stomatologiya/',
@@ -771,39 +901,119 @@ const websitesList = [
   }
 ];
 
-function showNotification(message, type){
-  const box = document.querySelector('.success-message');
-  const span = document.getElementById('successMessage');
-  span.textContent = message;
-  box.classList.remove('hidden');
-  box.style.display = 'block';
-  if(type === 'error'){
-    box.style.backgroundColor = '#fee2e2';
-    box.style.borderColor = '#ef4444';
-    box.style.color = '#dc2626';
-  } else {
-    box.style.backgroundColor = '#dcfce7';
-    box.style.borderColor = '#22c55e';
-    box.style.color = '#166534';
-  }
-  setTimeout(() => {
-    box.classList.add('hidden');
-    box.style.display = 'none';
-  }, 3000);
+// ======================================================
+// УВЕДОМЛЕНИЯ
+// ======================================================
+
+var notificationTimeout = null;
+
+function showNotification(message, type) {
+  if (!type) type = 'info';
+  var el = document.getElementById('notification');
+  var text = document.getElementById('notificationText');
+  
+  el.className = 'notification ' + type;
+  text.textContent = message;
+  el.classList.add('show');
+  
+  if (notificationTimeout) clearTimeout(notificationTimeout);
+  notificationTimeout = setTimeout(function() {
+    el.classList.remove('show');
+  }, 4000);
 }
 
-function selectService(serviceName){
-  const select = document.getElementById('xizmat');
-  let found = false;
-  for(let i = 0; i < select.options.length; i++){
-    if(select.options[i].value === serviceName){
+// ======================================================
+// БЛОКИРОВКА
+// ======================================================
+
+function showBlockedScreen(data) {
+  var overlay = document.getElementById('blockedOverlay');
+  var reason = document.getElementById('blockReason');
+  var timer = document.getElementById('blockTimer');
+  
+  overlay.classList.add('active');
+  reason.textContent = data.reason || 'Превышен лимит заказов';
+  
+  if (data.remainingMinutes && data.remainingMinutes > 0) {
+    var seconds = Math.floor(data.remainingMinutes * 60);
+    var interval = setInterval(function() {
+      var mins = Math.floor(seconds / 60);
+      var secs = seconds % 60;
+      timer.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+      seconds--;
+      
+      if (seconds < 0) {
+        clearInterval(interval);
+        location.reload();
+      }
+    }, 1000);
+  } else {
+    timer.textContent = '--:--';
+  }
+}
+
+function checkBlockStatus() {
+  try {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', SCRIPT_URL + '?action=checkBlock', true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        try {
+          var data = JSON.parse(xhr.responseText);
+          if (data && data.blocked) {
+            showBlockedScreen(data);
+          }
+        } catch (e) {}
+      }
+    };
+    xhr.send();
+  } catch (error) {}
+}
+
+// ======================================================
+// ЗАГРУЗКА УСЛУГ
+// ======================================================
+
+function loadServices() {
+  var grid = document.getElementById('servicesGrid');
+  grid.innerHTML = '';
+  
+  for (var i = 0; i < servicesWithIcons.length; i++) {
+    var service = servicesWithIcons[i];
+    var card = document.createElement('div');
+    card.className = 'service-card';
+    card.style.cursor = 'pointer';
+    card.onclick = (function(s) {
+      return function() { selectService(s.name); };
+    })(service);
+    card.innerHTML = 
+      '<div class="service-icon"><i class="' + service.icon + '"></i></div>' +
+      '<h3>' + service.name + '</h3>' +
+      '<p>Нажмите, чтобы автоматически выбрать услугу в форме.</p>';
+    grid.appendChild(card);
+  }
+
+  var serviceSelect = document.getElementById('xizmat');
+  for (var j = 0; j < servicesWithIcons.length; j++) {
+    var option = document.createElement('option');
+    option.value = servicesWithIcons[j].name;
+    option.textContent = servicesWithIcons[j].name;
+    serviceSelect.appendChild(option);
+  }
+}
+
+function selectService(serviceName) {
+  var select = document.getElementById('xizmat');
+  var found = false;
+  for (var i = 0; i < select.options.length; i++) {
+    if (select.options[i].value === serviceName) {
       select.selectedIndex = i;
       found = true;
       break;
     }
   }
-  if(!found){
-    const option = document.createElement('option');
+  if (!found) {
+    var option = document.createElement('option');
     option.value = serviceName;
     option.textContent = serviceName;
     select.appendChild(option);
@@ -813,177 +1023,233 @@ function selectService(serviceName){
   showNotification('✅ ' + serviceName + ' выбрано!', 'success');
 }
 
-function loadServicesWithIcons(){
-  const servicesGrid = document.getElementById('servicesGrid');
-  servicesGrid.innerHTML = '';
-  servicesWithIcons.forEach(service => {
-    const card = document.createElement('div');
-    card.className = 'service-card';
-    card.style.cursor = 'pointer';
-    card.onclick = () => selectService(service.name);
-    card.innerHTML = `
-      <div class="service-icon"><i class="${service.icon}"></i></div>
-      <h3>${service.name}</h3>
-      <p>Нажмите, чтобы автоматически выбрать услугу в форме.</p>
-    `;
-    servicesGrid.appendChild(card);
-  });
+// ======================================================
+// ЗАГРУЗКА САЙТОВ
+// ======================================================
 
-  const serviceSelect = document.getElementById('xizmat');
-  allServicesList.forEach(service => {
-    const option = document.createElement('option');
-    option.value = service;
-    option.textContent = service;
-    serviceSelect.appendChild(option);
-  });
-}
-
-function loadWebsites(){
-  const websitesGrid = document.getElementById('websitesGrid');
-  websitesGrid.innerHTML = '';
-  websitesList.forEach(website => {
-    const card = document.createElement('div');
+function loadWebsites() {
+  var grid = document.getElementById('websitesGrid');
+  grid.innerHTML = '';
+  
+  for (var i = 0; i < websitesList.length; i++) {
+    var website = websitesList[i];
+    var card = document.createElement('div');
     card.className = 'card';
-    card.innerHTML = `
-      <img src="${website.image}" alt="${website.name}" style="height:240px;width:100%;object-fit:cover">
-      <div style="padding:22px">
-        <h3 style="margin:0 0 10px;font-size:22px">${website.name}</h3>
-        <p style="color:var(--muted);line-height:1.75;margin:0 0 16px">${website.description}</p>
-        <button onclick="openWebsite('${website.url}')" class="btn" style="width:100%">Посмотреть сайт</button>
-      </div>
-    `;
-    websitesGrid.appendChild(card);
-  });
+    card.innerHTML = 
+      '<img src="' + website.image + '" alt="' + website.name + '" style="height:240px;width:100%;object-fit:cover">' +
+      '<div style="padding:22px">' +
+        '<h3 style="margin:0 0 10px;font-size:22px">' + website.name + '</h3>' +
+        '<p style="color:var(--muted);line-height:1.75;margin:0 0 16px">' + website.description + '</p>' +
+        '<button onclick="openWebsite(\'' + website.url + '\')" class="btn" style="width:100%">Посмотреть сайт</button>' +
+      '</div>';
+    grid.appendChild(card);
+  }
 }
 
-function openWebsite(url){
-  window.open(url,'_blank');
+function openWebsite(url) {
+  window.open(url, '_blank');
 }
 
-document.getElementById('menuToggle').addEventListener('click', function(){
-  document.getElementById('navLinks').classList.toggle('active');
-});
+// ======================================================
+// МЕНЮ
+// ======================================================
 
-document.getElementById('phoneCode').addEventListener('change', function(){
-  document.getElementById('nomer').value = '';
-  document.getElementById('nomer').placeholder = this.value === '+7' ? '700 123 45 67' : '700 123 456';
-});
-
-document.getElementById('nomer').addEventListener('input', function(){
-  const code = document.getElementById('phoneCode').value;
-  let v = this.value.replace(/\D/g,'');
-
-  if(code === '+7'){
-    v = v.slice(0,10);
-    const p1 = v.slice(0,3);
-    const p2 = v.slice(3,6);
-    const p3 = v.slice(6,8);
-    const p4 = v.slice(8,10);
-    this.value = '+7' + (v.length ? ' ' : '') + [p1,p2,p3,p4].filter(Boolean).join(' ');
+document.getElementById('menuToggle').addEventListener('click', function() {
+  var nav = document.getElementById('navLinks');
+  if (nav.classList.contains('active')) {
+    nav.classList.remove('active');
   } else {
-    const codeDigits = code.replace('+','');
-    if(v.startsWith(codeDigits)) v = v.slice(codeDigits.length);
-    v = v.slice(0,9);
-    const p1 = v.slice(0,3);
-    const p2 = v.slice(3,6);
-    const p3 = v.slice(6,9);
-    this.value = code + (v.length ? ' ' : '') + [p1,p2,p3].filter(Boolean).join(' ');
+    nav.classList.add('active');
   }
 });
 
-document.getElementById('orderForm').addEventListener('submit', async function(e){
+// ======================================================
+// ТЕЛЕФОН
+// ======================================================
+
+document.getElementById('phoneCode').addEventListener('change', function() {
+  document.getElementById('nomer').value = '';
+  var placeholder = this.value === '+7' ? '700 123 45 67' : '700 123 456';
+  document.getElementById('nomer').placeholder = placeholder;
+});
+
+document.getElementById('nomer').addEventListener('input', function() {
+  var code = document.getElementById('phoneCode').value;
+  var v = this.value.replace(/\D/g,'');
+
+  if (code === '+7') {
+    v = v.slice(0,10);
+    var p1 = v.slice(0,3);
+    var p2 = v.slice(3,6);
+    var p3 = v.slice(6,8);
+    var p4 = v.slice(8,10);
+    var parts = [];
+    if (p1) parts.push(p1);
+    if (p2) parts.push(p2);
+    if (p3) parts.push(p3);
+    if (p4) parts.push(p4);
+    this.value = '+7' + (v.length ? ' ' : '') + parts.join(' ');
+  } else {
+    var codeDigits = code.replace('+','');
+    if (v.indexOf(codeDigits) === 0) v = v.slice(codeDigits.length);
+    v = v.slice(0,9);
+    var p1 = v.slice(0,3);
+    var p2 = v.slice(3,6);
+    var p3 = v.slice(6,9);
+    var parts = [];
+    if (p1) parts.push(p1);
+    if (p2) parts.push(p2);
+    if (p3) parts.push(p3);
+    this.value = code + (v.length ? ' ' : '') + parts.join(' ');
+  }
+});
+
+// ======================================================
+// ОТПРАВКА ФОРМЫ
+// ======================================================
+
+document.getElementById('orderForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
-  const ism = document.getElementById('ism').value.trim();
-  const familiya = document.getElementById('familiya').value.trim();
-  const nomer = document.getElementById('nomer').value.trim();
-  const xizmat = document.getElementById('xizmat').value;
-  const izoh = document.getElementById('izoh').value.trim();
-  const phoneCode = document.getElementById('phoneCode').value;
+  var ism = document.getElementById('ism').value.trim();
+  var familiya = document.getElementById('familiya').value.trim();
+  var nomer = document.getElementById('nomer').value.trim();
+  var xizmat = document.getElementById('xizmat').value;
+  var izoh = document.getElementById('izoh').value.trim();
+  var phoneCode = document.getElementById('phoneCode').value;
 
-  if(!ism || !familiya || !nomer || !xizmat){
+  if (!ism || !familiya || !nomer || !xizmat) {
     showNotification('Пожалуйста, заполните все обязательные поля!', 'error');
     return;
   }
 
-  const digits = nomer.replace(/\D/g,'');
+  var digits = nomer.replace(/\D/g,'');
 
-  if(phoneCode === '+7'){
-    if(!nomer.startsWith('+7') || digits.length !== 11){
+  if (phoneCode === '+7') {
+    if (nomer.indexOf('+7') !== 0 || digits.length !== 11) {
       showNotification('Номер телефона должен быть в формате +7 XXX XXX XX XX!', 'error');
       return;
     }
   } else {
-    if(!nomer.startsWith(phoneCode) || digits.length !== 12){
+    if (nomer.indexOf(phoneCode) !== 0 || digits.length !== 12) {
       showNotification('Номер телефона должен быть в формате ' + phoneCode + ' XXX XXX XXX!', 'error');
       return;
     }
   }
 
-  const submitBtn = document.querySelector('.submit-btn');
-  const loading = document.querySelector('.loading');
+  var submitBtn = document.querySelector('.submit-btn');
+  var loading = document.querySelector('.loading');
   submitBtn.style.opacity = '0.5';
   submitBtn.disabled = true;
   loading.classList.remove('hidden');
   loading.style.display = 'block';
 
-  const orderData = {
-    ism,
-    familiya,
-    nomer,
-    xizmat,
-    izoh,
+  var orderData = {
+    ism: ism,
+    familiya: familiya,
+    nomer: nomer,
+    xizmat: xizmat,
+    izoh: izoh,
     vaqt: new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Bishkek' })
   };
 
-  try{
-    const res = await fetch(SCRIPT_URL, {
-      method: 'POST',
-      headers: {'Content-Type':'text/plain;charset=utf-8'},
-      body: JSON.stringify(orderData)
-    });
-    const text = await res.text();
-    console.log(text);
-    showNotification('✅ Заказ успешно принят!', 'success');
-    document.getElementById('orderForm').reset();
-  }catch(error){
-    showNotification('❌ Ошибка отправки. Попробуйте ещё раз.', 'error');
-  }finally{
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', SCRIPT_URL, true);
+  xhr.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
+  
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      submitBtn.style.opacity = '1';
+      submitBtn.disabled = false;
+      loading.classList.add('hidden');
+      loading.style.display = 'none';
+      
+      if (xhr.status === 200) {
+        try {
+          var result = JSON.parse(xhr.responseText);
+          
+          if (result.blocked) {
+            showBlockedScreen({
+              reason: result.error || 'Ваш IP заблокирован',
+              remainingMinutes: result.blockInfo ? result.blockInfo.remainingMinutes : 60
+            });
+            showNotification('⛔ ' + (result.error || 'Доступ заблокирован'), 'error');
+            return;
+          }
+
+          if (result.spam) {
+            showNotification('⛔ ' + (result.error || 'Обнаружен спам'), 'error');
+            return;
+          }
+
+          if (result.success) {
+            showNotification('✅ Заказ успешно принят! ID: ' + result.id, 'success');
+            document.getElementById('orderForm').reset();
+          } else {
+            showNotification('❌ Ошибка: ' + (result.error || 'Неизвестная ошибка'), 'error');
+          }
+        } catch (e) {
+          showNotification('❌ Ошибка обработки ответа', 'error');
+        }
+      } else {
+        showNotification('❌ Ошибка отправки. Код: ' + xhr.status, 'error');
+      }
+    }
+  };
+  
+  xhr.onerror = function() {
     submitBtn.style.opacity = '1';
     submitBtn.disabled = false;
     loading.classList.add('hidden');
     loading.style.display = 'none';
-  }
+    showNotification('❌ Ошибка соединения. Проверьте интернет.', 'error');
+  };
+  
+  xhr.send(JSON.stringify(orderData));
 });
 
-window.addEventListener('DOMContentLoaded', () => {
-  loadServicesWithIcons();
-  loadWebsites();
+// ======================================================
+// КАРУСЕЛЬ
+// ======================================================
 
-  const slides = document.querySelectorAll('.hero-bg .slide');
-  const dotsWrap = document.getElementById('dots');
-  let active = 0;
+function initCarousel() {
+  var slides = document.querySelectorAll('.hero-bg .slide');
+  var dotsWrap = document.getElementById('dots');
+  var active = 0;
 
-  slides.forEach((_, i) => {
-    const dot = document.createElement('div');
+  for (var i = 0; i < slides.length; i++) {
+    var dot = document.createElement('div');
     dot.className = 'dot' + (i === 0 ? ' active' : '');
-    dot.onclick = () => {
-      slides[active].classList.remove('active');
-      dotsWrap.children[active].classList.remove('active');
-      active = i;
-      slides[active].classList.add('active');
-      dotsWrap.children[active].classList.add('active');
-    };
+    dot.onclick = (function(index) {
+      return function() {
+        slides[active].classList.remove('active');
+        dotsWrap.children[active].classList.remove('active');
+        active = index;
+        slides[active].classList.add('active');
+        dotsWrap.children[active].classList.add('active');
+      };
+    })(i);
     dotsWrap.appendChild(dot);
-  });
+  }
 
-  setInterval(() => {
+  setInterval(function() {
     slides[active].classList.remove('active');
     dotsWrap.children[active].classList.remove('active');
     active = (active + 1) % slides.length;
     slides[active].classList.add('active');
     dotsWrap.children[active].classList.add('active');
   }, 4500);
+}
+
+// ======================================================
+// ЗАПУСК
+// ======================================================
+
+window.addEventListener('DOMContentLoaded', function() {
+  loadServices();
+  loadWebsites();
+  initCarousel();
+  checkBlockStatus();
 });
 </script>
 </body>
